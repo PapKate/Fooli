@@ -1,4 +1,8 @@
-﻿namespace Fooli
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Fooli
 {
     /// <summary>
     /// Represents a user in the database
@@ -10,6 +14,8 @@
         /// <summary>
         /// The id
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -71,6 +77,15 @@
         /// The postal code
         /// </summary>
         public int? PostalCode { get; set; }
+
+        #region relationships
+
+        /// <summary>
+        /// The lists
+        /// </summary>
+        public IEnumerable<ListEntity> Lists { get; set; }
+
+        #endregion
 
         #endregion
 

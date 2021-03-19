@@ -1,4 +1,7 @@
-﻿namespace Fooli
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Fooli
 {
     /// <summary>
     /// Represents a list item in the database
@@ -10,6 +13,8 @@
         /// <summary>
         /// The id
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -20,14 +25,14 @@
         #region Relationships
 
         /// <summary>
-        /// The <see cref="NoteEntity.Id"/> of the related <see cref="NoteEntity"/>
+        /// The <see cref="ListEntity.Id"/> of the related <see cref="ListEntity"/>
         /// </summary>
-        public int NoteId { get; set; }
+        public int ListId { get; set; }
 
         /// <summary>
-        /// The related <see cref="NoteEntity"/>
+        /// The related <see cref="ListEntity"/>
         /// </summary>
-        public NoteEntity Note { get; set; }
+        public ListEntity List { get; set; }
 
         #endregion
 

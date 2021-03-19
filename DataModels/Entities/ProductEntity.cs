@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
@@ -12,6 +15,8 @@ namespace Fooli
         /// <summary>
         /// The id
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -24,7 +29,22 @@ namespace Fooli
         /// </summary>
         public double? Price { get; set; }
 
+        /// <summary>
+        /// The date it was created
+        /// </summary>
+        public DateTimeOffset DateCreated { get; set; }
+
+        /// <summary>
+        /// The date the image was last modified
+        /// </summary>
+        public DateTimeOffset DateModified { get; set; }
+
         #region Relationships
+
+        /// <summary>
+        /// The product's images
+        /// </summary>
+        public IEnumerable<ImageEntity> Images { get; set; }
 
         /// <summary>
         /// The companies and products
@@ -32,10 +52,15 @@ namespace Fooli
         public IEnumerable<CompanyProductEntity> CompaniesProducts { get; set; }
 
         /// <summary>
-        /// The label and product pairs
+        /// The labels and products
         /// </summary>
-        public IEnumerable<LabelsProductsEntity> LabelsProducts { get; set; }
+        public IEnumerable<ProductLabelEntity> ProductLabels { get; set; }
 
+        /// <summary>
+        /// The category and product pairs
+        /// </summary>
+        public IEnumerable<ProductCategoryEntity> ProductsCategories { get; set; }
+        
         #endregion
 
         #endregion

@@ -1,9 +1,9 @@
 ﻿namespace Fooli
 {
     /// <summary>
-    /// Represents a label product pair
+    /// Represents a product label pair in the database
     /// </summary>
-    public class LabelsProductsEntity
+    public class ProductLabelEntity
     {
         #region Public Properties
 
@@ -38,7 +38,7 @@
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LabelsProductsEntity()
+        public ProductLabelEntity()
         {
 
         }

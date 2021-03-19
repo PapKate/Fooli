@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
     /// <summary>
     /// Represents a note in the database
     /// </summary>
-    public class NoteEntity
+    public class ListEntity
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -37,6 +41,16 @@ namespace Fooli
         /// </summary>
         public IEnumerable<ListItemEntity> ListItems { get; set; }
 
+        /// <summary>
+        /// The <see cref="UserEntity.Id"/> of the related <see cref="UserEntity"/>
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
+        /// The related <see cref="UserEntity"/>
+        /// </summary>
+        public UserEntity User { get; set; }
+
         #endregion
 
         #endregion
@@ -46,7 +60,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public NoteEntity()
+        public ListEntity()
         {
 
         }

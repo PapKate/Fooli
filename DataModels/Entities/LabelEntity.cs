@@ -1,20 +1,23 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
     /// <summary>
-    /// Represents a leaflet in the database
+    /// Represents a label in the database
     /// </summary>
-    public class LeafletEntity
+    public class LabelEntity
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -23,31 +26,26 @@ namespace Fooli
         public string Name { get; set; }
 
         /// <summary>
-        /// The url 
+        /// The slug
         /// </summary>
-        public string Url { get; set; }
+        public string Slug { get; set; }
 
         /// <summary>
-        /// The date from which the leaflet applies
+        /// The date the label was created
         /// </summary>
-        public DateTimeOffset DateStart { get; set; }
+        public DateTimeOffset DateCreated { get; set; }
 
         /// <summary>
-        /// The date that ends what the leaflet applies
+        /// The date the label was last modified
         /// </summary>
-        public DateTimeOffset DateEnd { get; set; }
+        public DateTimeOffset DateModified { get; set; }
 
         #region Relationships
 
         /// <summary>
-        /// The <see cref="CompanyEntity.Id"/> of the related <see cref="CompanyEntity"/>
+        /// The labels and products
         /// </summary>
-        public int CompanyId { get; set; }
-
-        /// <summary>
-        /// The related <see cref="CompanyEntity"/>
-        /// </summary>
-        public CompanyEntity Company { get; set; }
+        public IEnumerable<ProductLabelEntity> ProductLabels { get; set; }
 
         #endregion
 
@@ -58,12 +56,11 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LeafletEntity()
+        public LabelEntity()
         {
 
         }
 
         #endregion
-
     }
 }
