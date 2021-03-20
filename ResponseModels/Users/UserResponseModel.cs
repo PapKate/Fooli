@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
-    /// <summary>
-    /// Represents a user in the database
-    /// </summary>
-    public class UserEntity
+    public class UserResponseModel
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -28,11 +21,6 @@ namespace Fooli
         /// The email
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// The password
-        /// </summary>
-        public string Password { get; set; }
 
         /// <summary>
         /// The profile's picture url
@@ -86,23 +74,14 @@ namespace Fooli
         public int? PostalCode { get; set; }
 
         /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
-
-        /// <summary>
-        /// The date the user was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; }
-
-        #region Relationships
-
-        /// <summary>
         /// The lists
         /// </summary>
         public IEnumerable<ListEntity> Lists { get; set; }
 
-        #endregion
+        /// <summary>
+        /// The date it was created
+        /// </summary>
+        public DateTimeOffset DateCreated { get; set; }
 
         #endregion
 
@@ -111,7 +90,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public UserEntity()
+        public UserResponseModel()
         {
 
         }

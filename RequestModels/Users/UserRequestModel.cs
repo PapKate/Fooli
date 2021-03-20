@@ -1,23 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Fooli
+﻿namespace Fooli
 {
-    /// <summary>
-    /// Represents a user in the database
-    /// </summary>
-    public class UserEntity
+    public class UserRequestModel
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The username
@@ -43,7 +28,7 @@ namespace Fooli
         /// The user's type
         /// By default customer
         /// </summary>
-        public UserType Type { get; set; } = UserType.Customer;
+        public UserType? Type { get; set; } = UserType.Customer;
 
         /// <summary>
         /// The first name
@@ -58,7 +43,7 @@ namespace Fooli
         /// <summary>
         /// The gender
         /// </summary>
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         /// <summary>
         /// The country
@@ -85,25 +70,6 @@ namespace Fooli
         /// </summary>
         public int? PostalCode { get; set; }
 
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
-
-        /// <summary>
-        /// The date the user was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; }
-
-        #region Relationships
-
-        /// <summary>
-        /// The lists
-        /// </summary>
-        public IEnumerable<ListEntity> Lists { get; set; }
-
-        #endregion
-
         #endregion
 
         #region Constructors
@@ -111,7 +77,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public UserEntity()
+        public UserRequestModel()
         {
 
         }

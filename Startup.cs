@@ -26,8 +26,12 @@ namespace Fooli
             services.AddDbContext<FooliDBContext>(options => options.UseSqlServer
                 (Configuration.GetConnectionString("FooliSQLServerConnection")));
 
-            services.AddControllers();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            services.AddControllers().AddNewtonsoftJson(s =>
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
