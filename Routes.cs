@@ -7,6 +7,7 @@
     {
         /// <summary>
         /// The home route
+        /// /fooli
         /// </summary>
         public const string HomeRoute = "fooli";
 
@@ -20,22 +21,31 @@
         /// The route for a users with id
         /// /fooli/users/1
         /// </summary>
-        public const string UserRoute = UsersRoute + "/{id}";
+        public const string UserRoute = UsersRoute + "/{userId}";
 
         /// <summary>
-        /// The route for the lists
+        /// The route for a user's notes
+        /// /fooli/users/1/notes
         /// </summary>
-        public const string ListsRoute = HomeRoute + "/lists";
+        public const string UserNotesRoute = UserRoute + "/notes";
+      
+        /// <summary>
+        /// The route for a user's note with noteId and userId
+        /// /fooli/users/1/notes/5
+        /// </summary>
+        public const string UserNoteRoute = UserNotesRoute + "/{noteId}";
+        
+        /// <summary>
+        /// The route for the all notes
+        /// /fooli/notes/
+        /// </summary>
+        public const string NotesRoute = HomeRoute + "/notes";
 
         /// <summary>
-        /// The route for the lists
+        /// The route for a note with specified id
+        /// /fooli/notes/3
         /// </summary>
-        public const string UserListsRoute = UserRoute + "/lists";
-
-        /// <summary>
-        /// The route for a list with id
-        /// </summary>
-        public const string ListRoute = ListsRoute + "/{id}";
+        public const string NoteRoute = NotesRoute + "/{noteId}";
 
 
     }

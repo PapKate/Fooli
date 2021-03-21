@@ -67,12 +67,12 @@ namespace Fooli
         /// <summary>
         /// The note lists
         /// </summary>
-        public DbSet<ListEntity> Lists { get; set; }
+        public DbSet<NoteEntity> Notes { get; set; }
 
         /// <summary>
         /// The list items
         /// </summary>
-        public DbSet<ListItemEntity> ListItems { get; set; }
+        public DbSet<CheckListItemEntity> CheckListItems { get; set; }
 
         #endregion
 
@@ -105,7 +105,7 @@ namespace Fooli
             // For the lists of a user...
             modelBuilder.Entity<UserEntity>()
                 // One user has many lists
-                .HasMany(x => x.Lists)
+                .HasMany(x => x.Notes)
                 // Each list has one user
                 .WithOne(x => x.User)
                 // The principal key of the join is the User.Id
@@ -116,13 +116,13 @@ namespace Fooli
 
             #endregion
 
-            #region Lists
+            #region Notes
 
-            modelBuilder.Entity<ListEntity>()
-                .HasMany(x => x.ListItems)
-                .WithOne(x => x.List)
+            modelBuilder.Entity<NoteEntity>()
+                .HasMany(x => x.CheckListItems)
+                .WithOne(x => x.Note)
                 .HasPrincipalKey(x => x.Id)
-                .HasForeignKey(x => x.ListId)
+                .HasForeignKey(x => x.NoteId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             #endregion

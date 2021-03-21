@@ -1,4 +1,6 @@
-﻿namespace Fooli
+﻿using System;
+
+namespace Fooli
 {
     public class UserRequestModel
     {

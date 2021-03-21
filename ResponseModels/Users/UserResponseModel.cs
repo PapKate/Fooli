@@ -76,12 +76,17 @@ namespace Fooli
         /// <summary>
         /// The lists
         /// </summary>
-        public IEnumerable<ListEntity> Lists { get; set; }
+        public IEnumerable<NoteEntity> Lists { get; set; }
 
         /// <summary>
         /// The date it was created
         /// </summary>
         public DateTimeOffset DateCreated { get; set; }
+
+        /// <summary>
+        /// The date it was last modified
+        /// </summary>
+        public DateTimeOffset DateModified { get; set; }
 
         #endregion
 

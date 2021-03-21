@@ -100,7 +100,7 @@ namespace Fooli
         /// <summary>
         /// The lists
         /// </summary>
-        public IEnumerable<ListEntity> Lists { get; set; }
+        public IEnumerable<NoteEntity> Notes { get; set; }
 
         #endregion
 

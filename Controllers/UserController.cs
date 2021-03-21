@@ -217,7 +217,7 @@ namespace Fooli
         public async Task<ActionResult<UserResponseModel>> DeleteUserAsync(int id)
         {
             // Gets the user from the database with id the specified id
-            var user = await mContext.Users.FirstAsync(x => x.Id == id);
+            var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == id);
 
             // If there is no user...
             if (user == null)

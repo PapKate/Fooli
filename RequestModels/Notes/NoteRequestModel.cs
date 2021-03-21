@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Fooli
 {
     /// <summary>
     /// The list's request model
     /// </summary>
-    public class ListRequestModel
+    public class NoteRequestModel
     {
         #region Public Properties
 
@@ -15,6 +16,11 @@ namespace Fooli
         public string Title { get; set; }
 
         /// <summary>
+        /// The text
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
         /// The color
         /// </summary>
         public string Color { get; set; }
@@ -22,7 +28,7 @@ namespace Fooli
         /// <summary>
         /// The list's items
         /// </summary>
-        public IEnumerable<ListItemEntity> ListItems { get; set; }
+        public IEnumerable<CheckListItemRequestModel> CheckListItems { get; set; }
 
         #endregion
 
@@ -31,7 +37,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ListRequestModel()
+        public NoteRequestModel()
         {
 
         }

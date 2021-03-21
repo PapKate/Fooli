@@ -35,13 +35,13 @@ namespace Fooli
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dBContext)
         {
-            dbContext.Database.EnsureCreated();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                dBContext.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();
@@ -54,8 +54,6 @@ namespace Fooli
             {
                 endpoints.MapControllers();
             });
-
-            
         }
     }
 }

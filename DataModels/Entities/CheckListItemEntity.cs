@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
@@ -6,7 +7,7 @@ namespace Fooli
     /// <summary>
     /// Represents a list item in the database
     /// </summary>
-    public class ListItemEntity
+    public class CheckListItemEntity
     {
         #region Public Properties
 
@@ -20,19 +21,29 @@ namespace Fooli
         /// <summary>
         /// The item
         /// </summary>
-        public string Item { get; set; }
+        public string Text { get; set; }
+
+        /// <summary>
+        /// The date it was created
+        /// </summary>
+        public DateTimeOffset DateCreated { get; set; }
+
+        /// <summary>
+        /// The date it was last modified
+        /// </summary>
+        public DateTimeOffset DateModified { get; set; }
 
         #region Relationships
 
         /// <summary>
-        /// The <see cref="ListEntity.Id"/> of the related <see cref="ListEntity"/>
+        /// The <see cref="NoteEntity.Id"/> of the related <see cref="NoteEntity"/>
         /// </summary>
-        public int ListId { get; set; }
+        public int NoteId { get; set; }
 
         /// <summary>
-        /// The related <see cref="ListEntity"/>
+        /// The related <see cref="NoteEntity"/>
         /// </summary>
-        public ListEntity List { get; set; }
+        public NoteEntity Note { get; set; }
 
         #endregion
 
@@ -43,7 +54,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ListItemEntity()
+        public CheckListItemEntity()
         {
 
         }

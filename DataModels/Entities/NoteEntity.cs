@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
     /// <summary>
-    /// The list's response model
+    /// Represents a note in the database
     /// </summary>
-    public class ListResponseModel
+    public class NoteEntity
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -21,19 +25,31 @@ namespace Fooli
         public string Title { get; set; }
 
         /// <summary>
-        /// The date the note was created
+        /// The text
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
+        /// The date the list was created
         /// </summary>
         public DateTimeOffset DateCreated { get; set; }
+
+        /// <summary>
+        /// The date the list was last modified
+        /// </summary>
+        public DateTimeOffset DateModified { get; set; }
 
         /// <summary>
         /// The color
         /// </summary>
         public string Color { get; set; }
 
+        #region Relationships
+
         /// <summary>
-        /// The list's items
+        /// The check list's items
         /// </summary>
-        public IEnumerable<ListItemEntity> ListItems { get; set; }
+        public IEnumerable<CheckListItemEntity> CheckListItems { get; set; }
 
         /// <summary>
         /// The <see cref="UserEntity.Id"/> of the related <see cref="UserEntity"/>
@@ -47,12 +63,14 @@ namespace Fooli
 
         #endregion
 
+        #endregion
+
         #region Constructors
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ListResponseModel()
+        public NoteEntity()
         {
 
         }
