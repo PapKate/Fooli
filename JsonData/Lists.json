@@ -1,0 +1,44 @@
+[
+    {
+        "title" : "Test",
+        "text" : "δροσερά",
+        "color" : "223344",
+        "CheckListItems" : 
+        [
+            {
+                "text":"test1"
+            },
+            {
+                "text": "test2"
+            }
+        ]
+    },
+    {
+        "title" : "Veggies",
+        "text" : "και",
+        "color" : "993344",
+        "CheckListItems" : 
+        [
+            {
+                "text":"potato"
+            },
+            {
+                "text": "tomato"
+            }
+        ]
+    },
+    {
+        "title" : "Sweets",
+        "text" : "ωραία",
+        "color" : "551188",
+        "CheckListItems" : 
+        [
+            {
+                "text":"σοκολάτα"
+            },
+            {
+                "text": "καραμέλα"
+            }
+        ]
+    }
+]

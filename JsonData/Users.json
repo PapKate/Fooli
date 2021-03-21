@@ -1,0 +1,42 @@
+[
+    {
+        "username": "PapLabros",
+        "email": "paplabros@gmail.com",
+        "password": "1234t",
+        "pictureUrl": "https://images-na.ssl-images-amazon.com/images/I/71kNvlpS9GL._AC_SL1000_.jpg",
+        "userType": "0",
+        "firstName": "Labros",
+        "lastName": "Papadopoulos",
+        "Gender": "1",
+        "Country": "Greece",
+        "City": "Patras",
+        "Address1": "Zakunthou 35"
+    },
+    {
+        "username": "PapKate",
+        "email": "papkate@gmail.com",
+        "password": "1234t",
+        "pictureUrl": "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg",
+        "userType": "0",
+        "firstName": "Katherine",
+        "lastName": "Papa",
+        "Gender": "0",
+        "Country": "Greece",
+        "City": "Patras",
+        "Address1": "Zakunthou 35"
+    },
+    {
+        "username": "Jim",
+        "email": "jim@saves.com",
+        "password": "1234t",
+        "pictureUrl": "https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/other/cat_relaxing_on_patio_other/1800x1200_cat_relaxing_on_patio_other.jpg",
+        "userType": "2",
+        "firstName": "Jim",
+        "lastName": "MoneyRoots",
+        "Gender": "0",
+        "Country": "Greece",
+        "City": "Patras",
+        "Address1": "Pantanasi 5"
+    }
+
+]
