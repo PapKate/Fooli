@@ -24,14 +24,19 @@ namespace Fooli
         public string Text { get; set; }
 
         /// <summary>
+        /// Shows if it is checked
+        /// </summary>
+        public bool IsChecked { get; set; }
+
+        /// <summary>
         /// The date it was created
         /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// The date it was last modified
         /// </summary>
-        public DateTimeOffset DateModified { get; set; }
+        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         #region Relationships
 

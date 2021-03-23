@@ -25,11 +25,6 @@ namespace Fooli
         /// </summary>
         public string Color { get; set; }
 
-        /// <summary>
-        /// The list's items
-        /// </summary>
-        public IEnumerable<CheckListItemRequestModel> CheckListItems { get; set; }
-
         #endregion
 
         #region Constructors

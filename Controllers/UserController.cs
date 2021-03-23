@@ -198,8 +198,6 @@ namespace Fooli
                 // Set the user's PostalCode equal to the model's
                 user.PostalCode = model.PostalCode;
 
-            user.DateModified = DateTimeOffset.Now;
-
             // Saves the changes to the database
             await mContext.SaveChangesAsync();
 

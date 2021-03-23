@@ -1,24 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Fooli
 {
-    /// <summary>
-    /// Represents a leaflet in the database
-    /// </summary>
-    public class LeafletEntity
+    public class LeafletResponseModel
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -41,19 +34,10 @@ namespace Fooli
         /// </summary>
         public DateTimeOffset DateEnd { get; set; } = DateTimeOffset.Now;
 
-        #region Relationships
-
         /// <summary>
         /// The <see cref="CompanyEntity.Id"/> of the related <see cref="CompanyEntity"/>
         /// </summary>
         public int CompanyId { get; set; }
-
-        /// <summary>
-        /// The related <see cref="CompanyEntity"/>
-        /// </summary>
-        public CompanyEntity Company { get; set; }
-
-        #endregion
 
         #endregion
 
@@ -62,12 +46,11 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LeafletEntity()
+        public LeafletResponseModel()
         {
 
         }
 
         #endregion
-
     }
 }

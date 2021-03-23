@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
-    /// <summary>
-    /// Represents a company in the database
-    /// </summary>
-    public class CompanyEntity
+    public class CompanyResponseModel
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
@@ -52,14 +45,12 @@ namespace Fooli
         /// <summary>
         /// The date it was created
         /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset DateCreated { get; set; }
 
         /// <summary>
         /// The date the image was last modified
         /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
-
-        #region Relationships
+        public DateTimeOffset DateModified { get; set; }
 
         /// <summary>
         /// The companies and products
@@ -78,14 +69,12 @@ namespace Fooli
 
         #endregion
 
-        #endregion
-
         #region Constructors
 
         /// <summary>
         /// Default constructor
         /// </summary>
-        public CompanyEntity()
+        public CompanyResponseModel()
         {
 
         }

@@ -9,6 +9,11 @@
         /// </summary>
         public string Text { get; set; }
 
+        /// <summary>
+        /// Shows if it is checked
+        /// </summary>
+        public bool? IsChecked { get; set; }
+
         #endregion
 
         #region Constructors

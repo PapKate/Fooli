@@ -32,12 +32,12 @@ namespace Fooli
         /// <summary>
         /// The date the list was created
         /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// The date the list was last modified
         /// </summary>
-        public DateTimeOffset DateModified { get; set; }
+        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// The color

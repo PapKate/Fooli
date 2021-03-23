@@ -17,6 +17,11 @@ namespace Fooli
         public string Text { get; set; }
 
         /// <summary>
+        /// Shows if it is checked
+        /// </summary>
+        public bool IsChecked { get; set; }
+
+        /// <summary>
         /// The <see cref="NoteEntity.Id"/> of the related <see cref="NoteEntity"/>
         /// </summary>
         public int NoteId { get; set; }

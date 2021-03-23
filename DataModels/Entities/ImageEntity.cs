@@ -21,12 +21,12 @@ namespace Fooli
         /// <summary>
         /// The date it was created
         /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
+        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// The date the image was last modified
         /// </summary>
-        public DateTimeOffset DateModified { get; set; }
+        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// The name
