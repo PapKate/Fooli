@@ -5,7 +5,7 @@ namespace Fooli
     /// <summary>
     /// Represents a product label pair in the database
     /// </summary>
-    public class ProductLabelEntity
+    public class ProductLabelEntity 
     {
         #region Public Properties
 

@@ -1,0 +1,120 @@
+{
+    "services": 
+    [
+        {
+            "Name" : "Yoga",
+            "Description" : "Yoga as exercise is a physical activity consisting mainly of postures, often connected by flowing sequences, sometimes accompanied by breathing exercises, and frequently ending with relaxation lying down or meditation. Yoga in this form has become familiar across the world, especially in America and Europe.",
+            "SmallDescription" : "Yoga poses stretch your muscles and increase your range of motion. With regular practice, they'll improve your flexibility. ",
+            "Color" : "",
+            "Image" : "C:\\Users\\PapKate\\Desktop\\ArgonProjects\\Argon.PinPad\\wwwroot\\icons\\yoga.jpg"
+        },
+        {
+            "Name" : "Spinning",
+            "Description" : "Indoor cycling, often also called spinning, as an organized sport, is a form of exercise with classes focusing on endurance, strength, intervals, high intensity and recovery, and involves using a special stationary exercise bicycle with a weighted flywheel in a classroom setting.",
+            "SmallDescription" : "Spinning can be performed as an anaerobic exercise, pulling energy from reserves and building up muscular endurance over an extended timeframe. However, there are also aerobic benefits.",
+            "Color" : "",
+            "Image" : "C:\\Users\\PapKate\\Desktop\\ArgonProjects\\Argon.PinPad\\wwwroot\\icons\\spinning.jpg"
+        },
+        {
+            "Name" : "TRX",
+            "Description" : "The term suspension training refers to an approach to strength training that uses a system of ropes and webbing called a \"suspension trainer\" to allow users to work against their own body weight.",
+            "SmallDescription" : "The term suspension training refers to an approach to strength training that uses a system of ropes and webbing called a \"suspension trainer\" to allow users to work against their own body weight.",
+            "Color" : "",
+            "Image" : "C:\\Users\\PapKate\\Desktop\\ArgonProjects\\Argon.PinPad\\wwwroot\\icons\\trx.jpg"
+        },
+        {
+            "Name" : "Pilates",
+            "Description" : "Pilates is a method of exercise that consists of low-impact flexibility and muscular strength and endurance movements. Pilates emphasizes proper postural alignment, core strength and muscle balance. Pilates is named for its creator, Joseph Pilates, who developed the exercises in the 1920s.",
+            "SmallDescription" : "Pilates lengthens and stretches all the major muscle groups in the body in a balanced fashion. It improves flexibility, strength, balance and body awareness.",
+            "Color" : "",
+            "Image" : "C:\\Users\\PapKate\\Desktop\\ArgonProjects\\Argon.PinPad\\wwwroot\\icons\\pilates.jpg"
+        },
+        {
+            "Name" : "Zumba",
+            "Description" : "Zumba is an exercise fitness program created by Colombian dancer and choreographer Alberto \"Beto\" Pérez during the 1990s. Zumba is a trademark owned by Zumba Fitness, LLC. The Brazilian pop singer Claudia Leitte has become the international ambassador to Zumba Fitness.",
+            "SmallDescription" : "Pretty much the most awesome workout ever. Dance to great music, with great people, and burn a ton of calories without even realizing it.",
+            "Color" : "",
+            "Image" : "C:\\Users\\PapKate\\Desktop\\ArgonProjects\\Argon.PinPad\\wwwroot\\icons\\zumba.jpg"
+        },
+        {
+            "Name" : "CrossFit",
+            "Description" : "A form of high intensity interval training, CrossFit is a strength and conditioning workout that is made up of functional movement performed at a high intensity level. CrossFit is similar to Orange Theory in that there is a standard \"workout of the day\" (WOD) that all members complete on the same day.",
+            "SmallDescription" : "A form of high intensity interval training, CrossFit is a strength and conditioning workout that is made up of functional movement performed at a high intensity level. ",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "Power Strength",
+            "Description" : "45 minutes of total body strength training with 30 second bouts of cardio between each set. This class is designed to strengthen, shape and tone every muscle in the body! Dumbbells, resistance bands, stability balls, bosu balls and exercise bench may be used.",
+            "SmallDescription" : "45 minutes of total body strength training with 30 second bouts of cardio between each set. This class is designed to strengthen, shape and tone every muscle in the body! Dumbbells, resistance bands, stability balls, bosu balls and exercise bench may be used.",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "Buts Guts & Upper Bod",
+            "Description" : "This 60-minute total body strength class combines the Butts & Guts class with the Upper Bod class. This strength class is split between 25 minutes dedicated to strengthen, shape and tone the glutes and legs and another ten minutes to tone and strengthen the abdominal area. On top of that, you get 13 minutes of upper body exercises that strengthen and tone every upper body muscle group. Dumbbells, resistance bands, versa bands, stability balls, bosu balls and exercise bench or chair may be used.",
+            "SmallDescription" : "This 60-minute total body strength class combines the Butts & Guts class with the Upper Bod class. This strength class is split between 25 minutes dedicated to strengthen, shape and tone the glutes and legs and another ten minutes to tone and strengthen the abdominal area. On top of that, you get 13 minutes of upper body exercises that strengthen and tone every upper body muscle group. Dumbbells, resistance bands, versa bands, stability balls, bosu balls and exercise bench or chair may be used.",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "Krav Maga",
+            "Description" : "One of the fastest growing self-defense systems in the world today. It is designed to allow ordinary men and women to protect themselves in the shortest possible time. It doesn't require long-term and demanding practice. It's a threat response system that focuses on protecting yourself and the people you love.",
+            "SmallDescription" : "One of the fastest growing self-defense systems in the world today. It is designed to allow ordinary men and women to protect themselves in the shortest possible time. It doesn't require long-term and demanding practice. It's a threat response system that focuses on protecting yourself and the people you love.",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "Aerial Yoga",
+            "Description" : "It is performed with the help of a special sail (6 meters wide and 2 meters wide, it is like the one used in aerial acrobatics). Pilates exercises are also performed in conjunction with acrobatic moves. It exercises and aligns the body, relaxes the joints and helps to repair musculoskeletal problems. With the use of special cloths it incorporates the element of swinging and fun in a different way of training for all ages and all levels.",
+            "SmallDescription" : "It is performed with the help of a special sail (6 meters wide and 2 meters wide, it is like the one used in aerial acrobatics). Pilates exercises are also performed in conjunction with acrobatic moves. It exercises and aligns the body, relaxes the joints and helps to repair musculoskeletal problems. With the use of special cloths it incorporates the element of swinging and fun in a different way of training for all ages and all levels.",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "Bosu",
+            "Description" : "Unique and comprehensive fitness program that takes place in a hemispheric ball and improves fitness, muscle strengthening, aerobic ability, balance and agility.",
+            "SmallDescription" : "Unique and comprehensive fitness program that takes place in a hemispheric ball and improves fitness, muscle strengthening, aerobic ability, balance and agility.",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "Hips & Abs",
+            "Description" : "Program for buttocks, thighs and abs that aims to stimulate, line and strengthen. Exercises with body weight that solve problem areas.",
+            "SmallDescription" : "Program for buttocks, thighs and abs that aims to stimulate, line and strengthen. Exercises with body weight that solve problem areas.",
+            "Color" : "",
+            "Image" : " "
+        },
+        {
+            "Name" : "",
+            "Description" : "",
+            "SmallDescription" : "",
+            "Color" : "",
+            "Image" : " "
+        }
+    ],
+
+    "subscriptions" : 
+    [
+        {
+            "Name" : "Standard Year",
+            "Description" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα",
+            "SmallDescription" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα"
+        },
+        {
+            "Name" : "Standard Month",
+            "Description" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα",
+            "SmallDescription" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα"
+        },
+        {
+            "Name" : "Premium Year",
+            "Description" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα",
+            "SmallDescription" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα"
+        },
+        {
+            "Name" : "Premium Month",
+            "Description" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα",
+            "SmallDescription" : "Καρδιαγγειακά Μηχανήματα, Μηχανήματα Μυϊκής Ενδυνάμωσης, Ελεύθερα Βάρη, Πρόγραμμα Γυμναστικής, Gym Panels (μόνιτορ), E-Booking μέσω της διαδικτυακής πλατφόρμας, Χρήση αποδυτηρίων και ντους (τηρουμένων των μέτρων ασφαλείας όπως ισχύουν), Όλα τα Free Ομαδικά προγράμματα"
+        }
+    ]
+}

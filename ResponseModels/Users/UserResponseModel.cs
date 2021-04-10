@@ -3,14 +3,9 @@ using System.Collections.Generic;
 
 namespace Fooli
 {
-    public class UserResponseModel
+    public class UserResponseModel : BaseResponseModel
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// The username
@@ -77,16 +72,6 @@ namespace Fooli
         /// The lists
         /// </summary>
         public IEnumerable<NoteEntity> Lists { get; set; }
-
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
-
-        /// <summary>
-        /// The date it was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; }
 
         #endregion
 

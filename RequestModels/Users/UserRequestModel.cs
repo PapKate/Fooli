@@ -2,7 +2,7 @@
 
 namespace Fooli
 {
-    public class UserRequestModel
+    public class UserRequestModel : BaseRequestModel
     {
         #region Public Properties
 

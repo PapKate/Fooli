@@ -8,16 +8,9 @@ namespace Fooli
     /// <summary>
     /// Represents a category in the database
     /// </summary>
-    public class CategoryEntity
+    public class CategoryEntity : BaseEntity
     {
         #region Public Regions
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The category
@@ -28,16 +21,6 @@ namespace Fooli
         /// The icon's path
         /// </summary>
         public string Path { get; set; }
-
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
-
-        /// <summary>
-        /// The date the image was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         #region Relationships
 

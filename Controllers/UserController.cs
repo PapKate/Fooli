@@ -50,27 +50,8 @@ namespace Fooli
         /// Post fooli/users
         [HttpPost]
         [Route(Routes.UsersRoute)]
-        public async Task<ActionResult<UserResponseModel>> CreateUserAsync([FromBody]UserRequestModel model)
-        {
-            // Maps a user from the request model and creates it
-            var user = mMapper.Map<UserEntity>(model);
-
-            user.DateCreated = DateTimeOffset.Now;
-            user.DateModified = DateTimeOffset.Now;
-
-            // Add to the users the user (in memory)
-            mContext.Users.Add(user);
-
-            // Save the changes in the database
-            await mContext.SaveChangesAsync();
-
-            // Maps the entity to the response model
-            var userGetResponseModel = mMapper.Map<UserResponseModel>(user);
-
-            // Returns the response model
-            return userGetResponseModel;
-        }
-
+        public Task<ActionResult<UserResponseModel>> CreateUserAsync([FromBody] UserRequestModel model) 
+            => ControllersHelper.PostAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext, mContext.Users, mMapper, model);
 
         /// <summary>
         /// Gets all the users from the database
@@ -80,13 +61,10 @@ namespace Fooli
         [Route(Routes.UsersRoute)]
         public async Task<ActionResult<IEnumerable<UserResponseModel>>> GetUsersAsync()
         {
-            // Gets all the users in the database in a list
-            var users = await mContext.Users.ToListAsync();
-
-            // Creates and returns an Microsoft.AspNetCore.Mvc.OkObjectResult object that
-            // produces an Microsoft.AspNetCore.Http.StatusCodes.Status200OK
-            // response with all the users
-            return Ok(mMapper.Map<IEnumerable<UserResponseModel>>(users));
+            // Gets the response models for each user entity
+            var userResponseModels = await ControllersHelper.GetAllAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper);
+            // Returns the response models
+            return userResponseModels;
         }
 
         /// <summary>
@@ -97,22 +75,13 @@ namespace Fooli
         /// Get fooli/users/{id} == fooli/users/2
         [HttpGet]
         [Route(Routes.UserRoute)]
-        public async Task<ActionResult<UserResponseModel>> GetUserAsync([FromRoute]int id)
+        public async Task<ActionResult<UserResponseModel>> GetUserAsync([FromRoute]int userId)
         {
-            // Gets the first user with id the specified id from the data base
-            var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            // Gets the response model 
+            var userResponseModel = await ControllersHelper.GetAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper, userId);
 
-            // If a user is found...
-            if (user != null)
-                // Creates and returns an Microsoft.AspNetCore.Mvc.OkObjectResult object that
-                // produces an Microsoft.AspNetCore.Http.StatusCodes.Status200OK
-                // response with the user
-                return Ok(mMapper.Map<UserResponseModel>(user));
-
-            // If no user is found Creates an Microsoft.AspNetCore.Mvc.NotFoundResult that
-            // produces a Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound
-            // response.
-            return NotFound();
+            // Returns it
+            return userResponseModel;
         }
 
         /// <summary>

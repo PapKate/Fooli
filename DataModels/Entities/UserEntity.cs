@@ -8,16 +8,9 @@ namespace Fooli
     /// <summary>
     /// Represents a user in the database
     /// </summary>
-    public class UserEntity
+    public class UserEntity : BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The username
@@ -84,16 +77,6 @@ namespace Fooli
         /// The postal code
         /// </summary>
         public int? PostalCode { get; set; }
-
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
-
-        /// <summary>
-        /// The date the user was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         #region Relationships
 

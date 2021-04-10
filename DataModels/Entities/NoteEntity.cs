@@ -8,16 +8,9 @@ namespace Fooli
     /// <summary>
     /// Represents a note in the database
     /// </summary>
-    public class NoteEntity
+    public class NoteEntity : BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The title
@@ -28,16 +21,6 @@ namespace Fooli
         /// The text
         /// </summary>
         public string Text { get; set; }
-
-        /// <summary>
-        /// The date the list was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
-
-        /// <summary>
-        /// The date the list was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         /// <summary>
         /// The color

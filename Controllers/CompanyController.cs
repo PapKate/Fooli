@@ -209,10 +209,12 @@ namespace Fooli
 
         #region Leaflets
 
-        public async Task<ActionResult<IEnumerable<LeafletResponseModel>>> GetLeafletsAsync()
-        {
+        //[HttpPost]
+        //[Route(Routes.CompanyLeafletsRoute)]
+        //public async Task<ActionResult<IEnumerable<LeafletResponseModel>>> CreateLeafletAsync()
+        //{
 
-        }
+        //}
 
         #endregion
 

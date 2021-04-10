@@ -9,16 +9,9 @@ namespace Fooli
     /// <summary>
     /// Represents a label in the database
     /// </summary>
-    public class LabelEntity
+    public class LabelEntity : BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The name
@@ -29,16 +22,6 @@ namespace Fooli
         /// The slug
         /// </summary>
         public string Slug { get; set; }
-
-        /// <summary>
-        /// The date the label was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
-
-        /// <summary>
-        /// The date the label was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         #region Relationships
 
