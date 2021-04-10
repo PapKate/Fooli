@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Fooli
@@ -59,49 +60,47 @@ namespace Fooli
         /// Get fooli/users
         [HttpGet]
         [Route(Routes.UsersRoute)]
-        public async Task<ActionResult<IEnumerable<UserResponseModel>>> GetUsersAsync()
+        public Task<ActionResult<IEnumerable<UserResponseModel>>> GetUsersAsync()
         {
             // Gets the response models for each user entity
-            var userResponseModels = await ControllersHelper.GetAllAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper);
-            // Returns the response models
-            return userResponseModels;
+            return ControllersHelper.GetAllAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper, x => true);
         }
 
         /// <summary>
         /// Gets the user with the specified id from the database if exists...
         /// Else returns not found
         /// </summary>
-        /// <param name="id">The user's id</param>
-        /// Get fooli/users/{id} == fooli/users/2
+        /// <param name="userId">The user's id</param>
+        /// Get fooli/users/{userId} == fooli/users/2
         [HttpGet]
         [Route(Routes.UserRoute)]
-        public async Task<ActionResult<UserResponseModel>> GetUserAsync([FromRoute]int userId)
+        public Task<ActionResult<UserResponseModel>> GetUserAsync([FromRoute]int userId)
         {
-            // Gets the response model 
-            var userResponseModel = await ControllersHelper.GetAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper, userId);
+            // The needed expression for the filter
+            Expression<Func<UserEntity, bool>> expression = x => x.Id == userId;
 
-            // Returns it
-            return userResponseModel;
+            // Gets the response model 
+            return ControllersHelper.GetAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper, expression);
         }
 
         /// <summary>
         /// Updates the user with the specified id
         /// </summary>
-        /// <param name="id">The user's id</param>
+        /// <param name="userId">The user's id</param>
         /// <param name="model">The user request model</param>
-        /// Put /fooli/users/{id}
+        /// Put /fooli/users/{userId}
         [HttpPut]
         [Route(Routes.UserRoute)]
-        public async Task<ActionResult<UserResponseModel>> UpdateUserAsync([FromRoute]int id, [FromBody] UserRequestModel model)
+        public async Task<ActionResult<UserResponseModel>> UpdateUserAsync([FromRoute]int userId, [FromBody] UserRequestModel model)
         {
             // Gets the user with the specified id from the database 
-            var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == userId);
 
             // If there is no user...
             if (user == null)
                 // Return not found
                 return NotFound();
-
+            
             // If the model has a username...
             if (model.Username != null)
                 // Set the user's username equal to the model's
@@ -177,28 +176,31 @@ namespace Fooli
         /// <summary>
         /// Deletes the user with the specified id if exists from the database
         /// </summary>
-        /// <param name="id">The user's id</param>
-        /// Delete /fooli/users/{id}
+        /// <param name="userId">The user's id</param>
+        /// Delete /fooli/users/{userId}
         [HttpDelete]
         [Route(Routes.UserRoute)]
-        public async Task<ActionResult<UserResponseModel>> DeleteUserAsync(int id)
+        public Task<ActionResult<UserResponseModel>> DeleteUserAsync(int userId)
         {
-            // Gets the user from the database with id the specified id
-            var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+            //// Gets the user from the database with id the specified id
+            //var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == id);
 
-            // If there is no user...
-            if (user == null)
-                // Return not found
-                return NotFound();
+            //// If there is no user...
+            //if (user == null)
+            //    // Return not found
+            //    return NotFound();
 
-            // Remove from the db context the user
-            mContext.Users.Remove(user);
+            //// Remove from the db context the user
+            //mContext.Users.Remove(user);
 
-            // Save the changes to the database
-            await mContext.SaveChangesAsync();
+            //// Save the changes to the database
+            //await mContext.SaveChangesAsync();
 
-            // Returns the deleted user
-            return mMapper.Map<UserResponseModel>(user);
+            //// Returns the deleted user
+            //return mMapper.Map<UserResponseModel>(user);
+            Expression<Func<UserEntity, bool>> expression = x => x.Id == userId;
+
+            return ControllersHelper.DeleteAsync<UserEntity, UserResponseModel>(mContext, mContext.Users, mMapper, expression);
         }
 
         #endregion

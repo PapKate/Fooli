@@ -100,22 +100,6 @@ namespace Fooli
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region Users
-
-            // For the lists of a user...
-            modelBuilder.Entity<UserEntity>()
-                // One user has many lists
-                .HasMany(x => x.Notes)
-                // Each list has one user
-                .WithOne(x => x.User)
-                // The principal key of the join is the User.Id
-                .HasPrincipalKey(x => x.Id)
-                // The foreign key of the join is the List.UserId
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            #endregion
-
             #region Notes
 
             modelBuilder.Entity<NoteEntity>()

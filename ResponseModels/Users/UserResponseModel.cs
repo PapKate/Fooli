@@ -68,11 +68,6 @@ namespace Fooli
         /// </summary>
         public int? PostalCode { get; set; }
 
-        /// <summary>
-        /// The lists
-        /// </summary>
-        public IEnumerable<NoteEntity> Lists { get; set; }
-
         #endregion
 
         #region Constructors

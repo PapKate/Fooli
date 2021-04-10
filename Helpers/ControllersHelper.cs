@@ -23,23 +23,16 @@ namespace Fooli
         /// <summary>
         /// Creates a post request
         /// </summary>
-        /// <typeparam name="TRequestModel">The request model</typeparam>
         /// <typeparam name="TEntity">The entity</typeparam>
         /// <typeparam name="TResponseModel">The response model</typeparam>
         /// <param name="dBContext">The db context</param>
         /// <param name="dbSet">The db set</param>
-        /// <param name="mapper">The mapper</param>
-        /// <param name="model">The model</param>
-        /// <param name="configureEntity">Extra modification</param>
+        /// <param name="entity">The model</param>
+        /// <param name="projector">Creates a <typeparamref name="TResponseModel"/> from the inserted <typeparamref name="TEntity"/></param>
         /// <returns></returns>
-        public static async Task<ActionResult<TResponseModel>> PostAsync<TRequestModel, TEntity, TResponseModel>(FooliDBContext dBContext, DbSet<TEntity> dbSet, IMapper mapper, TRequestModel model, Action<TEntity> configureEntity = null)
+        public static async Task<ActionResult<TResponseModel>> PostAsync<TEntity, TResponseModel>(FooliDBContext dBContext, DbSet<TEntity> dbSet, TEntity entity, Func<TEntity, TResponseModel> projector)
             where TEntity : class
         {
-            // Creates an entity from the specified model
-            var entity = mapper.Map<TEntity>(model);
-
-            configureEntity?.Invoke(entity);
-
             // Add it to the database
             dbSet.Add(entity);
 
@@ -47,7 +40,7 @@ namespace Fooli
             await dBContext.SaveChangesAsync();
 
             // Create a response model from the entity
-            var responseModel = mapper.Map<TResponseModel>(entity);
+            var responseModel = projector(entity);
 
             // Returns the response model
             return responseModel;
@@ -56,35 +49,22 @@ namespace Fooli
         /// <summary>
         /// Gets all the response models of a db set
         /// </summary>
-        /// <typeparam name="TRequestModel">The request model</typeparam>
         /// <typeparam name="TEntity">The entity</typeparam>
         /// <typeparam name="TResponseModel">The response model</typeparam>
-        /// <param name="dbSet">The db set</param>
+        /// <param name="query">The db set</param>
         /// <param name="mapper">The mapper</param>
-        /// <param name="model">The model</param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        public static async Task<ActionResult<IEnumerable<TResponseModel>>> GetAllAsync<TRequestModel, TEntity, TResponseModel>(IQueryable<TEntity> dbSet, IMapper mapper, params string[] navigationPropertyNames)
+        public static async Task<ActionResult<IEnumerable<TResponseModel>>> GetAllAsync<TEntity, TResponseModel>(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> filter)
             where TEntity : BaseEntity
         {
             // Gets the all the entities of the db set 
-            var entities = new List<TEntity>();
-
-            // If there is at least one navigation property name...
-            if(navigationPropertyNames.Length != 0)
-            {
-                foreach(var navigationPropertyName in navigationPropertyNames)
-                {
-                    dbSet = dbSet.Include(navigationPropertyName);
-                }
-            }
-
-            // Gets the all the entities of the db set 
-            entities = await dbSet.ToListAsync();
+            var entities = await query.Where(filter).ToListAsync();
 
             // Creates and returns an Microsoft.AspNetCore.Mvc.OkObjectResult object that
             // produces an Microsoft.AspNetCore.Http.StatusCodes.Status200OK
             // response with all the response models of the entities
-            return new OkObjectResult(mapper.Map<IEnumerable<TResponseModel>>(entities));
+            return new OkObjectResult(DI.GetMapper.Map<IEnumerable<TResponseModel>>(entities));
         }
 
         /// <summary>
@@ -95,13 +75,13 @@ namespace Fooli
         /// <typeparam name="TResponseModel">The response model</typeparam>
         /// <param name="dbSet">The db set</param>
         /// <param name="mapper">The mapper</param>
-        /// <param name="id">The id</param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        public static async Task<ActionResult<TResponseModel>> GetAsync<TRequestModel, TEntity, TResponseModel>(IQueryable<TEntity> dbSet, IMapper mapper, int id, params string[] navigationPropertyNames)
+        public static async Task<ActionResult<TResponseModel>> GetAsync<TRequestModel, TEntity, TResponseModel>(IQueryable<TEntity> dbSet, IMapper mapper, Expression<Func<TEntity, bool>> filter)
             where TEntity : BaseEntity
         {
             // If exists finds the entity
-            var entity = await dbSet.FirstOrDefaultAsync<TEntity>(x => x.Id == id);
+            var entity = await dbSet.FirstOrDefaultAsync<TEntity>(filter, cancellationToken: default);
 
             // If the entity does not exist...
             if (entity == null)
@@ -112,8 +92,97 @@ namespace Fooli
             return mapper.Map<TResponseModel>(entity);
         }
 
+        public static async Task<ActionResult<TResponseModel>> UpdateAsync<TRequestModel, TEntity, TResponseModel>()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// Deletes the entity that follows the expression if exists
+        /// </summary>
+        /// <typeparam name="TEntity">The entity</typeparam>
+        /// <typeparam name="TResponseModel">The response model</typeparam>
+        /// <param name="dbContext">The db context</param>
+        /// <param name="queryable">The db set</param>
+        /// <param name="mapper">The mapper</param>
+        /// <param name="expression">The expression</param>
+        /// <returns></returns>
+        public static async Task<ActionResult<TResponseModel>> DeleteAsync<TEntity, TResponseModel>(DbContext dbContext, IQueryable<TEntity> queryable, IMapper mapper, Expression<Func<TEntity, bool>> expression)
+            where TEntity : BaseEntity 
+        {
+            // Gets the entity if exists
+            var entity = await queryable.FirstOrDefaultAsync(expression);
+
+            // If no entity is found...
+            if (entity == null)
+                // Return not found
+                return new NotFoundResult();
+
+            // Removes the entity from the db set
+            dbContext.Remove(entity);
+
+            // Saves the changes to the data base
+            await dbContext.SaveChangesAsync();
+
+            // Returns the response model of the entity that was removed
+            return mapper.Map<TResponseModel>(entity);
+        }
 
 
+        /// <summary>
+        /// Includes in a db set all the navigation properties if they exist
+        /// </summary>
+        /// <typeparam name="TEntity">The entity</typeparam>
+        /// <param name="dbSet">The db set</param>
+        /// <param name="navigationPropertyNames">The names of the navigation properties</param>
+        /// <returns></returns>
+        public static IQueryable<TEntity> IncludeNavigationProperties<TEntity>(this IQueryable<TEntity> dbSet, params string[] navigationPropertyNames)
+            where TEntity : BaseEntity 
+        {
+            // If there is at least one navigation property name...
+            if (navigationPropertyNames.Length != 0)
+            {
+                // For each name...
+                foreach (var navigationPropertyName in navigationPropertyNames)
+                {
+                    // Include them in the db set
+                    dbSet = dbSet.Include(navigationPropertyName);
+                }
+            }
+            // Return the db set
+            return dbSet;
+        }
+
+        /// <summary>
+        /// Parses the navigation properties to the correct form to include them later to a db set
+        /// </summary>
+        /// <param name="navigationPropertyNames">The names of the navigation properties</param>
+        /// <returns></returns>
+        public static string ParseToMultiLevelNavigationProperties(params string[] navigationPropertyNames)
+        {
+            // The path
+            var navigationPropertyPath = string.Empty;
+            
+            // If there is at least one navigation property name...
+            if (navigationPropertyNames.Length != 0)
+            {
+                // For each name...
+                foreach (var navigationPropertyName in navigationPropertyNames)
+                {
+                    // If it is the last...
+                    if (navigationPropertyName == navigationPropertyNames[navigationPropertyNames.Length - 1])
+                        // Adds the name
+                        navigationPropertyPath += $"{navigationPropertyName}";
+                    // Else...
+                    else
+                        // Adds the name and a dot
+                        navigationPropertyPath += $"{navigationPropertyName}.";
+                }
+            }
+
+            // Returns the path
+            return navigationPropertyPath;
+        }
 
         #endregion
     }

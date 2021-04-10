@@ -78,15 +78,6 @@ namespace Fooli
         /// </summary>
         public int? PostalCode { get; set; }
 
-        #region Relationships
-
-        /// <summary>
-        /// The lists
-        /// </summary>
-        public IEnumerable<NoteEntity> Notes { get; set; }
-
-        #endregion
-
         #endregion
 
         #region Constructors

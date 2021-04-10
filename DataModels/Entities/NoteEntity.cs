@@ -59,5 +59,30 @@ namespace Fooli
         }
 
         #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="NoteEntity"/> from the specified <paramref name="model"/>
+        /// </summary>
+        /// <param name="userId">The user id</param>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static NoteEntity FromRequestModel(int userId, NoteRequestModel model)
+        {
+            var entity = DI.GetMapper.Map<NoteEntity>(model);
+
+            entity.UserId = userId;
+
+            return entity;
+        }
+
+        /// <summary>
+        /// Creates and returns a <see cref="NoteResponseModel"/> from the current <see cref="NoteEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public NoteResponseModel ToResponseModel() => DI.GetMapper.Map<NoteResponseModel>(this);
+
+        #endregion
     }
 }

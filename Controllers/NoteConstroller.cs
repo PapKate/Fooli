@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Fooli
@@ -26,6 +27,15 @@ namespace Fooli
         /// The auto mapper
         /// </summary>
         private readonly IMapper mMapper;
+
+        #endregion
+
+        #region Protected Properties
+
+        /// <summary>
+        /// The query used for retrieving the notes
+        /// </summary>
+        protected IQueryable<NoteEntity> NotesQuery => mContext.Notes.Include(x => x.CheckListItems);
 
         #endregion
 
@@ -50,12 +60,17 @@ namespace Fooli
         /// <summary>
         /// Creates a new list
         /// </summary>
+        /// <param name="userId"></param>
         /// <param name="model">The list request model</param>
         /// Post fooli/lists
         [HttpPost]
         [Route(Routes.UserNotesRoute)]
         public Task<ActionResult<NoteResponseModel>> CreateNoteAsync([FromRoute] int userId, [FromBody] NoteRequestModel model) 
-            => ControllersHelper.PostAsync<NoteRequestModel, NoteEntity, NoteResponseModel>(mContext, mContext.Notes, mMapper, model, (entity) => entity.UserId = userId);
+            => ControllersHelper.PostAsync<NoteEntity, NoteResponseModel>(
+                mContext, 
+                mContext.Notes, 
+                NoteEntity.FromRequestModel(userId, model), 
+                x => x.ToResponseModel());
 
         /// <summary>
         /// Gets all the lists from the database that belong to the user with the specified id
@@ -63,44 +78,47 @@ namespace Fooli
         /// Get fooli/users/{id}/lists
         [HttpGet]
         [Route(Routes.UserNotesRoute)]
-        public async Task<ActionResult<IEnumerable<NoteResponseModel>>> GetNotesAsync([FromRoute]int userId)
+        public Task<ActionResult<IEnumerable<NoteResponseModel>>> GetNotesAsync([FromRoute]int userId)
         {
-            //// Gets all the lists of the user with the specified id to a list
-            //var notes = await mContext.Notes.Include(x => x.CheckListItems).Where(x => x.UserId == userId).ToListAsync();
-
-            //// Creates and returns an Microsoft.AspNetCore.Mvc.OkObjectResult object that
-            //// produces an Microsoft.AspNetCore.Http.StatusCodes.Status200OK
-            //// response with all the lists
-            //return Ok(mMapper.Map<IEnumerable<NoteResponseModel>>(notes));
-
-            var noteResponseModels = await ControllersHelper.GetAllAsync<NoteRequestModel, NoteEntity, NoteResponseModel>(mContext.Notes, mMapper, "CheckListItems");
-
-            return noteResponseModels;
+            // Gets the response models
+            return ControllersHelper.GetAllAsync<NoteEntity, NoteResponseModel>(
+                NotesQuery, 
+                x => x.UserId == userId);
         }
 
         /// <summary>
         /// Gets the list with the specified id
         /// </summary>
+        /// <param name="userId"></param>
         /// <param name="noteId">The specified id</param>
         /// <returns></returns>
         [HttpGet]
         [Route(Routes.UserNoteRoute)]
-        public async Task<ActionResult<NoteResponseModel>> GetNoteAsync([FromRoute]int userId, [FromRoute]int noteId)
+        public Task<ActionResult<NoteResponseModel>> GetNoteAsync([FromRoute]int userId, [FromRoute]int noteId)
         {
-            // Gets the first list with id the specified id from the database
-            var note = await mContext.Notes.Include(x => x.CheckListItems).FirstOrDefaultAsync(x => x.Id == noteId && x.UserId == userId);
+            //// Gets the first list with id the specified id from the database
+            //var note = await mContext.Notes.Include(x => x.CheckListItems).FirstOrDefaultAsync(x => x.Id == noteId && x.UserId == userId);
 
-            // If a list is found
-            if(note != null)
-                // Creates and returns an Microsoft.AspNetCore.Mvc.OkObjectResult object that
-                // produces an Microsoft.AspNetCore.Http.StatusCodes.Status200OK
-                // response with the list
-                return Ok(mMapper.Map<NoteResponseModel>(note));
+            //// If a list is found
+            //if(note != null)
+            //    // Creates and returns an Microsoft.AspNetCore.Mvc.OkObjectResult object that
+            //    // produces an Microsoft.AspNetCore.Http.StatusCodes.Status200OK
+            //    // response with the list
+            //    return Ok(mMapper.Map<NoteResponseModel>(note));
 
-            // If no user is found Creates an Microsoft.AspNetCore.Mvc.NotFoundResult that
-            // produces a Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound
-            // response.
-            return NotFound();
+            //// If no user is found Creates an Microsoft.AspNetCore.Mvc.NotFoundResult that
+            //// produces a Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound
+            //// response.
+            //return NotFound();
+
+            // The needed expression for the filter
+            Expression<Func<NoteEntity, bool>> filter = x => x.Id == noteId && x.UserId == userId;
+
+            // Gets the response model
+            return ControllersHelper.GetAsync<NoteRequestModel, NoteEntity, NoteResponseModel>(
+                NotesQuery,
+                mMapper, 
+                filter);
         }
 
         /// <summary>
@@ -186,10 +204,8 @@ namespace Fooli
             if (note == null)
                 // Returns not found
                 return NotFound();
-            
-            var entity = mMapper.Map<CheckListItemEntity>(model);
 
-            entity.NoteId = noteId;
+            var entity = CheckListItemEntity.FromRequestModel(noteId, model);
 
             // Add the check list item
             mContext.CheckListItems.Add(entity);

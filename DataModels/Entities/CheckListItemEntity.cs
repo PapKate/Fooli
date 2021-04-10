@@ -15,7 +15,7 @@
         /// <summary>
         /// Shows if it is checked
         /// </summary>
-        public bool IsChecked { get; set; }
+        public bool IsChecked { get; set; } = false;
 
         #region Relationships
 
@@ -45,5 +45,31 @@
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="CheckListItemEntity"/> from the specified <para
+        /// </summary>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static CheckListItemEntity FromRequestModel(int noteId, CheckListItemRequestModel model)
+        {
+            var entity = DI.GetMapper.Map<CheckListItemEntity>(model);
+
+            entity.NoteId = noteId;
+
+            return entity;
+        }
+
+        /// <summary>
+        /// Creates and returns a <see cref="CheckListItemResponseModel"/> from the current <see cref="CheckListItemEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public CheckListItemResponseModel ToResponseModel()
+        {
+            return DI.GetMapper.Map<CheckListItemResponseModel>(this);
+        }
+
+        #endregion
     }
 }
