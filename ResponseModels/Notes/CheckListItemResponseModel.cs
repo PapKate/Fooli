@@ -2,7 +2,7 @@
 
 namespace Fooli
 {
-    public class CheckListItemResponseModel
+    public class CheckListItemResponseModel : BaseResponseModel
     {
         #region Public Properties
 

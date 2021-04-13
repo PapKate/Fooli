@@ -52,7 +52,6 @@ namespace Fooli
         /// <typeparam name="TEntity">The entity</typeparam>
         /// <typeparam name="TResponseModel">The response model</typeparam>
         /// <param name="query">The db set</param>
-        /// <param name="mapper">The mapper</param>
         /// <param name="filter"></param>
         /// <returns></returns>
         public static async Task<ActionResult<IEnumerable<TResponseModel>>> GetAllAsync<TEntity, TResponseModel>(IQueryable<TEntity> query, Expression<Func<TEntity, bool>> filter)
@@ -81,7 +80,7 @@ namespace Fooli
             where TEntity : BaseEntity
         {
             // If exists finds the entity
-            var entity = await dbSet.FirstOrDefaultAsync<TEntity>(filter, cancellationToken: default);
+            var entity = await dbSet.FirstOrDefaultAsync(filter, cancellationToken: default);
 
             // If the entity does not exist...
             if (entity == null)
@@ -92,7 +91,7 @@ namespace Fooli
             return mapper.Map<TResponseModel>(entity);
         }
 
-        public static async Task<ActionResult<TResponseModel>> UpdateAsync<TRequestModel, TEntity, TResponseModel>()
+        public static Task<ActionResult<TResponseModel>> UpdateAsync<TRequestModel, TEntity, TResponseModel>()
         {
             return null;
         }
@@ -128,6 +127,38 @@ namespace Fooli
             return mapper.Map<TResponseModel>(entity);
         }
 
+        /// <summary>
+        /// Creates and returns a <typeparamref name="TEntity"/> from the specified <typeparamref name="TRequestModel"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TRequestModel"></typeparam>
+        /// <param name="model"></param>
+        /// <param name="action"></param>
+        /// <returns></returns>
+        public static TEntity FromRequestModel<TEntity, TRequestModel>(TRequestModel model, Action<TEntity> action = null)
+            where TEntity :  BaseEntity
+        {
+            // Maps the request model to the entity
+            var entity = DI.GetMapper.Map<TEntity>(model);
+            if(action!=null)
+            {
+                // Calls the action
+                action.Invoke(entity);
+            }
+
+            // Returns the entity
+            return entity;
+        }
+
+        /// <summary>
+        /// Creates and returns a <typeparamref name="TResponseModel"/> from a <typeparamref name="TEntity"/>
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <typeparam name="TResponseModel"></typeparam>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        public static TResponseModel ToResponseModel<TEntity, TResponseModel>(TEntity entity)
+            where TResponseModel : BaseResponseModel => DI.GetMapper.Map<TResponseModel>(entity);
 
         /// <summary>
         /// Includes in a db set all the navigation properties if they exist

@@ -12,18 +12,6 @@
         public const string HomeRoute = "fooli";
 
         /// <summary>
-        /// The route for the all notes
-        /// /fooli/notes/
-        /// </summary>
-        public const string NotesRoute = HomeRoute + "/notes";
-
-        /// <summary>
-        /// The route for a note with specified id
-        /// /fooli/notes/3
-        /// </summary>
-        public const string NoteRoute = NotesRoute + "/{noteId}";
-
-        /// <summary>
         /// The route for the all images
         /// </summary>
         public const string ImagesRoute = HomeRoute + "/images";
@@ -119,7 +107,7 @@
         /// The route of a company's leaflet
         /// fooli/companies/1/leaflets/3
         /// </summary>
-        public const string CompanyLeafletRoute = CompanyLeafletsRoute+ "/{leafletId}";
+        public const string CompanyLeafletRoute = CompanyLeafletsRoute + "/{leafletId}";
 
         #endregion
 

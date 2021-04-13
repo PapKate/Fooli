@@ -1,6 +1,6 @@
 ﻿namespace Fooli
 {
-    public class CompanyRequestModel
+    public class CompanyRequestModel : BaseRequestModel
     {
         #region Public Properties
 

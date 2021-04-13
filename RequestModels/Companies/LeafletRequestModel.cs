@@ -1,6 +1,11 @@
-﻿namespace Fooli
+﻿using System;
+
+namespace Fooli
 {
-    public class LeafletRequestModel
+    /// <summary>
+    /// 
+    /// </summary>
+    public class LeafletRequestModel : BaseRequestModel
     {
         #region Pubic Properties
 
@@ -13,6 +18,16 @@
         /// The url 
         /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// The date from which the leaflet applies
+        /// </summary>
+        public DateTimeOffset DateStart { get; set; }
+
+        /// <summary>
+        /// The date that ends what the leaflet applies
+        /// </summary>
+        public DateTimeOffset DateEnd { get; set; }
 
         #endregion
 

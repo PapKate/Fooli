@@ -22,11 +22,6 @@ namespace Fooli
         /// </summary>
         private readonly FooliDBContext mContext;
 
-        /// <summary>
-        /// The auto mapper
-        /// </summary>
-        private readonly IMapper mMapper;
-
         #endregion
 
         #region Constructors
@@ -34,11 +29,9 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public UserController(FooliDBContext context, IMapper mapper)
+        public UserController(FooliDBContext context)
         {
             mContext = context;
-
-            mMapper = mapper;
         }
 
         #endregion
@@ -52,7 +45,11 @@ namespace Fooli
         [HttpPost]
         [Route(Routes.UsersRoute)]
         public Task<ActionResult<UserResponseModel>> CreateUserAsync([FromBody] UserRequestModel model) 
-            => ControllersHelper.PostAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext, mContext.Users, mMapper, model);
+            => ControllersHelper.PostAsync<UserEntity, UserResponseModel>(
+                mContext, 
+                mContext.Users, 
+                UserEntity.FromRequestModel(model),
+                x => x.ToResponseModel());
 
         /// <summary>
         /// Gets all the users from the database
@@ -60,11 +57,11 @@ namespace Fooli
         /// Get fooli/users
         [HttpGet]
         [Route(Routes.UsersRoute)]
-        public Task<ActionResult<IEnumerable<UserResponseModel>>> GetUsersAsync()
-        {
+        public Task<ActionResult<IEnumerable<UserResponseModel>>> GetUsersAsync() =>
             // Gets the response models for each user entity
-            return ControllersHelper.GetAllAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper, x => true);
-        }
+            ControllersHelper.GetAllAsync<UserEntity, UserResponseModel>(
+                mContext.Users,
+                x => true);
 
         /// <summary>
         /// Gets the user with the specified id from the database if exists...
@@ -77,10 +74,13 @@ namespace Fooli
         public Task<ActionResult<UserResponseModel>> GetUserAsync([FromRoute]int userId)
         {
             // The needed expression for the filter
-            Expression<Func<UserEntity, bool>> expression = x => x.Id == userId;
+            Expression<Func<UserEntity, bool>> filter = x => x.Id == userId;
 
             // Gets the response model 
-            return ControllersHelper.GetAsync<UserRequestModel, UserEntity, UserResponseModel>(mContext.Users, mMapper, expression);
+            return ControllersHelper.GetAsync<UserRequestModel, UserEntity, UserResponseModel>(
+                mContext.Users, 
+                DI.GetMapper, 
+                filter);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Fooli
             await mContext.SaveChangesAsync();
 
             // Returns the user
-            return mMapper.Map<UserResponseModel>(user);
+            return DI.GetMapper.Map<UserResponseModel>(user);
         }
 
         /// <summary>
@@ -198,9 +198,12 @@ namespace Fooli
 
             //// Returns the deleted user
             //return mMapper.Map<UserResponseModel>(user);
-            Expression<Func<UserEntity, bool>> expression = x => x.Id == userId;
 
-            return ControllersHelper.DeleteAsync<UserEntity, UserResponseModel>(mContext, mContext.Users, mMapper, expression);
+            return ControllersHelper.DeleteAsync<UserEntity, UserResponseModel>(
+                mContext, 
+                mContext.Users,
+                DI.GetMapper,
+                x => x.Id == userId);
         }
 
         #endregion

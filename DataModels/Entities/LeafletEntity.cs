@@ -10,16 +10,9 @@ namespace Fooli
     /// <summary>
     /// Represents a leaflet in the database
     /// </summary>
-    public class LeafletEntity
+    public class LeafletEntity : BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The name
@@ -69,5 +62,24 @@ namespace Fooli
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="LeafletEntity"/> from the specified <paramref name="model"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static LeafletEntity FromRequestModel(int companyId, LeafletRequestModel model) 
+            => ControllersHelper.FromRequestModel(model, delegate (LeafletEntity entity) { entity.CompanyId = companyId; });
+
+        /// <summary>
+        /// Creates and returns a <see cref="LeafletResponseModel"/> from the current <see cref="LeafletEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public LeafletResponseModel ToResponseModel() 
+            => ControllersHelper.ToResponseModel<LeafletEntity, LeafletResponseModel>(this);
+
+        #endregion
     }
 }

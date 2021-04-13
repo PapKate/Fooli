@@ -157,7 +157,7 @@ namespace Fooli
 
             modelBuilder.Entity<CompanyProductEntity>()
                 .HasOne(x => x.Company)
-                .WithMany(x => x.CompaniesProducts)
+                .WithMany(x => x.CompayProducts)
                 .HasForeignKey(x => x.CompanyId)
                 .OnDelete(DeleteBehavior.Cascade);
 

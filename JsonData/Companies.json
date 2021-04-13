@@ -1,0 +1,37 @@
+{
+    "companies" : 
+    [
+        {
+            "Name" : "L.I.D.L.",
+            "Country" : "Ελλάδα",
+            "City" : "Αλεξάνδεια",
+            "Address" : "Εθνική Οδός Αλεξάνδρειας - Κοζάνης 1km",
+            "PhoneNumber" : "8001113333",
+            "PostalCode" : ""
+        },
+        {
+            "Name" : "L.I.D.L.",
+            "Country" : "Ελλάδα",
+            "City" : "Πάτρα",
+            "Address" : "Νοτάρα 9",
+            "PhoneNumber" : "8001113333",
+            "PostalCode" : "26440"
+        },
+        {
+            "Name" : "Σκλαβενίτης",
+            "Country" : "Ελλάδα",
+            "City" : "Πάτρα",
+            "Address" : "Έλληνος Στρατιώτου 51",
+            "PhoneNumber" : "2610424208",
+            "PostalCode" : ""
+        },
+        {
+            "Name" : "MyMarket",
+            "Country" : "Ελλάδα",
+            "City" : "Πάτρα",
+            "Address" : "Λεωφόρος Αγ. Σοφίας 1",
+            "PhoneNumber" : "261 042 4208",
+            "PostalCode" : "26441"
+        }
+    ]
+}

@@ -48,27 +48,21 @@
         #region Public Methods
 
         /// <summary>
-        /// Creates and returns a <see cref="CheckListItemEntity"/> from the specified <para
+        /// Creates and returns a <see cref="CheckListItemEntity"/> from the specified <paramref name="model"/>
         /// </summary>
+        /// <param name="noteId"></param>
         /// <param name="model">The model</param>
         /// <returns></returns>
         public static CheckListItemEntity FromRequestModel(int noteId, CheckListItemRequestModel model)
-        {
-            var entity = DI.GetMapper.Map<CheckListItemEntity>(model);
+            => ControllersHelper.FromRequestModel(model, delegate (CheckListItemEntity entity) { entity.NoteId = noteId; });
 
-            entity.NoteId = noteId;
-
-            return entity;
-        }
 
         /// <summary>
         /// Creates and returns a <see cref="CheckListItemResponseModel"/> from the current <see cref="CheckListItemEntity"/>
         /// </summary>
         /// <returns></returns>
-        public CheckListItemResponseModel ToResponseModel()
-        {
-            return DI.GetMapper.Map<CheckListItemResponseModel>(this);
-        }
+        public CheckListItemResponseModel ToResponseModel() => 
+            ControllersHelper.ToResponseModel<CheckListItemEntity, CheckListItemResponseModel>(this);
 
         #endregion
     }

@@ -68,20 +68,14 @@ namespace Fooli
         /// <param name="userId">The user id</param>
         /// <param name="model">The model</param>
         /// <returns></returns>
-        public static NoteEntity FromRequestModel(int userId, NoteRequestModel model)
-        {
-            var entity = DI.GetMapper.Map<NoteEntity>(model);
-
-            entity.UserId = userId;
-
-            return entity;
-        }
+        public static NoteEntity FromRequestModel(int userId, NoteRequestModel model) 
+            => ControllersHelper.FromRequestModel(model, delegate (NoteEntity entity) { entity.UserId = userId; });
 
         /// <summary>
         /// Creates and returns a <see cref="NoteResponseModel"/> from the current <see cref="NoteEntity"/>
         /// </summary>
         /// <returns></returns>
-        public NoteResponseModel ToResponseModel() => DI.GetMapper.Map<NoteResponseModel>(this);
+        public NoteResponseModel ToResponseModel() => ControllersHelper.ToResponseModel<NoteEntity, NoteResponseModel>(this);
 
         #endregion
     }

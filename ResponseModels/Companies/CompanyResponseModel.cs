@@ -3,14 +3,12 @@ using System.Collections.Generic;
 
 namespace Fooli
 {
-    public class CompanyResponseModel
+    /// <summary>
+    /// The company's response model
+    /// </summary>
+    public class CompanyResponseModel : BaseResponseModel
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// The name
@@ -41,21 +39,6 @@ namespace Fooli
         /// The postal code
         /// </summary>
         public int PostalCode { get; set; }
-
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; }
-
-        /// <summary>
-        /// The date the image was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; }
-
-        /// <summary>
-        /// The companies and products
-        /// </summary>
-        public IEnumerable<CompanyProductEntity> CompaniesProducts { get; set; }
 
         /// <summary>
         /// The company's leaflets

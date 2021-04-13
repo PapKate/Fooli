@@ -6,7 +6,7 @@ namespace Fooli
     /// <summary>
     /// The list's response model
     /// </summary>
-    public class NoteResponseModel
+    public class NoteResponseModel : BaseResponseModel
     {
         #region Public Properties
 

@@ -1,0 +1,24 @@
+{
+    "leaflets" : 
+    [
+        {
+            "Name" : "Φυλλάδιο Lidl - Non Food",
+            "Url" : "https://www.lidl-hellas.gr/el/fyladia/apo-deutera-12-04-phulladio-lidl-food/view/jumpmarks/page/1",
+            "DateStart" : "04-12-2021",
+            "DateEnd" : "12-11-2021"
+        },
+        {
+            "Name" : "Φυλλάδιο Lidl - Food",
+            "Url" : "https://www.lidl-hellas.gr/el/fyladia/apo-deutera-12-04-phulladio-lidl-non-food/view/jumpmarks/page/1",
+            "DateStart" : "04-12-2021",
+            "DateEnd" : "12-11-2021"
+        },
+        {
+            "Name" : "MyMarket Φυλλάδιο",
+            "Url" : "https://eshop.mymarket.gr/fylladio-prosforon-my-market",
+            "DateStart" : "04-12-2021",
+            "DateEnd" : "12-11-2021"
+        }
+
+    ]
+}

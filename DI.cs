@@ -34,7 +34,7 @@ namespace Fooli
             get
             {
                 if (mMapper == null)
-                    mMapper = Host.Services.GetService<IMapper>();
+                    mMapper = Host.Services.GetService<Mapper>();
 
                 return mMapper;
             }
