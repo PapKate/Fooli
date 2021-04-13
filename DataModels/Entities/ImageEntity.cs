@@ -75,5 +75,25 @@ namespace Fooli
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="ImageEntity"/> from the specified <paramref name="model"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static ImageEntity FromRequestModel(int companyId, ImageRequestModel model) 
+            => ControllersHelper.FromRequestModel(model, delegate (ImageEntity entity) { entity.CompanyId = companyId; });
+
+        /// <summary>
+        /// Creates and returns a <see cref="ImageResponseModel"/> from the current <see cref="ImageEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public ImageResponseModel ToResponseModel()
+            => ControllersHelper.ToResponseModel<ImageEntity, ImageResponseModel>(this);
+
+        #endregion
+
     }
 }

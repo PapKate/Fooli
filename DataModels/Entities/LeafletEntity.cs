@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Fooli
 {
@@ -27,12 +22,12 @@ namespace Fooli
         /// <summary>
         /// The date from which the leaflet applies
         /// </summary>
-        public DateTimeOffset DateStart { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset DateStart { get; set; }
 
         /// <summary>
         /// The date that ends what the leaflet applies
         /// </summary>
-        public DateTimeOffset DateEnd { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset DateEnd { get; set; }
 
         #region Relationships
 

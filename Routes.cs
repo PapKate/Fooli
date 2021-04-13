@@ -11,16 +11,6 @@
         /// </summary>
         public const string HomeRoute = "fooli";
 
-        /// <summary>
-        /// The route for the all images
-        /// </summary>
-        public const string ImagesRoute = HomeRoute + "/images";
-
-        /// <summary>
-        /// The route for an image with specified id
-        /// </summary>
-        public const string ImageRoute = ImagesRoute + "/{imageId}";
-
         #region User Routes
 
         /// <summary>

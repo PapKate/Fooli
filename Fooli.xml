@@ -1750,16 +1750,6 @@
             /fooli
             </summary>
         </member>
-        <member name="F:Fooli.Routes.ImagesRoute">
-            <summary>
-            The route for the all images
-            </summary>
-        </member>
-        <member name="F:Fooli.Routes.ImageRoute">
-            <summary>
-            The route for an image with specified id
-            </summary>
-        </member>
         <member name="F:Fooli.Routes.UsersRoute">
             <summary>
             The route for the users

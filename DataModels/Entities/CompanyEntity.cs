@@ -67,7 +67,6 @@ namespace Fooli
         /// </summary>
         public CompanyEntity()
         {
-
         }
 
         #endregion

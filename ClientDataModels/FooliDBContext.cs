@@ -84,7 +84,6 @@ namespace Fooli
         /// <param name="options">The options</param>
         public FooliDBContext(DbContextOptions<FooliDBContext> options) : base(options)
         {
-
         }
 
         #endregion

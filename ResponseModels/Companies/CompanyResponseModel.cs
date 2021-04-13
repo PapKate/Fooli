@@ -41,11 +41,6 @@ namespace Fooli
         public int PostalCode { get; set; }
 
         /// <summary>
-        /// The company's leaflets
-        /// </summary>
-        public IEnumerable<LeafletEntity> Leaflets { get; set; }
-
-        /// <summary>
         /// The company's images
         /// </summary>
         public IEnumerable<ImageEntity> Images { get; set; }

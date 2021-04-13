@@ -27,13 +27,17 @@ namespace Fooli
         /// <summary>
         /// The query used for retrieving the companies
         /// </summary>
-        protected IQueryable<CompanyEntity> CompaniesQuery => mContext.Companies.Include(x => x.Images)
-                                                                                .Include(x => x.Leaflets);
+        protected IQueryable<CompanyEntity> CompaniesQuery => mContext.Companies.Include(x => x.Images);
         
         /// <summary>
         /// The query used for retrieving the leaflets
         /// </summary>
-        protected IQueryable<LeafletEntity> LeafletsQuery => mContext.Leaflets.Include(x => x.Company);
+        protected IQueryable<LeafletEntity> LeafletsQuery => mContext.Leaflets;
+
+        /// <summary>
+        /// The query used for retrieving the images
+        /// </summary>
+        protected IQueryable<ImageEntity> ImagesQuery => mContext.Images;
 
         #endregion
 
@@ -90,10 +94,10 @@ namespace Fooli
                x => x.Id == companyId);
 
         /// <summary>
-        /// 
+        /// Updates the data of the company with the specified <paramref name="companyId"/>
         /// </summary>
-        /// <param name="companyId"></param>
-        /// <param name="model"></param>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="model">The model</param>
         /// <returns></returns>
         public async Task<ActionResult<CompanyResponseModel>> UpdateCompany([FromRoute] int companyId, CompanyRequestModel model)
         {
@@ -148,7 +152,7 @@ namespace Fooli
         }
 
         /// <summary>
-        /// Deletes the company with the specified id
+        /// Deletes the company with the specified <paramref name="companyId"/>
         /// </summary>
         /// <param name="companyId">The company's id</param>
         /// Delete fooli/companies/3
@@ -198,7 +202,7 @@ namespace Fooli
         /// </summary>
         /// <param name="companyId">The company's id</param>
         /// <param name="leafletId">The leaflet's id</param>
-        /// <returns></returns>
+        /// Get fooli/companies/1/leaflets/4
         [HttpGet]
         [Route(Routes.CompanyLeafletRoute)]
         public Task<ActionResult<LeafletResponseModel>> GetLeafletAsync([FromRoute] int companyId, [FromRoute] int leafletId)
@@ -208,11 +212,13 @@ namespace Fooli
                 x => x.Id == leafletId && x.CompanyId == companyId);
 
         /// <summary>
-        /// 
+        /// Deletes a leaflet with the specified <paramref name="leafletId"/> that belongs to the  company with the specified <paramref name="companyId"/>
         /// </summary>
         /// <param name="companyId"></param>
         /// <param name="leafletId"></param>
-        /// <returns></returns>
+        /// Delete fooli/companies/1/leaflets/4
+        [HttpDelete]
+        [Route(Routes.CompanyLeafletRoute)]
         public Task<ActionResult<LeafletResponseModel>> DeleteLeafletAsync([FromRoute] int companyId, [FromRoute] int leafletId)
             => ControllersHelper.DeleteAsync<LeafletEntity, LeafletResponseModel>(
                 mContext,
@@ -221,6 +227,66 @@ namespace Fooli
                 x => x.CompanyId == companyId && x.Id == leafletId);
 
         #endregion
+
+        #region Company Images
+
+        /// <summary>
+        /// Creates a new leaflet
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="model">The model</param>
+        /// Post fooli/companies/5/images
+        [HttpPost]
+        [Route(Routes.CompanyImagesRoute)]
+        public Task<ActionResult<ImageResponseModel>> CreateImageAsync([FromRoute] int companyId, [FromBody] ImageRequestModel model) => ControllersHelper.PostAsync<ImageEntity, ImageResponseModel>(
+                mContext,
+                mContext.Images,
+                ImageEntity.FromRequestModel(companyId, model),
+                x => x.ToResponseModel());
+
+        /// <summary>
+        /// Gets all the images that belong to the company with the specified <paramref name="companyId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// Get fooli/companies/1/images
+        [HttpGet]
+        [Route(Routes.CompanyImagesRoute)]
+        public Task<ActionResult<IEnumerable<ImageResponseModel>>> GetImagesAsync([FromRoute] int companyId)
+            => ControllersHelper.GetAllAsync<ImageEntity, ImageResponseModel>(
+                ImagesQuery,
+                x => x.CompanyId == companyId);
+
+        /// <summary>
+        /// Gets the image with the <paramref name="imageId"/> that belongs to the company with the specified <paramref name="companyId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="imageId"></param>
+        /// Get fooli/companies/1/images/5
+        [HttpGet]
+        [Route(Routes.CompanyImageRoute)]
+        public Task<ActionResult<ImageResponseModel>> GetImageAsync([FromRoute] int companyId, [FromRoute] int imageId)
+            => ControllersHelper.GetAsync<ImageRequestModel, ImageEntity, ImageResponseModel>(
+                ImagesQuery,
+                DI.GetMapper,
+                x => x.Id == imageId && x.CompanyId == companyId);
+
+        /// <summary>
+        /// Deletes an image with the specified <paramref name="leafletId"/> that belongs to the  company with the specified <paramref name="companyId"/>
+        /// </summary>
+        /// <param name="companyId"></param>
+        /// <param name="leafletId"></param>
+        /// Delete fooli/companies/1/images/6
+        [HttpDelete]
+        [Route(Routes.CompanyImageRoute)]
+        public Task<ActionResult<ImageResponseModel>> DeleteImageAsync([FromRoute] int companyId, [FromRoute] int leafletId)
+            => ControllersHelper.DeleteAsync<ImageEntity, ImageResponseModel>(
+                mContext,
+                ImagesQuery,
+                DI.GetMapper,
+                x => x.CompanyId == companyId && x.Id == leafletId);
+
+        #endregion
+
 
         #endregion
     }
