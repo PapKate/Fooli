@@ -158,14 +158,11 @@ namespace Fooli
         /// Delete fooli/companies/3
         [HttpDelete]
         [Route(Routes.CompanyRoute)]
-        public Task<ActionResult<CompanyResponseModel>> DeleteCompany([FromRoute] int companyId)
-        {
-            return ControllersHelper.DeleteAsync<CompanyEntity, CompanyResponseModel>(
+        public Task<ActionResult<CompanyResponseModel>> DeleteCompany([FromRoute] int companyId) => ControllersHelper.DeleteAsync<CompanyEntity, CompanyResponseModel>(
                 mContext,
                 mContext.Companies,
                 DI.GetMapper,
                 x => x.Id == companyId);
-        }
 
         #endregion
 
@@ -271,21 +268,28 @@ namespace Fooli
                 x => x.Id == imageId && x.CompanyId == companyId);
 
         /// <summary>
-        /// Deletes an image with the specified <paramref name="leafletId"/> that belongs to the  company with the specified <paramref name="companyId"/>
+        /// Deletes an image with the specified <paramref name="imageId"/> that belongs to the  company with the specified <paramref name="companyId"/>
         /// </summary>
         /// <param name="companyId"></param>
-        /// <param name="leafletId"></param>
+        /// <param name="imageId"></param>
         /// Delete fooli/companies/1/images/6
         [HttpDelete]
         [Route(Routes.CompanyImageRoute)]
-        public Task<ActionResult<ImageResponseModel>> DeleteImageAsync([FromRoute] int companyId, [FromRoute] int leafletId)
+        public Task<ActionResult<ImageResponseModel>> DeleteImageAsync([FromRoute] int companyId, [FromRoute] int imageId)
             => ControllersHelper.DeleteAsync<ImageEntity, ImageResponseModel>(
                 mContext,
                 ImagesQuery,
                 DI.GetMapper,
-                x => x.CompanyId == companyId && x.Id == leafletId);
+                x => x.CompanyId == companyId && x.Id == imageId);
 
         #endregion
+
+        #region Company Product
+
+
+
+        #endregion
+
 
 
         #endregion

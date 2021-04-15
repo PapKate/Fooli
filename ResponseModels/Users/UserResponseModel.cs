@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Fooli
+﻿namespace Fooli
 {
-    public class UserResponseModel : BaseResponseModel
+    /// <summary>
+    /// The user's response model
+    /// </summary>
+    public class UserResponseModel : StandardResponseModel
     {
         #region Public Properties
 

@@ -1,0 +1,15 @@
+{
+    "images" : 
+    [
+        {
+            "Name" : "NonFood",
+            "Source" : "https://www.lidl-hellas.gr/el/fyladia/apo-deutera-12-04-phulladio-lidl-food/view/flyer/page/1",
+            "Alt" : "non food"
+        },
+        {
+            "Name" : "",
+            "Source" : "",
+            "Alt" : ""
+        }
+    ]
+}

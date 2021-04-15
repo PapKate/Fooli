@@ -6,7 +6,7 @@ namespace Fooli
     /// <summary>
     /// The company's response model
     /// </summary>
-    public class CompanyResponseModel : BaseResponseModel
+    public class CompanyResponseModel : StandardResponseModel
     {
         #region Public Properties
 

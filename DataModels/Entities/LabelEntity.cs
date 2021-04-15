@@ -9,7 +9,7 @@ namespace Fooli
     /// <summary>
     /// Represents a label in the database
     /// </summary>
-    public class LabelEntity : BaseEntity
+    public class LabelEntity : StandardEntity
     {
         #region Public Properties
 

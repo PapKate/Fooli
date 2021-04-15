@@ -8,7 +8,7 @@ namespace Fooli
     /// <summary>
     /// The response model for the leaflet
     /// </summary>
-    public class LeafletResponseModel : BaseResponseModel
+    public class LeafletResponseModel : StandardResponseModel
     {
         #region Public Properties
 

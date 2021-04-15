@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace Fooli
 {
     /// <summary>
-    /// The company product's response model
+    /// The product label pair's response model
     /// </summary>
-    public class CompanyProductResponseModel
+    public class ProductLabelResponseModel : BaseResponseModel
     {
     }
 }

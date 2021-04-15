@@ -2,14 +2,12 @@
 
 namespace Fooli
 {
+    /// <summary>
+    /// Does not have id
+    /// </summary>
     public class BaseResponseModel
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        public int Id { get; set; }
 
         /// <summary>
         /// The date it was created

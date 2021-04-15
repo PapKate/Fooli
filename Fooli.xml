@@ -104,6 +104,11 @@
             The query used for retrieving the leaflets
             </summary>
         </member>
+        <member name="P:Fooli.CompanyController.ImagesQuery">
+            <summary>
+            The query used for retrieving the images
+            </summary>
+        </member>
         <member name="M:Fooli.CompanyController.#ctor(Fooli.FooliDBContext)">
             <summary>
             Default constructor
@@ -131,15 +136,15 @@
         </member>
         <member name="M:Fooli.CompanyController.UpdateCompany(System.Int32,Fooli.CompanyRequestModel)">
             <summary>
-            
+            Updates the data of the company with the specified <paramref name="companyId"/>
             </summary>
-            <param name="companyId"></param>
-            <param name="model"></param>
+            <param name="companyId">The company's id</param>
+            <param name="model">The model</param>
             <returns></returns>
         </member>
         <member name="M:Fooli.CompanyController.DeleteCompany(System.Int32)">
             <summary>
-            Deletes the company with the specified id
+            Deletes the company with the specified <paramref name="companyId"/>
             </summary>
             <param name="companyId">The company's id</param>
             Delete fooli/companies/3
@@ -165,25 +170,46 @@
             </summary>
             <param name="companyId">The company's id</param>
             <param name="leafletId">The leaflet's id</param>
-            <returns></returns>
+            Get fooli/companies/1/leaflets/4
         </member>
         <member name="M:Fooli.CompanyController.DeleteLeafletAsync(System.Int32,System.Int32)">
             <summary>
-            
+            Deletes a leaflet with the specified <paramref name="leafletId"/> that belongs to the  company with the specified <paramref name="companyId"/>
             </summary>
             <param name="companyId"></param>
             <param name="leafletId"></param>
-            <returns></returns>
+            Delete fooli/companies/1/leaflets/4
         </member>
-        <member name="T:Fooli.ImageController">
+        <member name="M:Fooli.CompanyController.CreateImageAsync(System.Int32,Fooli.ImageRequestModel)">
             <summary>
-            Api images
+            Creates a new leaflet
             </summary>
+            <param name="companyId">The company's id</param>
+            <param name="model">The model</param>
+            Post fooli/companies/5/images
         </member>
-        <member name="M:Fooli.ImageController.#ctor(AutoMapper.IMapper,Fooli.FooliDBContext)">
+        <member name="M:Fooli.CompanyController.GetImagesAsync(System.Int32)">
             <summary>
-            Default constructor
+            Gets all the images that belong to the company with the specified <paramref name="companyId"/>
             </summary>
+            <param name="companyId">The company's id</param>
+            Get fooli/companies/1/images
+        </member>
+        <member name="M:Fooli.CompanyController.GetImageAsync(System.Int32,System.Int32)">
+            <summary>
+            Gets the image with the <paramref name="imageId"/> that belongs to the company with the specified <paramref name="companyId"/>
+            </summary>
+            <param name="companyId">The company's id</param>
+            <param name="imageId"></param>
+            Get fooli/companies/1/images/5
+        </member>
+        <member name="M:Fooli.CompanyController.DeleteImageAsync(System.Int32,System.Int32)">
+            <summary>
+            Deletes an image with the specified <paramref name="imageId"/> that belongs to the  company with the specified <paramref name="companyId"/>
+            </summary>
+            <param name="companyId"></param>
+            <param name="imageId"></param>
+            Delete fooli/companies/1/images/6
         </member>
         <member name="T:Fooli.NoteConstroller">
             <summary>
@@ -640,6 +666,20 @@
             <summary>
             Default constructor
             </summary>
+        </member>
+        <member name="M:Fooli.ImageEntity.FromRequestModel(System.Int32,Fooli.ImageRequestModel)">
+            <summary>
+            Creates and returns a <see cref="T:Fooli.ImageEntity"/> from the specified <paramref name="model"/>
+            </summary>
+            <param name="companyId">The company's id</param>
+            <param name="model">The model</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fooli.ImageEntity.ToResponseModel">
+            <summary>
+            Creates and returns a <see cref="T:Fooli.ImageResponseModel"/> from the current <see cref="T:Fooli.ImageEntity"/>
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:Fooli.LabelEntity">
             <summary>
@@ -1289,22 +1329,6 @@
             The image's alternative text
             </summary>
         </member>
-        <member name="P:Fooli.ImageRequestModel.ProductId">
-            <summary>
-            The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageRequestModel.CompanyId">
-            <summary>
-            The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageRequestModel.CompanyProductId">
-            <summary>
-            The company's product's image
-            The <see cref="!:CompanyProductEntity.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
-            </summary>
-        </member>
         <member name="M:Fooli.ImageRequestModel.#ctor">
             <summary>
             Default constructor
@@ -1498,11 +1522,6 @@
             The postal code
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.Leaflets">
-            <summary>
-            The company's leaflets
-            </summary>
-        </member>
         <member name="P:Fooli.CompanyResponseModel.Images">
             <summary>
             The company's images
@@ -1548,19 +1567,9 @@
             Default constructor
             </summary>
         </member>
-        <member name="P:Fooli.ImageResponseModel.Id">
+        <member name="T:Fooli.ImageResponseModel">
             <summary>
-            The id
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.DateCreated">
-            <summary>
-            The date it was created
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.DateModified">
-            <summary>
-            The date the image was last modified
+            The image response model
             </summary>
         </member>
         <member name="P:Fooli.ImageResponseModel.Name">
@@ -1578,9 +1587,20 @@
             The image's alternative text
             </summary>
         </member>
+        <member name="P:Fooli.ImageResponseModel.ProductId">
+            <summary>
+            The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
+            </summary>
+        </member>
         <member name="P:Fooli.ImageResponseModel.CompanyId">
             <summary>
             The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.CompanyProductId">
+            <summary>
+            The company's product's image
+            The <see cref="!:CompanyProductEntity.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
             </summary>
         </member>
         <member name="M:Fooli.ImageResponseModel.#ctor">

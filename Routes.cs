@@ -131,5 +131,35 @@
 
         #endregion
 
+        #region Products
+
+        /// <summary>
+        /// The route for the products
+        /// fooli/products
+        /// </summary>
+        public const string ProductsRoute = HomeRoute + "products";
+
+        /// <summary>
+        /// The route for a specified product
+        /// fooli/products/7
+        /// </summary>
+        public const string ProductRoute = ProductsRoute + "{productId}";
+
+        /// <summary>
+        /// The route for a product's images
+        /// fooli/products/1/images
+        /// </summary>
+        public const string ProductImagesRoute = ProductRoute + "images";
+
+        /// <summary>
+        /// The route for a product's image
+        /// fooli/products/1/images/4
+        /// </summary>
+        public const string ProductImageRoute = ProductImagesRoute + "{imageId}";
+
+
+
+        #endregion
+
     }
 }

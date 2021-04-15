@@ -5,7 +5,7 @@ namespace Fooli
     /// <summary>
     /// Represents a leaflet in the database
     /// </summary>
-    public class LeafletEntity : BaseEntity
+    public class LeafletEntity : StandardEntity
     {
         #region Public Properties
 

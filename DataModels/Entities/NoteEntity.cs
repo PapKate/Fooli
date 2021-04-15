@@ -8,7 +8,7 @@ namespace Fooli
     /// <summary>
     /// Represents a note in the database
     /// </summary>
-    public class NoteEntity : BaseEntity
+    public class NoteEntity : StandardEntity
     {
         #region Public Properties
 

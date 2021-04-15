@@ -8,7 +8,7 @@ namespace Fooli
     /// <summary>
     /// Represents a user in the database
     /// </summary>
-    public class UserEntity : BaseEntity
+    public class UserEntity : StandardEntity
     {
         #region Public Properties
 

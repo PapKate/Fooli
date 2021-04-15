@@ -5,7 +5,7 @@ namespace Fooli
     /// <summary>
     /// The image response model
     /// </summary>
-    public class ImageResponseModel : BaseResponseModel
+    public class ImageResponseModel : StandardResponseModel
     {
         #region Public Properties
 

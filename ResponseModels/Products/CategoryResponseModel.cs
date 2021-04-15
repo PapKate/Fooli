@@ -3,9 +3,9 @@
 namespace Fooli
 {
     /// <summary>
-    /// Represents a category in the database
+    /// The category response model
     /// </summary>
-    public class CategoryEntity : StandardEntity
+    public class CategoryResponseModel : StandardResponseModel
     {
         #region Public Regions
 
@@ -19,30 +19,26 @@ namespace Fooli
         /// </summary>
         public string Path { get; set; }
 
-        #region Relationships
-
         /// <summary>
         /// The id of the parent category
-        /// The <see cref="CategoryEntity.Id"/> of the related <see cref="CategoryEntity"/>
+        /// The <see cref="CategoryResponseModel.Id"/> of the related <see cref="CategoryResponseModel"/>
         /// </summary>
         public int? ParentCategoryId { get; set; }
 
         /// <summary>
-        /// The related <see cref="CategoryEntity"/>
+        /// The related <see cref="CategoryResponseModel"/>
         /// </summary>
-        public CategoryEntity ParentCategory { get; set; }
+        public CategoryResponseModel ParentCategory { get; set; }
 
         /// <summary>
         /// The children categories
         /// </summary>
-        public IEnumerable<CategoryEntity> ChildrenCategories { get; set; }
+        public IEnumerable<CategoryResponseModel> ChildrenCategories { get; set; }
 
         /// <summary>
         /// The products categories pair
         /// </summary>
-        public IEnumerable<ProductCategoryEntity> ProductCategories { get; set; }
-
-        #endregion
+        public IEnumerable<ProductCategoryResponseModel> ProductCategories { get; set; }
 
         #endregion
 
@@ -51,7 +47,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public CategoryEntity()
+        public CategoryResponseModel()
         {
 
         }

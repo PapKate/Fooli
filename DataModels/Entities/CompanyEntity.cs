@@ -5,7 +5,7 @@ namespace Fooli
     /// <summary>
     /// Represents a company in the database
     /// </summary>
-    public class CompanyEntity : BaseEntity
+    public class CompanyEntity : StandardEntity
     {
         #region Public Properties
 

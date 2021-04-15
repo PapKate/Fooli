@@ -1,19 +1,13 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
+    /// <summary>
+    /// The base entity with the date created and modified properties
+    /// </summary>
     public class BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The id
-        /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
 
         /// <summary>
         /// The date it was created

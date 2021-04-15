@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a list item in the database
     /// </summary>
-    public class CheckListItemEntity : BaseEntity
+    public class CheckListItemEntity : StandardEntity
     {
         #region Public Properties
 

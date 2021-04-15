@@ -5,19 +5,9 @@ namespace Fooli
     /// <summary>
     /// Represents a product label pair in the database
     /// </summary>
-    public class ProductLabelEntity 
+    public class ProductLabelEntity : BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
-
-        /// <summary>
-        /// The date it was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         #region Relationships
 

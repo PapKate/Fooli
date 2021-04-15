@@ -5,19 +5,9 @@ namespace Fooli
     /// <summary>
     /// Represents a category product pair
     /// </summary>
-    public class ProductCategoryEntity
+    public class ProductCategoryEntity : BaseEntity
     {
         #region Public Properties
-
-        /// <summary>
-        /// The date it was created
-        /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
-
-        /// <summary>
-        /// The date it was last modified
-        /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
 
         #region Relationships
 

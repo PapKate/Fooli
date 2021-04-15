@@ -7,7 +7,7 @@ namespace Fooli
     /// <summary>
     /// Represents an image in the database
     /// </summary>
-    public class ImageEntity : BaseEntity
+    public class ImageEntity : StandardEntity
     {
         #region Public Properties
 

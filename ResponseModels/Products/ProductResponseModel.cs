@@ -3,9 +3,9 @@
 namespace Fooli
 {
     /// <summary>
-    /// Represents a product in the database
+    /// The product's response model
     /// </summary>
-    public class ProductEntity : StandardEntity
+    public class ProductResponseModel : StandardResponseModel
     {
         #region Public Properties
 
@@ -17,31 +17,27 @@ namespace Fooli
         /// <summary>
         /// The price
         /// </summary>
-        public double? Price { get; set; }
-
-        #region Relationships
+        public double Price { get; set; }
 
         /// <summary>
         /// The product's images
         /// </summary>
-        public IEnumerable<ImageEntity> Images { get; set; }
+        public IEnumerable<ImageResponseModel> Images { get; set; }
 
         /// <summary>
         /// The companies and products
         /// </summary>
-        public IEnumerable<CompanyProductEntity> CompaniesProducts { get; set; }
+        public IEnumerable<CompanyProductResponseModel> CompaniesProducts { get; set; }
 
         /// <summary>
         /// The labels and products
         /// </summary>
-        public IEnumerable<ProductLabelEntity> ProductLabels { get; set; }
+        public IEnumerable<ProductLabelResponseModel> ProductLabels { get; set; }
 
         /// <summary>
         /// The category and product pairs
         /// </summary>
-        public IEnumerable<ProductCategoryEntity> ProductsCategories { get; set; }
-        
-        #endregion
+        public IEnumerable<ProductCategoryResponseModel> ProductsCategories { get; set; }
 
         #endregion
 
@@ -50,7 +46,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ProductEntity()
+        public ProductResponseModel()
         {
 
         }
