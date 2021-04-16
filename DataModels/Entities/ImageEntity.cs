@@ -1,13 +1,9 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Fooli
+﻿namespace Fooli
 {
     /// <summary>
     /// Represents an image in the database
     /// </summary>
-    public class ImageEntity : StandardEntity
+    public class ImageEntity : BaseEntity
     {
         #region Public Properties
 
@@ -47,17 +43,6 @@ namespace Fooli
         /// The related <see cref="CompanyEntity"/>
         /// </summary>
         public CompanyEntity Company { get; set; }
-
-        /// <summary>
-        /// The company's product's image
-        /// The <see cref="CompanyProductEntity.Id"/> of the related <see cref="CompanyProductEntity"/>
-        /// </summary>
-        public int? CompanyProductId { get; set; }
-
-        /// <summary>
-        /// The related <see cref="CompanyProductEntity"/>
-        /// </summary>
-        public CompanyProductEntity CompanyProduct { get; set; }
 
         #endregion
 

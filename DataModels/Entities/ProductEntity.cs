@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Fooli
 {
     /// <summary>
     /// Represents a product in the database
     /// </summary>
-    public class ProductEntity : StandardEntity
+    public class ProductEntity : BaseEntity
     {
         #region Public Properties
 
@@ -17,7 +18,7 @@ namespace Fooli
         /// <summary>
         /// The price
         /// </summary>
-        public double? Price { get; set; }
+        public double Price { get; set; }
 
         #region Relationships
 
@@ -27,9 +28,14 @@ namespace Fooli
         public IEnumerable<ImageEntity> Images { get; set; }
 
         /// <summary>
+        /// The product measurement units
+        /// </summary>
+        public IEnumerable<ProductMeasurementUnitEntity> ProductMeasurementUnits { get; set; }
+
+        /// <summary>
         /// The companies and products
         /// </summary>
-        public IEnumerable<CompanyProductEntity> CompaniesProducts { get; set; }
+        public IEnumerable<CompanyProductEntity> CompanyProducts { get; set; }
 
         /// <summary>
         /// The labels and products
@@ -39,7 +45,7 @@ namespace Fooli
         /// <summary>
         /// The category and product pairs
         /// </summary>
-        public IEnumerable<ProductCategoryEntity> ProductsCategories { get; set; }
+        public IEnumerable<ProductCategoryEntity> ProductCategories { get; set; }
         
         #endregion
 
@@ -53,6 +59,18 @@ namespace Fooli
         public ProductEntity()
         {
 
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public static ProductEntity FromRequestModel(ProductRequestModel model, CompanyProductEntity companyProduct)
+        {
+           
+            return ControllersHelper.FromRequestModel(model, delegate (ProductEntity entity) 
+            {
+            });
         }
 
         #endregion

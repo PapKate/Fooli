@@ -1,32 +1,28 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Fooli
 {
     /// <summary>
-    /// The base entity with the date created and modified properties
+    /// Does not have id
     /// </summary>
-    public abstract class BaseEntity
+    public abstract class BaseResponseModel
     {
         #region Public Properties
 
         /// <summary>
         /// The id
         /// </summary>
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         /// <summary>
         /// The date it was created
         /// </summary>
-        public DateTimeOffset DateCreated { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset DateCreated { get; set; }
 
         /// <summary>
         /// The date it was last modified
         /// </summary>
-        public DateTimeOffset DateModified { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset DateModified { get; set; }
 
         #endregion
 
@@ -35,7 +31,7 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public BaseEntity()
+        public BaseResponseModel()
         {
 
         }

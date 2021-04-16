@@ -69,14 +69,13 @@ namespace Fooli
         /// <summary>
         /// Gets a specified response model of an entity if exists with the specified id
         /// </summary>
-        /// <typeparam name="TRequestModel">The request model</typeparam>
         /// <typeparam name="TEntity">The entity</typeparam>
         /// <typeparam name="TResponseModel">The response model</typeparam>
         /// <param name="dbSet">The db set</param>
         /// <param name="mapper">The mapper</param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public static async Task<ActionResult<TResponseModel>> GetAsync<TRequestModel, TEntity, TResponseModel>(IQueryable<TEntity> dbSet, IMapper mapper, Expression<Func<TEntity, bool>> filter)
+        public static async Task<ActionResult<TResponseModel>> GetAsync<TEntity, TResponseModel>(IQueryable<TEntity> dbSet, IMapper mapper, Expression<Func<TEntity, bool>> filter)
             where TEntity : BaseEntity
         {
             // If exists finds the entity

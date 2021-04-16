@@ -11,6 +11,38 @@
         /// </summary>
         public const string HomeRoute = "fooli";
 
+        #region Category Routes
+
+        /// <summary>
+        /// The route to the categories
+        /// fooli/categories
+        /// </summary>
+        public const string CategoriesRoute = HomeRoute + "/categories";
+
+        /// <summary>
+        /// The route to a category
+        /// fooli/categories/3
+        /// </summary>
+        public const string CategoryRoute = CategoriesRoute + "/{categoryId}";
+
+        #endregion
+
+        #region Label Routes
+
+        /// <summary>
+        /// The route to the labels
+        /// fooli/labels
+        /// </summary>
+        public const string LabelsRoute = HomeRoute + "/labels";
+
+        /// <summary>
+        /// The route to a label
+        /// fooli/labels/3
+        /// </summary>
+        public const string LabelRoute = LabelsRoute + "/{labelId}";
+
+        #endregion
+
         #region User Routes
 
         /// <summary>
@@ -137,27 +169,49 @@
         /// The route for the products
         /// fooli/products
         /// </summary>
-        public const string ProductsRoute = HomeRoute + "products";
+        public const string ProductsRoute = HomeRoute + "/products";
 
         /// <summary>
         /// The route for a specified product
         /// fooli/products/7
         /// </summary>
-        public const string ProductRoute = ProductsRoute + "{productId}";
+        public const string ProductRoute = ProductsRoute + "/{productId}";
 
         /// <summary>
         /// The route for a product's images
         /// fooli/products/1/images
         /// </summary>
-        public const string ProductImagesRoute = ProductRoute + "images";
+        public const string ProductImagesRoute = ProductRoute + "/images";
 
         /// <summary>
         /// The route for a product's image
         /// fooli/products/1/images/4
         /// </summary>
-        public const string ProductImageRoute = ProductImagesRoute + "{imageId}";
+        public const string ProductImageRoute = ProductImagesRoute + "/{imageId}";
 
+        /// <summary>
+        /// The route for a product's categories
+        /// fooli/products/categories
+        /// </summary>
+        public const string ProductCategoriesRoute = ProductRoute + "/categories";
 
+        /// <summary>
+        /// The route to a product's category
+        /// fooli/products/categories/9
+        /// </summary>
+        public const string ProductCategoryRoute = ProductCategoriesRoute + "/{categoryId}";
+
+        /// <summary>
+        /// The route for a product's labels
+        /// fooli/products/labels
+        /// </summary>
+        public const string ProductLabelsRoute = ProductRoute + "/labels";
+
+        /// <summary>
+        /// The route to a product's label
+        /// fooli/products/labels/6
+        /// </summary>
+        public const string ProductLabelRoute = ProductLabelsRoute + "/{labelId}";
 
         #endregion
 

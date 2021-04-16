@@ -5,7 +5,7 @@ namespace Fooli
     /// <summary>
     /// Represents a leaflet in the database
     /// </summary>
-    public class LeafletEntity : StandardEntity
+    public class LeafletEntity : BaseEntity
     {
         #region Public Properties
 
@@ -32,7 +32,7 @@ namespace Fooli
         #region Relationships
 
         /// <summary>
-        /// The <see cref="CompanyEntity.Id"/> of the related <see cref="CompanyEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="CompanyEntity"/>
         /// </summary>
         public int CompanyId { get; set; }
 
@@ -66,7 +66,7 @@ namespace Fooli
         /// <param name="model">The model</param>
         /// <returns></returns>
         public static LeafletEntity FromRequestModel(int companyId, LeafletRequestModel model) 
-            => ControllersHelper.FromRequestModel(model, delegate (LeafletEntity entity) { entity.CompanyId = companyId; });
+            => ControllersHelper.FromRequestModel(model, (LeafletEntity entity) => { entity.CompanyId = companyId; });
 
         /// <summary>
         /// Creates and returns a <see cref="LeafletResponseModel"/> from the current <see cref="LeafletEntity"/>

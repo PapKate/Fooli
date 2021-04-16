@@ -1,13 +1,11 @@
 ﻿namespace Fooli
 {
     /// <summary>
-    /// Represents a category product pair
+    /// The product measurement unit pair entity
     /// </summary>
-    public class ProductCategoryEntity : BaseEntity
+    public class ProductMeasurementUnitEntity : BaseEntity
     {
         #region Public Properties
-
-        #region Relationships
 
         /// <summary>
         /// The <see cref="ProductEntity.Id"/> of the related <see cref="ProductEntity"/>
@@ -20,16 +18,14 @@
         public ProductEntity Product { get; set; }
 
         /// <summary>
-        /// The <see cref="CategoryEntity.Id"/> of the related <see cref="CategoryEntity"/>
+        /// The <see cref="MeasurementUnitEntity.Id"/> of the related <see cref="MeasurementUnitEntity"/>
         /// </summary>
-        public int CategoryId { get; set; }
+        public int MeasurementUnitId { get; set; }
 
         /// <summary>
-        /// The related <see cref="CategoryEntity"/>
+        /// The related <see cref="MeasurementUnit"/>
         /// </summary>
-        public CategoryEntity Category { get; set; }
-
-        #endregion
+        public MeasurementUnitEntity MeasurementUnit { get; set; }
 
         #endregion
 
@@ -38,12 +34,11 @@
         /// <summary>
         /// Default constructor
         /// </summary>
-        public ProductCategoryEntity()
+        public ProductMeasurementUnitEntity()
         {
 
         }
 
         #endregion
-
     }
 }

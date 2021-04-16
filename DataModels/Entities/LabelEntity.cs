@@ -9,7 +9,7 @@ namespace Fooli
     /// <summary>
     /// Represents a label in the database
     /// </summary>
-    public class LabelEntity : StandardEntity
+    public class LabelEntity : BaseEntity
     {
         #region Public Properties
 
@@ -43,6 +43,25 @@ namespace Fooli
         {
 
         }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="LabelEntity"/> from the specified <paramref name="model"/>
+        /// <paramref name="model">The model</paramref>
+        /// </summary>
+        /// <returns></returns>
+        public static LabelEntity FromRequestModel(LabelRequestModel model)
+            => ControllersHelper.FromRequestModel<LabelEntity, LabelRequestModel>(model);
+
+        /// <summary>
+        /// Creates and returns a <see cref="LabelResponseModel"/> from the current <see cref="ImageEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public LabelResponseModel ToResponseModel()
+            => ControllersHelper.ToResponseModel<LabelEntity, LabelResponseModel>(this);
 
         #endregion
     }

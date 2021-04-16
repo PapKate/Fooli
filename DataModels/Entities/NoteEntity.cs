@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
 
 namespace Fooli
 {
     /// <summary>
     /// Represents a note in the database
     /// </summary>
-    public class NoteEntity : StandardEntity
+    public class NoteEntity : BaseEntity
     {
         #region Public Properties
 

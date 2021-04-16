@@ -5,7 +5,7 @@ namespace Fooli
     /// <summary>
     /// Represents a category in the database
     /// </summary>
-    public class CategoryEntity : StandardEntity
+    public class CategoryEntity : BaseEntity
     {
         #region Public Regions
 
@@ -55,6 +55,25 @@ namespace Fooli
         {
 
         }
+
+        #endregion
+
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="CategoryEntity"/> from the specified <paramref name="model"/>
+        /// </summary>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static CategoryEntity FromRequestModel(CategoryRequestModel model)
+            => ControllersHelper.FromRequestModel<CategoryEntity, CategoryRequestModel>(model);
+
+        /// <summary>
+        /// Creates and returns a <see cref="CategoryResponseModel"/> from the current <see cref="CategoryEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public CategoryResponseModel ToResponseModel()
+            => ControllersHelper.ToResponseModel<CategoryEntity, CategoryResponseModel>(this);
 
         #endregion
     }

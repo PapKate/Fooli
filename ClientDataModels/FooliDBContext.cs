@@ -1,10 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Fooli
 {
     /// <summary>
@@ -152,19 +147,18 @@ namespace Fooli
             #region CompanyProductPairs
 
             modelBuilder.Entity<CompanyProductEntity>()
-                .HasKey(x => new { x.CompanyId, x.ProductrId });
-
-            modelBuilder.Entity<CompanyProductEntity>()
                 .HasOne(x => x.Company)
                 .WithMany(x => x.CompayProducts)
+                .HasPrincipalKey(x => x.Id)
                 .HasForeignKey(x => x.CompanyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CompanyProductEntity>()
-              .HasOne(x => x.Product)
-              .WithMany(x => x.CompaniesProducts)
-              .HasForeignKey(x => x.ProductrId)
-              .OnDelete(DeleteBehavior.Cascade);
+               .HasOne(x => x.Product)
+               .WithMany(x => x.CompanyProducts)
+               .HasPrincipalKey(x => x.Id)
+               .HasForeignKey(x => x.ProductrId)
+               .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
@@ -182,38 +176,54 @@ namespace Fooli
             #region ProductCategoryPairs
 
             modelBuilder.Entity<ProductCategoryEntity>()
-                .HasKey(x => new { x.CategoryId, x.ProductId });
-
-            modelBuilder.Entity<ProductCategoryEntity>()
                 .HasOne(x => x.Product)
-                .WithMany(x => x.ProductsCategories)
+                .WithMany(x => x.ProductCategories)
+                .HasPrincipalKey(x => x.Id)
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ProductCategoryEntity>()
-                .HasOne(x => x.Category)
-                .WithMany(x => x.ProductCategories)
-                .HasForeignKey(x => x.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+               .HasOne(x => x.Category)
+               .WithMany(x => x.ProductCategories)
+               .HasPrincipalKey(x => x.Id)
+               .HasForeignKey(x => x.CategoryId)
+               .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
             #region ProductLabelPairs
 
             modelBuilder.Entity<ProductLabelEntity>()
-               .HasKey(x => new { x.LabelId, x.ProductId });
-
-            modelBuilder.Entity<ProductLabelEntity>()
                 .HasOne(x => x.Product)
                 .WithMany(x => x.ProductLabels)
+                .HasPrincipalKey(x => x.Id)
                 .HasForeignKey(x => x.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ProductLabelEntity>()
-                .HasOne(x => x.Label)
-                .WithMany(x => x.ProductLabels)
-                .HasForeignKey(x => x.LabelId)
+             .HasOne(x => x.Label)
+             .WithMany(x => x.ProductLabels)
+             .HasPrincipalKey(x => x.Id)
+             .HasForeignKey(x => x.LabelId)
+             .OnDelete(DeleteBehavior.Cascade);
+
+            #endregion
+
+            #region ProductMeasurementPairs
+
+            modelBuilder.Entity<ProductMeasurementUnitEntity>()
+                .HasOne(x => x.MeasurementUnit)
+                .WithMany(x => x.ProductMeasurementUnits)
+                .HasPrincipalKey(x => x.Id)
+                .HasForeignKey(x => x.MeasurementUnitId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProductMeasurementUnitEntity>()
+               .HasOne(x => x.Product)
+               .WithMany(x => x.ProductMeasurementUnits)
+               .HasPrincipalKey(x => x.Id)
+               .HasForeignKey(x => x.ProductId)
+               .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
         }

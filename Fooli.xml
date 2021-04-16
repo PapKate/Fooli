@@ -313,6 +313,26 @@
             <param name="checkListItemId">The check list item's id</param>
             Delete fooli/users/2/notes/1/checkListItems/3
         </member>
+        <member name="T:Fooli.ProductController">
+            <summary>
+            The product's controller
+            </summary>
+        </member>
+        <member name="F:Fooli.ProductController.mContext">
+            <summary>
+            The DB context
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductController.ProductsQuery">
+            <summary>
+            The query used for retrieving the products
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductController.#ctor(Fooli.FooliDBContext)">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Fooli.UserController">
             <summary>
             Api users
@@ -363,6 +383,11 @@
             <param name="userId">The user's id</param>
             Delete /fooli/users/{userId}
         </member>
+        <member name="T:Fooli.BaseEntity">
+            <summary>
+            The base entity with the date created and modified properties
+            </summary>
+        </member>
         <member name="P:Fooli.BaseEntity.Id">
             <summary>
             The id
@@ -395,7 +420,7 @@
         </member>
         <member name="P:Fooli.CategoryEntity.Path">
             <summary>
-            The icon's path
+            The category icon's path
             </summary>
         </member>
         <member name="P:Fooli.CategoryEntity.ParentCategoryId">
@@ -651,17 +676,6 @@
             The related <see cref="T:Fooli.CompanyEntity"/>
             </summary>
         </member>
-        <member name="P:Fooli.ImageEntity.CompanyProductId">
-            <summary>
-            The company's product's image
-            The <see cref="!:CompanyProductEntity.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageEntity.CompanyProduct">
-            <summary>
-            The related <see cref="T:Fooli.CompanyProductEntity"/>
-            </summary>
-        </member>
         <member name="M:Fooli.ImageEntity.#ctor">
             <summary>
             Default constructor
@@ -760,6 +774,37 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:Fooli.MeasurementUnitEntity">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Fooli.MeasurementUnitEntity.Name">
+            <summary>
+            The name 
+            ex. kilograms
+            </summary>
+        </member>
+        <member name="P:Fooli.MeasurementUnitEntity.Quantity">
+            <summary>
+            The quantity
+            </summary>
+        </member>
+        <member name="P:Fooli.MeasurementUnitEntity.Αbbreviation">
+            <summary>
+            The abbreviation
+            </summary>
+        </member>
+        <member name="P:Fooli.MeasurementUnitEntity.ProductMeasurementUnits">
+            <summary>
+            The product measurement units
+            </summary>
+        </member>
+        <member name="M:Fooli.MeasurementUnitEntity.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
         <member name="T:Fooli.NoteEntity">
             <summary>
             Represents a note in the database
@@ -819,16 +864,6 @@
             Represents a category product pair
             </summary>
         </member>
-        <member name="P:Fooli.ProductCategoryEntity.DateCreated">
-            <summary>
-            The date it was created
-            </summary>
-        </member>
-        <member name="P:Fooli.ProductCategoryEntity.DateModified">
-            <summary>
-            The date it was last modified
-            </summary>
-        </member>
         <member name="P:Fooli.ProductCategoryEntity.ProductId">
             <summary>
             The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
@@ -874,7 +909,12 @@
             The product's images
             </summary>
         </member>
-        <member name="P:Fooli.ProductEntity.CompaniesProducts">
+        <member name="P:Fooli.ProductEntity.ProductMeasurementUnits">
+            <summary>
+            The product measurement units
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductEntity.CompanyProducts">
             <summary>
             The companies and products
             </summary>
@@ -884,7 +924,7 @@
             The labels and products
             </summary>
         </member>
-        <member name="P:Fooli.ProductEntity.ProductsCategories">
+        <member name="P:Fooli.ProductEntity.ProductCategories">
             <summary>
             The category and product pairs
             </summary>
@@ -897,16 +937,6 @@
         <member name="T:Fooli.ProductLabelEntity">
             <summary>
             Represents a product label pair in the database
-            </summary>
-        </member>
-        <member name="P:Fooli.ProductLabelEntity.DateCreated">
-            <summary>
-            The date it was created
-            </summary>
-        </member>
-        <member name="P:Fooli.ProductLabelEntity.DateModified">
-            <summary>
-            The date it was last modified
             </summary>
         </member>
         <member name="P:Fooli.ProductLabelEntity.ProductId">
@@ -930,6 +960,36 @@
             </summary>
         </member>
         <member name="M:Fooli.ProductLabelEntity.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductMeasurementUnitEntity">
+            <summary>
+            The product measurement unit pair entity
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitEntity.ProductId">
+            <summary>
+            The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitEntity.Product">
+            <summary>
+            The related <see cref="T:Fooli.ProductEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitEntity.MeasurementUnitId">
+            <summary>
+            The <see cref="!:MeasurementUnitEntity.Id"/> of the related <see cref="T:Fooli.MeasurementUnitEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitEntity.MeasurementUnit">
+            <summary>
+            The related <see cref="P:Fooli.ProductMeasurementUnitEntity.MeasurementUnit"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductMeasurementUnitEntity.#ctor">
             <summary>
             Default constructor
             </summary>
@@ -1063,6 +1123,845 @@
         <member name="M:Fooli.IUserRepository.SaveChanges">
             <summary>
             Saves changes in the database
+            </summary>
+        </member>
+        <member name="T:Fooli.BaseRequestModel">
+            <summary>
+            Empty
+            </summary>
+        </member>
+        <member name="M:Fooli.BaseRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.Country">
+            <summary>
+            The country
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.City">
+            <summary>
+            The city
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.Address">
+            <summary>
+            The address
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.PhoneNumber">
+            <summary>
+            The phone number
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.PostalCode">
+            <summary>
+            The postal code
+            </summary>
+        </member>
+        <member name="M:Fooli.CompanyRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.LeafletRequestModel">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletRequestModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletRequestModel.Url">
+            <summary>
+            The url 
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletRequestModel.DateStart">
+            <summary>
+            The date from which the leaflet applies
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletRequestModel.DateEnd">
+            <summary>
+            The date that ends what the leaflet applies
+            </summary>
+        </member>
+        <member name="M:Fooli.LeafletRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ImageRequestModel">
+            <summary>
+            The image's request model
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageRequestModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageRequestModel.Source">
+            <summary>
+            The image's url
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageRequestModel.Alt">
+            <summary>
+            The image's alternative text
+            </summary>
+        </member>
+        <member name="M:Fooli.ImageRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemRequestModel.Text">
+            <summary>
+            The item
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemRequestModel.IsChecked">
+            <summary>
+            Shows if it is checked
+            </summary>
+        </member>
+        <member name="M:Fooli.CheckListItemRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.NoteRequestModel">
+            <summary>
+            The list's request model
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteRequestModel.Title">
+            <summary>
+            The title
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteRequestModel.Text">
+            <summary>
+            The text
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteRequestModel.Color">
+            <summary>
+            The color
+            </summary>
+        </member>
+        <member name="M:Fooli.NoteRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.CategoryRequestModel">
+            <summary>
+            The category's request model
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryRequestModel.Name">
+            <summary>
+            The category
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryRequestModel.Path">
+            <summary>
+            The category icon's path
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryRequestModel.ParentCategoryId">
+            <summary>
+            The id of the parent category
+            </summary>
+        </member>
+        <member name="M:Fooli.CategoryRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.LabelRequestModel">
+            <summary>
+            The label request model
+            </summary>
+        </member>
+        <member name="P:Fooli.LabelRequestModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.LabelRequestModel.Slug">
+            <summary>
+            The slug
+            </summary>
+        </member>
+        <member name="M:Fooli.LabelRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductCategoryRequestModel">
+            <summary>
+            The product category pair request model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductCategoryRequestModel.ProductId">
+            <summary>
+            The <see cref="!:ProductRequestModel.Id"/> of the related <see cref="T:Fooli.ProductRequestModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductCategoryRequestModel.CategoryId">
+            <summary>
+            The <see cref="!:CategoryRequestModel.Id"/> of the related <see cref="T:Fooli.CategoryRequestModel"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductCategoryRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductLabelRequestModel">
+            <summary>
+            The product label pair's request model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductLabelRequestModel.ProductId">
+            <summary>
+            The <see cref="!:ProductRequestModel.Id"/> of the related <see cref="T:Fooli.ProductRequestModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductLabelRequestModel.LabelId">
+            <summary>
+            The <see cref="!:LabelRequestModel.Id"/> of the related <see cref="T:Fooli.LabelRequestModel"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductLabelRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductMeasurementUnitRequestModel">
+            <summary>
+            The product measurement unit pair request model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitRequestModel.ProductId">
+            <summary>
+            The <see cref="!:ProductRequestModel.Id"/> of the related <see cref="T:Fooli.ProductRequestModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitRequestModel.MeasurementUnitId">
+            <summary>
+            The <see cref="!:ProductMeasurementUnitRequestModel.Id"/> of the related <see cref="T:Fooli.ProductMeasurementUnitRequestModel"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductMeasurementUnitRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductRequestModel">
+            <summary>
+            The product's request model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductRequestModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Username">
+            <summary>
+            The username
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Email">
+            <summary>
+            The email
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Password">
+            <summary>
+            The password
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.PictureUrl">
+            <summary>
+            The profile's picture url
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Type">
+            <summary>
+            The user's type
+            By default customer
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.FirstName">
+            <summary>
+            The first name
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.LastName">
+            <summary>
+            The last name
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Gender">
+            <summary>
+            The gender
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Country">
+            <summary>
+            The country
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.City">
+            <summary>
+            The city
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Address1">
+            <summary>
+            The first-main address
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.Address2">
+            <summary>
+            The secondary address
+            </summary>
+        </member>
+        <member name="P:Fooli.UserRequestModel.PostalCode">
+            <summary>
+            The postal code
+            </summary>
+        </member>
+        <member name="M:Fooli.UserRequestModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.BaseResponseModel">
+            <summary>
+            Does not have id
+            </summary>
+        </member>
+        <member name="P:Fooli.BaseResponseModel.Id">
+            <summary>
+            The id
+            </summary>
+        </member>
+        <member name="P:Fooli.BaseResponseModel.DateCreated">
+            <summary>
+            The date it was created
+            </summary>
+        </member>
+        <member name="P:Fooli.BaseResponseModel.DateModified">
+            <summary>
+            The date it was last modified
+            </summary>
+        </member>
+        <member name="M:Fooli.BaseResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.CompanyProductResponseModel">
+            <summary>
+            The company product's response model
+            </summary>
+        </member>
+        <member name="T:Fooli.CompanyResponseModel">
+            <summary>
+            The company's response model
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.Country">
+            <summary>
+            The country
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.City">
+            <summary>
+            The city
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.Address">
+            <summary>
+            The address
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.PhoneNumber">
+            <summary>
+            The phone number
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.PostalCode">
+            <summary>
+            The postal code
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.Images">
+            <summary>
+            The company's images
+            </summary>
+        </member>
+        <member name="M:Fooli.CompanyResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.LeafletResponseModel">
+            <summary>
+            The response model for the leaflet
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletResponseModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletResponseModel.Url">
+            <summary>
+            The url 
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletResponseModel.DateStart">
+            <summary>
+            The date from which the leaflet applies
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletResponseModel.DateEnd">
+            <summary>
+            The date that ends what the leaflet applies
+            </summary>
+        </member>
+        <member name="P:Fooli.LeafletResponseModel.CompanyId">
+            <summary>
+            The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.LeafletResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ImageResponseModel">
+            <summary>
+            The image response model
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.Source">
+            <summary>
+            The image's url
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.Alt">
+            <summary>
+            The image's alternative text
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.ProductId">
+            <summary>
+            The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.CompanyId">
+            <summary>
+            The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ImageResponseModel.CompanyProductId">
+            <summary>
+            The company's product's image
+            The <see cref="!:CompanyProductEntity.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ImageResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.CheckListItemResponseModel">
+            <summary>
+            The check list item response model
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemResponseModel.Id">
+            <summary>
+            The id
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemResponseModel.Text">
+            <summary>
+            The item
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemResponseModel.IsChecked">
+            <summary>
+            Shows if it is checked
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemResponseModel.NoteId">
+            <summary>
+            The <see cref="!:NoteEntity.Id"/> of the related <see cref="T:Fooli.NoteEntity"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemResponseModel.DateCreated">
+            <summary>
+            The date it was created
+            </summary>
+        </member>
+        <member name="P:Fooli.CheckListItemResponseModel.DateModified">
+            <summary>
+            The date it was last modified
+            </summary>
+        </member>
+        <member name="M:Fooli.CheckListItemResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.NoteResponseModel">
+            <summary>
+            The list's response model
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.Id">
+            <summary>
+            The id
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.Title">
+            <summary>
+            The title
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.Text">
+            <summary>
+            The text
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.Color">
+            <summary>
+            The color
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.DateCreated">
+            <summary>
+            The date the note was created
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.DateModified">
+            <summary>
+            The date the list was last modified
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.CheckListItems">
+            <summary>
+            The list's items
+            </summary>
+        </member>
+        <member name="P:Fooli.NoteResponseModel.UserId">
+            <summary>
+            The <see cref="!:UserEntity.Id"/> of the related <see cref="T:Fooli.UserEntity"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.NoteResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.CategoryResponseModel">
+            <summary>
+            The category response model
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryResponseModel.Name">
+            <summary>
+            The category
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryResponseModel.Path">
+            <summary>
+            The category icon's path
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryResponseModel.ParentCategoryId">
+            <summary>
+            The id of the parent category
+            The <see cref="!:CategoryResponseModel.Id"/> of the related <see cref="T:Fooli.CategoryResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryResponseModel.ParentCategory">
+            <summary>
+            The related <see cref="T:Fooli.CategoryResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryResponseModel.ChildrenCategories">
+            <summary>
+            The children categories
+            </summary>
+        </member>
+        <member name="P:Fooli.CategoryResponseModel.ProductCategories">
+            <summary>
+            The products categories pair
+            </summary>
+        </member>
+        <member name="M:Fooli.CategoryResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.LabelResponseModel">
+            <summary>
+            The label response model
+            </summary>
+        </member>
+        <member name="P:Fooli.LabelResponseModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.LabelResponseModel.Slug">
+            <summary>
+            The slug
+            </summary>
+        </member>
+        <member name="P:Fooli.LabelResponseModel.ProductLabels">
+            <summary>
+            The labels and products
+            </summary>
+        </member>
+        <member name="M:Fooli.LabelResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductCategoryResponseModel">
+            <summary>
+            The product category pair's response model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductCategoryResponseModel.ProductId">
+            <summary>
+            The <see cref="!:ProductResponseModel.Id"/> of the related <see cref="T:Fooli.ProductResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductCategoryResponseModel.Product">
+            <summary>
+            The related <see cref="T:Fooli.ProductResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductCategoryResponseModel.CategoryId">
+            <summary>
+            The <see cref="!:CategoryResponseModel.Id"/> of the related <see cref="T:Fooli.CategoryResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductCategoryResponseModel.Category">
+            <summary>
+            The related <see cref="T:Fooli.CategoryResponseModel"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductCategoryResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductLabelResponseModel">
+            <summary>
+            The product label pair's response model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductLabelResponseModel.ProductId">
+            <summary>
+            The <see cref="!:ProductResponseModel.Id"/> of the related <see cref="T:Fooli.ProductResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductLabelResponseModel.Product">
+            <summary>
+            The related <see cref="T:Fooli.ProductResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductLabelResponseModel.LabelId">
+            <summary>
+            The <see cref="!:LabelResponseModel.Id"/> of the related <see cref="T:Fooli.LabelResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductLabelResponseModel.Label">
+            <summary>
+            The related <see cref="T:Fooli.LabelResponseModel"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductLabelResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductMeasurementUnitResponseModel">
+            <summary>
+            The product measurement unit pair response model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitResponseModel.ProductId">
+            <summary>
+            The <see cref="!:ProductResponseModel.Id"/> of the related <see cref="T:Fooli.ProductResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitResponseModel.Product">
+            <summary>
+            The related <see cref="T:Fooli.ProductResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitResponseModel.MeasurementUnitId">
+            <summary>
+            The <see cref="!:ProductMeasurementUnitResponseModel.Id"/> of the related <see cref="T:Fooli.ProductMeasurementUnitResponseModel"/>
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductMeasurementUnitResponseModel.MeasurementUnit">
+            <summary>
+            The related <see cref="P:Fooli.ProductMeasurementUnitResponseModel.MeasurementUnit"/>
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductMeasurementUnitResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.ProductResponseModel">
+            <summary>
+            The product's response model
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductResponseModel.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductResponseModel.Price">
+            <summary>
+            The price
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductResponseModel.Images">
+            <summary>
+            The product's images
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductResponseModel.CompaniesProducts">
+            <summary>
+            The companies and products
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductResponseModel.ProductLabels">
+            <summary>
+            The labels and products
+            </summary>
+        </member>
+        <member name="P:Fooli.ProductResponseModel.ProductsCategories">
+            <summary>
+            The category and product pairs
+            </summary>
+        </member>
+        <member name="M:Fooli.ProductResponseModel.#ctor">
+            <summary>
+            Default constructor
+            </summary>
+        </member>
+        <member name="T:Fooli.UserResponseModel">
+            <summary>
+            The user's response model
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Username">
+            <summary>
+            The username
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Email">
+            <summary>
+            The email
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.PictureUrl">
+            <summary>
+            The profile's picture url
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Type">
+            <summary>
+            The user's type
+            By default customer
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.FirstName">
+            <summary>
+            The first name
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.LastName">
+            <summary>
+            The last name
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Gender">
+            <summary>
+            The gender
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Country">
+            <summary>
+            The country
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.City">
+            <summary>
+            The city
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Address1">
+            <summary>
+            The first-main address
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.Address2">
+            <summary>
+            The secondary address
+            </summary>
+        </member>
+        <member name="P:Fooli.UserResponseModel.PostalCode">
+            <summary>
+            The postal code
+            </summary>
+        </member>
+        <member name="M:Fooli.UserResponseModel.#ctor">
+            <summary>
+            Default constructor
             </summary>
         </member>
         <member name="T:Fooli.DI">
@@ -1204,28 +2103,6 @@
             <param name="type">The type</param>
             <returns></returns>
         </member>
-        <member name="T:Fooli.CompaniesProfile">
-            <summary>
-            Provides a named configuration for maps. Naming conventions become scoped per
-            profile.
-            </summary>
-        </member>
-        <member name="M:Fooli.CompaniesProfile.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.ImagesProfile">
-            <summary>
-            Provides a named configuration for maps. Naming conventions become scoped per
-            profile.
-            </summary>
-        </member>
-        <member name="M:Fooli.ImagesProfile.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
         <member name="T:Fooli.Program">
             <summary>
             
@@ -1243,207 +2120,6 @@
             </summary>
             <param name="args"></param>
             <returns></returns>
-        </member>
-        <member name="M:Fooli.BaseRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyRequestModel.Name">
-            <summary>
-            The name
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyRequestModel.Country">
-            <summary>
-            The country
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyRequestModel.City">
-            <summary>
-            The city
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyRequestModel.Address">
-            <summary>
-            The address
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyRequestModel.PhoneNumber">
-            <summary>
-            The phone number
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyRequestModel.PostalCode">
-            <summary>
-            The postal code
-            </summary>
-        </member>
-        <member name="M:Fooli.CompanyRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.LeafletRequestModel">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletRequestModel.Name">
-            <summary>
-            The name
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletRequestModel.Url">
-            <summary>
-            The url 
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletRequestModel.DateStart">
-            <summary>
-            The date from which the leaflet applies
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletRequestModel.DateEnd">
-            <summary>
-            The date that ends what the leaflet applies
-            </summary>
-        </member>
-        <member name="M:Fooli.LeafletRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageRequestModel.Name">
-            <summary>
-            The name
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageRequestModel.Source">
-            <summary>
-            The image's url
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageRequestModel.Alt">
-            <summary>
-            The image's alternative text
-            </summary>
-        </member>
-        <member name="M:Fooli.ImageRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemRequestModel.Text">
-            <summary>
-            The item
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemRequestModel.IsChecked">
-            <summary>
-            Shows if it is checked
-            </summary>
-        </member>
-        <member name="M:Fooli.CheckListItemRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.NoteRequestModel">
-            <summary>
-            The list's request model
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteRequestModel.Title">
-            <summary>
-            The title
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteRequestModel.Text">
-            <summary>
-            The text
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteRequestModel.Color">
-            <summary>
-            The color
-            </summary>
-        </member>
-        <member name="M:Fooli.NoteRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Username">
-            <summary>
-            The username
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Email">
-            <summary>
-            The email
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Password">
-            <summary>
-            The password
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.PictureUrl">
-            <summary>
-            The profile's picture url
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Type">
-            <summary>
-            The user's type
-            By default customer
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.FirstName">
-            <summary>
-            The first name
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.LastName">
-            <summary>
-            The last name
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Gender">
-            <summary>
-            The gender
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Country">
-            <summary>
-            The country
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.City">
-            <summary>
-            The city
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Address1">
-            <summary>
-            The first-main address
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.Address2">
-            <summary>
-            The secondary address
-            </summary>
-        </member>
-        <member name="P:Fooli.UserRequestModel.PostalCode">
-            <summary>
-            The postal code
-            </summary>
-        </member>
-        <member name="M:Fooli.UserRequestModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
         </member>
         <member name="T:Fooli.IgnoreNullResolver">
             <summary>
@@ -1466,298 +2142,6 @@
             <param name="destinationMember">Destination member</param>
             <param name="context">The context of the mapping</param>
             <returns></returns>
-        </member>
-        <member name="P:Fooli.BaseResponseModel.Id">
-            <summary>
-            The id
-            </summary>
-        </member>
-        <member name="P:Fooli.BaseResponseModel.DateCreated">
-            <summary>
-            The date it was created
-            </summary>
-        </member>
-        <member name="P:Fooli.BaseResponseModel.DateModified">
-            <summary>
-            The date it was last modified
-            </summary>
-        </member>
-        <member name="M:Fooli.BaseResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.CompanyResponseModel">
-            <summary>
-            The company's response model
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.Name">
-            <summary>
-            The name
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.Country">
-            <summary>
-            The country
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.City">
-            <summary>
-            The city
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.Address">
-            <summary>
-            The address
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.PhoneNumber">
-            <summary>
-            The phone number
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.PostalCode">
-            <summary>
-            The postal code
-            </summary>
-        </member>
-        <member name="P:Fooli.CompanyResponseModel.Images">
-            <summary>
-            The company's images
-            </summary>
-        </member>
-        <member name="M:Fooli.CompanyResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.LeafletResponseModel">
-            <summary>
-            The response model for the leaflet
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletResponseModel.Name">
-            <summary>
-            The name
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletResponseModel.Url">
-            <summary>
-            The url 
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletResponseModel.DateStart">
-            <summary>
-            The date from which the leaflet applies
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletResponseModel.DateEnd">
-            <summary>
-            The date that ends what the leaflet applies
-            </summary>
-        </member>
-        <member name="P:Fooli.LeafletResponseModel.CompanyId">
-            <summary>
-            The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
-            </summary>
-        </member>
-        <member name="M:Fooli.LeafletResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.ImageResponseModel">
-            <summary>
-            The image response model
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.Name">
-            <summary>
-            The name
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.Source">
-            <summary>
-            The image's url
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.Alt">
-            <summary>
-            The image's alternative text
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.ProductId">
-            <summary>
-            The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.CompanyId">
-            <summary>
-            The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
-            </summary>
-        </member>
-        <member name="P:Fooli.ImageResponseModel.CompanyProductId">
-            <summary>
-            The company's product's image
-            The <see cref="!:CompanyProductEntity.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
-            </summary>
-        </member>
-        <member name="M:Fooli.ImageResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemResponseModel.Id">
-            <summary>
-            The id
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemResponseModel.Text">
-            <summary>
-            The item
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemResponseModel.IsChecked">
-            <summary>
-            Shows if it is checked
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemResponseModel.NoteId">
-            <summary>
-            The <see cref="!:NoteEntity.Id"/> of the related <see cref="T:Fooli.NoteEntity"/>
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemResponseModel.DateCreated">
-            <summary>
-            The date it was created
-            </summary>
-        </member>
-        <member name="P:Fooli.CheckListItemResponseModel.DateModified">
-            <summary>
-            The date it was last modified
-            </summary>
-        </member>
-        <member name="M:Fooli.CheckListItemResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="T:Fooli.NoteResponseModel">
-            <summary>
-            The list's response model
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.Id">
-            <summary>
-            The id
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.Title">
-            <summary>
-            The title
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.Text">
-            <summary>
-            The text
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.Color">
-            <summary>
-            The color
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.DateCreated">
-            <summary>
-            The date the note was created
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.DateModified">
-            <summary>
-            The date the list was last modified
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.CheckListItems">
-            <summary>
-            The list's items
-            </summary>
-        </member>
-        <member name="P:Fooli.NoteResponseModel.UserId">
-            <summary>
-            The <see cref="!:UserEntity.Id"/> of the related <see cref="T:Fooli.UserEntity"/>
-            </summary>
-        </member>
-        <member name="M:Fooli.NoteResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Username">
-            <summary>
-            The username
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Email">
-            <summary>
-            The email
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.PictureUrl">
-            <summary>
-            The profile's picture url
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Type">
-            <summary>
-            The user's type
-            By default customer
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.FirstName">
-            <summary>
-            The first name
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.LastName">
-            <summary>
-            The last name
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Gender">
-            <summary>
-            The gender
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Country">
-            <summary>
-            The country
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.City">
-            <summary>
-            The city
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Address1">
-            <summary>
-            The first-main address
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.Address2">
-            <summary>
-            The secondary address
-            </summary>
-        </member>
-        <member name="P:Fooli.UserResponseModel.PostalCode">
-            <summary>
-            The postal code
-            </summary>
-        </member>
-        <member name="M:Fooli.UserResponseModel.#ctor">
-            <summary>
-            Default constructor
-            </summary>
         </member>
         <member name="T:Fooli.Routes">
             <summary>
@@ -1864,6 +2248,30 @@
             <summary>
             The route for an image of a company's product with specified image id and company product id
             fooli/companies/2/companyProducts/3/images/1
+            </summary>
+        </member>
+        <member name="F:Fooli.Routes.ProductsRoute">
+            <summary>
+            The route for the products
+            fooli/products
+            </summary>
+        </member>
+        <member name="F:Fooli.Routes.ProductRoute">
+            <summary>
+            The route for a specified product
+            fooli/products/7
+            </summary>
+        </member>
+        <member name="F:Fooli.Routes.ProductImagesRoute">
+            <summary>
+            The route for a product's images
+            fooli/products/1/images
+            </summary>
+        </member>
+        <member name="F:Fooli.Routes.ProductImageRoute">
+            <summary>
+            The route for a product's image
+            fooli/products/1/images/4
             </summary>
         </member>
         <member name="T:Fooli.Startup">

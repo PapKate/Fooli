@@ -7,9 +7,14 @@ namespace Fooli
     /// <summary>
     /// Represents a company's product
     /// </summary>
-    public class CompanyProductEntity : StandardEntity
+    public class CompanyProductEntity : BaseEntity
     {
         #region Public Properties
+
+        /// <summary>
+        /// The name
+        /// </summary>
+        public string Name { get; set; }
 
         /// <summary>
         /// The product's price
@@ -94,5 +99,29 @@ namespace Fooli
 
         #endregion
 
+        #region Public Methods
+
+        /// <summary>
+        /// Creates and returns a <see cref="CompanyProductEntity"/> from the specified <paramref name="model"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="productId">The product's id</param>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static CompanyProductEntity FromRequestModel(int companyId, int productId, CompanyProductRequestModel model) 
+            => ControllersHelper.FromRequestModel(model, delegate (CompanyProductEntity entity)
+                                                        {
+                                                            entity.CompanyId = companyId;
+                                                            entity.ProductrId = productId;
+                                                        });
+
+        /// <summary>
+        /// Creates and returns a <see cref="CompanyProductResponseModel"/> from the current <see cref="CompanyProductEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public CompanyProductResponseModel ToResponseModel()
+            => ControllersHelper.ToResponseModel<CompanyProductEntity, CompanyProductResponseModel>(this);
+
+        #endregion
     }
 }

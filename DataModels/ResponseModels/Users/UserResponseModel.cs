@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Fooli
+﻿namespace Fooli
 {
     /// <summary>
-    /// Represents a user in the database
+    /// The user's response model
     /// </summary>
-    public class UserEntity : BaseEntity
+    public class UserResponseModel : BaseResponseModel
     {
         #region Public Properties
 
@@ -21,11 +16,6 @@ namespace Fooli
         /// The email
         /// </summary>
         public string Email { get; set; }
-
-        /// <summary>
-        /// The password
-        /// </summary>
-        public string Password { get; set; }
 
         /// <summary>
         /// The profile's picture url
@@ -85,30 +75,12 @@ namespace Fooli
         /// <summary>
         /// Default constructor
         /// </summary>
-        public UserEntity()
+        public UserResponseModel()
         {
 
         }
 
         #endregion
 
-
-        #region Public Methods
-
-        /// <summary>
-        /// Creates and returns a <see cref="UserEntity"/> from the specified <paramref name="model"/>
-        /// </summary>
-        /// <param name="model">The model</param>
-        /// <returns></returns>
-        public static UserEntity FromRequestModel(UserRequestModel model) 
-            => ControllersHelper.FromRequestModel<UserEntity, UserRequestModel>(model);
-
-        /// <summary>
-        /// Creates and returns a <see cref="UserResponseModel"/> from the current <see cref="UserEntity"/>
-        /// </summary>
-        /// <returns></returns>
-        public UserResponseModel ToResponseModel() => ControllersHelper.ToResponseModel<UserEntity, UserResponseModel>(this);
-
-        #endregion
     }
 }

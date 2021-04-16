@@ -228,14 +228,15 @@ namespace Fooli
         #region Company Images
 
         /// <summary>
-        /// Creates a new leaflet
+        /// Creates a new company image
         /// </summary>
         /// <param name="companyId">The company's id</param>
         /// <param name="model">The model</param>
         /// Post fooli/companies/5/images
         [HttpPost]
         [Route(Routes.CompanyImagesRoute)]
-        public Task<ActionResult<ImageResponseModel>> CreateImageAsync([FromRoute] int companyId, [FromBody] ImageRequestModel model) => ControllersHelper.PostAsync<ImageEntity, ImageResponseModel>(
+        public Task<ActionResult<ImageResponseModel>> CreateImageAsync([FromRoute] int companyId, [FromBody] ImageRequestModel model) 
+            => ControllersHelper.PostAsync<ImageEntity, ImageResponseModel>(
                 mContext,
                 mContext.Images,
                 ImageEntity.FromRequestModel(companyId, model),
@@ -283,14 +284,6 @@ namespace Fooli
                 x => x.CompanyId == companyId && x.Id == imageId);
 
         #endregion
-
-        #region Company Product
-
-
-
-        #endregion
-
-
 
         #endregion
     }
