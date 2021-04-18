@@ -15,22 +15,12 @@ namespace Fooli
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// The price
-        /// </summary>
-        public double Price { get; set; }
-
         #region Relationships
 
         /// <summary>
         /// The product's images
         /// </summary>
         public IEnumerable<ImageEntity> Images { get; set; }
-
-        /// <summary>
-        /// The product measurement units
-        /// </summary>
-        public IEnumerable<ProductMeasurementUnitEntity> ProductMeasurementUnits { get; set; }
 
         /// <summary>
         /// The companies and products
@@ -65,12 +55,25 @@ namespace Fooli
 
         #region Public Methods
 
-        public static ProductEntity FromRequestModel(ProductRequestModel model, CompanyProductEntity companyProduct)
+        /// <summary>
+        /// Creates and returns a <see cref="ProductEntity"/> from the specified <paramref name="model"/>
+        /// </summary>
+        /// <param name="model">The model</param>
+        /// <returns></returns>
+        public static ProductEntity FromRequestModel(ProductRequestModel model)
+            => ControllersHelper.FromRequestModel<ProductEntity, ProductRequestModel>(model);
+
+        /// <summary>
+        /// Creates and returns a <see cref="ProductResponseModel"/> from the current <see cref="ProductEntity"/>
+        /// </summary>
+        /// <returns></returns>
+        public ProductResponseModel ToResponseModel()
         {
-           
-            return ControllersHelper.FromRequestModel(model, delegate (ProductEntity entity) 
-            {
-            });
+            var response = ControllersHelper.ToResponseModel<ProductEntity, ProductResponseModel>(this);
+
+            response.Categories = ProductCategories?.Select(x => ControllersHelper.ToResponseModel<CategoryEntity, EmbeddedCategoryResponseModel>(x.Category)).ToList();
+
+            return response;
         }
 
         #endregion

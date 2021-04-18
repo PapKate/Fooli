@@ -213,7 +213,7 @@ namespace Fooli
 
         #endregion
 
-        #region Product Labels
+        #region Labels
 
         /// <summary>
         /// Creates a new label

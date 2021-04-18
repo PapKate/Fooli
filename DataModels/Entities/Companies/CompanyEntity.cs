@@ -14,31 +14,6 @@ namespace Fooli
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// The country
-        /// </summary>
-        public string Country { get; set; }
-
-        /// <summary>
-        /// The city
-        /// </summary>
-        public string City { get; set; }
-
-        /// <summary>
-        /// The address
-        /// </summary>
-        public string Address { get; set; }
-
-        /// <summary>
-        /// The phone number
-        /// </summary>
-        public string PhoneNumber { get; set; }
-
-        /// <summary>
-        /// The postal code
-        /// </summary>
-        public int PostalCode { get; set; }
-
         #region Relationships
 
         /// <summary>
@@ -55,6 +30,11 @@ namespace Fooli
         /// The company's images
         /// </summary>
         public IEnumerable<ImageEntity> Images { get; set; }
+
+        /// <summary>
+        /// The company's branches
+        /// </summary>
+        public IEnumerable<BranchEntity> Branches { get; set; }
 
         #endregion
 

@@ -25,21 +25,6 @@ namespace Fooli
         /// </summary>
         public int? ParentCategoryId { get; set; }
 
-        /// <summary>
-        /// The related <see cref="CategoryResponseModel"/>
-        /// </summary>
-        public CategoryResponseModel ParentCategory { get; set; }
-
-        /// <summary>
-        /// The children categories
-        /// </summary>
-        public IEnumerable<CategoryResponseModel> ChildrenCategories { get; set; }
-
-        /// <summary>
-        /// The products categories pair
-        /// </summary>
-        public IEnumerable<ProductCategoryResponseModel> ProductCategories { get; set; }
-
         #endregion
 
         #region Constructors

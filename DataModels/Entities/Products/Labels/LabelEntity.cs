@@ -19,9 +19,19 @@ namespace Fooli
         public string Name { get; set; }
 
         /// <summary>
+        /// The color
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
         /// The slug
         /// </summary>
         public string Slug { get; set; }
+
+        /// <summary>
+        /// The description
+        /// </summary>
+        public string Description { get; set; }
 
         #region Relationships
 

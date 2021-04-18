@@ -20,9 +20,19 @@ namespace Fooli
         public DbSet<CompanyEntity> Companies { get; set; }
 
         /// <summary>
+        /// The branches
+        /// </summary>
+        public DbSet<BranchEntity> Branches { get; set; }
+
+        /// <summary>
         /// The company's products
         /// </summary>
         public DbSet<CompanyProductEntity> CompanyProducts { get; set; }
+
+        /// <summary>
+        /// The price per measurement unit pairs
+        /// </summary>
+        public DbSet<PricePerMeasurementUnitEntity> PricePerMeasurementUnits { get; set; }
 
         /// <summary>
         /// The products
@@ -131,6 +141,13 @@ namespace Fooli
                 .HasForeignKey(x => x.CompanyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<CompanyEntity>()
+                .HasMany(x => x.Branches)
+                .WithOne(x => x.Company)
+                .HasPrincipalKey(x => x.Id)
+                .HasForeignKey(x => x.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             #endregion
 
             #region Products
@@ -159,6 +176,13 @@ namespace Fooli
                .HasPrincipalKey(x => x.Id)
                .HasForeignKey(x => x.ProductrId)
                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<CompanyProductEntity>()
+                .HasMany(x => x.PricesPerMeasurementUnits)
+                .WithOne(x => x.CompanyProduct)
+                .HasPrincipalKey(x => x.Id)
+                .HasForeignKey(x => x.CompanyProductId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 

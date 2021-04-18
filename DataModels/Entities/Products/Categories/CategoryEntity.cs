@@ -19,11 +19,21 @@ namespace Fooli
         /// </summary>
         public string Path { get; set; }
 
+        /// <summary>
+        /// The color
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
+        /// The description
+        /// </summary>
+        public string Description { get; set; }
+
         #region Relationships
 
         /// <summary>
         /// The id of the parent category
-        /// The <see cref="CategoryEntity.Id"/> of the related <see cref="CategoryEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="CategoryEntity"/>
         /// </summary>
         public int? ParentCategoryId { get; set; }
 

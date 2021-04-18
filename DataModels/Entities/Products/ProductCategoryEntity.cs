@@ -10,7 +10,7 @@
         #region Relationships
 
         /// <summary>
-        /// The <see cref="ProductEntity.Id"/> of the related <see cref="ProductEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="ProductEntity"/>
         /// </summary>
         public int ProductId { get; set; }
 
@@ -20,7 +20,7 @@
         public ProductEntity Product { get; set; }
 
         /// <summary>
-        /// The <see cref="CategoryEntity.Id"/> of the related <see cref="CategoryEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="CategoryEntity"/>
         /// </summary>
         public int CategoryId { get; set; }
 

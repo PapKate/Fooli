@@ -23,6 +23,11 @@ namespace Fooli
         public const string EntitySuffix = "Entity";
 
         /// <summary>
+        /// Embedded
+        /// </summary>
+        public const string EmbeddedPrefix = "Embedded";
+
+        /// <summary>
         /// ResponseModel
         /// </summary>
         public const string ResponseModelSuffix = "ResponseModel";

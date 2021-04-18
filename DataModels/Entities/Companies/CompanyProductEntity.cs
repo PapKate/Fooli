@@ -1,6 +1,5 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Fooli
 {
@@ -15,21 +14,6 @@ namespace Fooli
         /// The name
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// The product's price
-        /// </summary>
-        public double Price { get; set; }
-
-        /// <summary>
-        /// The regular price
-        /// </summary>
-        public double RegularPrice { get; set; }
-
-        /// <summary>
-        /// The price of the product when on sale
-        /// </summary>
-        public double SalePrice { get; set; }
 
         /// <summary>
         /// Shows if product is on sale
@@ -64,7 +48,7 @@ namespace Fooli
         #region Relationships
 
         /// <summary>
-        /// The <see cref="CompanyEntity.Id"/> of the related <see cref="CompanyEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="CompanyEntity"/>
         /// </summary>
         public int CompanyId { get; set; }
 
@@ -76,12 +60,17 @@ namespace Fooli
         /// <summary>
         /// The <see cref="ProductEntity"/> of the related <see cref="ProductEntity"/>
         /// </summary>
-        public int ProductrId { get; set; }
+        public int? ProductrId { get; set; }
 
         /// <summary>
         /// The related <see cref="ProductEntity"/>
         /// </summary>
         public ProductEntity Product { get; set; }
+
+        /// <summary>
+        /// The prices per measurement of the product
+        /// </summary>
+        public IEnumerable<PricePerMeasurementUnitEntity> PricesPerMeasurementUnits { get; set; } 
 
         #endregion
 

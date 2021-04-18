@@ -56,14 +56,14 @@ namespace Fooli
                 var responseModelTypes = new List<Type>();
 
                 var assemblies = new List<Assembly>()
-            {
-                // The request model
-                Assembly.GetAssembly(typeof(UserRequestModel)),
-                // The entities
-                Assembly.GetAssembly(typeof(UserEntity)),
-                // The response models
-                Assembly.GetAssembly(typeof(UserResponseModel))
-            };
+                {
+                    // The request model
+                    Assembly.GetAssembly(typeof(UserRequestModel)),
+                    // The entities
+                    Assembly.GetAssembly(typeof(UserEntity)),
+                    // The response models
+                    Assembly.GetAssembly(typeof(UserResponseModel))
+                };
 
                 // For each assembly...
                 foreach (var assembly in assemblies)
@@ -99,6 +99,7 @@ namespace Fooli
                             cfg.CreateMap(requestModelType, entityType);
                     }
 
+                    // For each entity type
                     foreach (var entityType in entityTypes)
                     {
                         // Get the prefix of the entity
@@ -110,8 +111,16 @@ namespace Fooli
                         if (responseModelType != null)
                             // Create map for entity -> response model
                             cfg.CreateMap(entityType, responseModelType);
-                    }
+                        
+                        var embeddedResponseModelName = FrameworkConstructionExtensions.EmbeddedPrefix + entityNamePrefix + FrameworkConstructionExtensions.ResponseModelSuffix;
 
+                        var embeddedResponseModelType = responseModelTypes.FirstOrDefault(x => x.Name == embeddedResponseModelName);
+
+                        if (embeddedResponseModelType == null)
+                            continue;
+
+                        cfg.CreateMap(entityType, embeddedResponseModelType);
+                    }
                 }
 
                 cfg.ForAllPropertyMaps(propertyMap => propertyMap.TypeMap.SourceType.Name.EndsWith(FrameworkConstructionExtensions.RequestModelSuffix)
@@ -138,7 +147,7 @@ namespace Fooli
         }
 
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dBContext)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dBContext)
         {
 
             if (env.IsDevelopment())
@@ -157,6 +166,8 @@ namespace Fooli
             {
                 endpoints.MapControllers();
             });
+
+            await EntryPoint.SetUpAsync(dBContext);
         }
     }
 }
