@@ -16,6 +16,22 @@ namespace Fooli
         public string Name { get; set; }
 
         /// <summary>
+        /// The quantity
+        /// </summary>
+        public double? Quantity { get; set; }
+
+        /// <summary>
+        /// The abbreviation
+        /// ex. TM, kg, gr
+        /// </summary>
+        public string Αbbreviation { get; set; }
+
+        /// <summary>
+        /// The price
+        /// </summary>
+        public double? Price { get; set; }
+
+        /// <summary>
         /// Shows if product is on sale
         /// </summary>
         public bool IsOnSale { get; set; }

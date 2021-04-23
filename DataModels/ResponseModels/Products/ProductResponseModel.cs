@@ -19,20 +19,20 @@ namespace Fooli
         /// </summary>
         public double Price { get; set; }
 
-        ///// <summary>
-        ///// The product's images
-        ///// </summary>
-        //public IEnumerable<ImageResponseModel> Images { get; set; }
+        /// <summary>
+        /// The product's images
+        /// </summary>
+        public IEnumerable<ImageResponseModel> Images { get; set; }
 
-        ///// <summary>
-        ///// The companies and products
-        ///// </summary>
-        //public IEnumerable<CompanyProductResponseModel> CompaniesProducts { get; set; }
+        /// <summary>
+        /// The companies and products
+        /// </summary>
+        public IEnumerable<EmbeddedCompanyProductResponseModel> CompaniesProducts { get; set; }
 
-        ///// <summary>
-        ///// The labels and products
-        ///// </summary>
-        //public IEnumerable<ProductLabelResponseModel> ProductLabels { get; set; }
+        /// <summary>
+        /// The labels
+        /// </summary>
+        public IEnumerable<EmbeddedLabelResponseModel> Labels { get; set; }
 
         /// <summary>
         /// The category and product pairs

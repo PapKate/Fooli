@@ -25,7 +25,7 @@
         #region Relationships
 
         /// <summary>
-        /// The <see cref="ProductEntity.Id"/> of the related <see cref="ProductEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="ProductEntity"/>
         /// </summary>
         public int? ProductId { get; set; }
 
@@ -35,14 +35,14 @@
         public ProductEntity Product { get; set; }
 
         /// <summary>
-        /// The <see cref="CompanyEntity.Id"/> of the related <see cref="CompanyEntity"/>
+        /// The <see cref="BaseEntity.Id"/> of the related <see cref="BranchEntity"/>
         /// </summary>
-        public int? CompanyId { get; set; }
+        public int? BranchId { get; set; }
 
         /// <summary>
-        /// The related <see cref="CompanyEntity"/>
+        /// The related <see cref="BranchEntity"/>
         /// </summary>
-        public CompanyEntity Company { get; set; }
+        public BranchEntity Branch { get; set; }
 
         #endregion
 
@@ -65,11 +65,11 @@
         /// <summary>
         /// Creates and returns a <see cref="ImageEntity"/> from the specified <paramref name="model"/>
         /// </summary>
-        /// <param name="companyId">The company's id</param>
+        /// <param name="branchId">The branch's id</param>
         /// <param name="model">The model</param>
         /// <returns></returns>
-        public static ImageEntity FromRequestModel(int companyId, ImageRequestModel model) 
-            => ControllersHelper.FromRequestModel(model, delegate (ImageEntity entity) { entity.CompanyId = companyId; });
+        public static ImageEntity FromRequestModel(int branchId, ImageRequestModel model) 
+            => ControllersHelper.FromRequestModel(model, delegate (ImageEntity entity) { entity.BranchId = branchId; });
 
         /// <summary>
         /// Creates and returns a <see cref="ImageResponseModel"/> from the current <see cref="ImageEntity"/>

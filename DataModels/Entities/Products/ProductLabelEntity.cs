@@ -7,6 +7,11 @@
     {
         #region Public Properties
 
+        /// <summary>
+        /// The value
+        /// </summary>
+        public string Value { get; set; }
+
         #region Relationships
 
         /// <summary>

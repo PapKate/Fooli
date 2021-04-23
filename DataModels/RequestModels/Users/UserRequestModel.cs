@@ -70,7 +70,7 @@ namespace Fooli
         /// <summary>
         /// The postal code
         /// </summary>
-        public int? PostalCode { get; set; }
+        public string PostalCode { get; set; }
 
         #endregion
 

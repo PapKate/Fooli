@@ -27,10 +27,9 @@ namespace Fooli
         /// The query used for retrieving the products
         /// </summary>
         protected IQueryable<ProductEntity> ProductsQuery => mContext.Products.Include(x => x.Images)
-                                                                              .Include(x => x.CompanyProducts)
-                                                                              .Include(x => x.ProductMeasurementUnits)
-                                                                              .Include(x => x.ProductLabels)
-                                                                              .Include(x => x.ProductCategories);
+                                                                              .Include(x => x.CompaniesProducts).ThenInclude(x => x.Company)
+                                                                              .Include(x => x.ProductLabels).ThenInclude(x => x.Label)
+                                                                              .Include(x => x.ProductCategories).ThenInclude(x => x.Category);
 
         /// <summary>
         /// The query used for retrieving the company products
@@ -71,6 +70,57 @@ namespace Fooli
 
         #region Products
 
+        /// <summary>
+        /// Creates a product
+        /// </summary>
+        /// <param name="model">The model</param>
+        /// fooli/products
+        [HttpPost]
+        [Route(Routes.ProductsRoute)]
+        public Task<ActionResult<ProductResponseModel>> CreateProductAsync([FromBody] ProductRequestModel model)
+            => ControllersHelper.PostAsync<ProductEntity, ProductResponseModel>(
+                mContext,
+                mContext.Products,
+                ProductEntity.FromRequestModel(model),
+                x => x.ToResponseModel());
+
+        /// <summary>
+        /// Gets all the products
+        /// </summary>
+        /// fooli/products
+        [HttpGet]
+        [Route(Routes.ProductsRoute)]
+        public Task<ActionResult<IEnumerable<ProductResponseModel>>> GetAllProductsAsync()
+            => ControllersHelper.GetAllAsync<ProductEntity, ProductResponseModel>(
+                ProductsQuery,
+                x => true);
+
+        /// <summary>
+        /// Gets the product with the specified <paramref name="productId"/>
+        /// </summary>
+        /// <param name="productId">The product's id</param>
+        /// fooli/products/8
+        [HttpGet]
+        [Route(Routes.ProductRoute)]
+        public Task<ActionResult<ProductResponseModel>> GetProductAsync([FromRoute] int productId)
+            => ControllersHelper.GetAsync<ProductEntity, ProductResponseModel>(
+                ProductsQuery,
+                DI.GetMapper,
+                x => x.Id == productId);
+
+        /// <summary>
+        /// Deletes the product with the specified <paramref name="productId"/>
+        /// </summary>
+        /// <param name="productId">The product's id</param>
+        /// fooli/products/7
+        [HttpDelete]
+        [Route(Routes.ProductRoute)]
+        public Task<ActionResult<ProductResponseModel>> DeleteProductAsync([FromRoute] int productId)
+            => ControllersHelper.DeleteAsync<ProductEntity, ProductResponseModel>(
+                mContext,
+                ProductsQuery,
+                DI.GetMapper,
+                x => x.Id == productId);
 
         #endregion
 

@@ -25,7 +25,7 @@ namespace Fooli
         /// <summary>
         /// The companies and products
         /// </summary>
-        public IEnumerable<CompanyProductEntity> CompanyProducts { get; set; }
+        public IEnumerable<CompanyProductEntity> CompaniesProducts { get; set; }
 
         /// <summary>
         /// The labels and products
@@ -72,6 +72,15 @@ namespace Fooli
             var response = ControllersHelper.ToResponseModel<ProductEntity, ProductResponseModel>(this);
 
             response.Categories = ProductCategories?.Select(x => ControllersHelper.ToResponseModel<CategoryEntity, EmbeddedCategoryResponseModel>(x.Category)).ToList();
+
+            response.CompaniesProducts = CompaniesProducts?.Select(x => ControllersHelper.ToResponseModel<CompanyProductEntity, EmbeddedCompanyProductResponseModel>(x)).ToList();
+
+            response.Labels = ProductLabels?.Select(x => ControllersHelper.ToResponseModel<LabelEntity, EmbeddedLabelResponseModel>(x.Label)).ToList();
+
+            foreach(var label in response.Labels)
+            {
+                label.Value = ProductLabels?.FirstOrDefault(x => x.LabelId == label.Id).Value;
+            }
 
             return response;
         }

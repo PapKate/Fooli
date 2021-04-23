@@ -14,6 +14,41 @@ namespace Fooli
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// The color
+        /// </summary>
+        public string Color { get; set; }
+
+        /// <summary>
+        /// The name of the logo image
+        /// </summary>
+        public string LogoImageName { get; set; }
+
+        /// <summary>
+        /// The logo image's url
+        /// </summary>
+        public string LogoImageSource { get; set; }
+
+        /// <summary>
+        /// The logo image's alternative text
+        /// </summary>
+        public string LogoImageAlt { get; set; }
+
+        /// <summary>
+        /// The name of the text image
+        /// </summary>
+        public string TextImageName { get; set; }
+
+        /// <summary>
+        /// The text image's url
+        /// </summary>
+        public string TextImageSource { get; set; }
+
+        /// <summary>
+        /// The text image's alternative text
+        /// </summary>
+        public string TextImageAlt { get; set; }
+
         #region Relationships
 
         /// <summary>
@@ -25,11 +60,6 @@ namespace Fooli
         /// The company's leaflets
         /// </summary>
         public IEnumerable<LeafletEntity> Leaflets { get; set; }
-
-        /// <summary>
-        /// The company's images
-        /// </summary>
-        public IEnumerable<ImageEntity> Images { get; set; }
 
         /// <summary>
         /// The company's branches

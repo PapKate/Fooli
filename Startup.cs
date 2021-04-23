@@ -13,7 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
+using System.Threading.Tasks;
 
 namespace Fooli
 {
@@ -112,13 +112,16 @@ namespace Fooli
                             // Create map for entity -> response model
                             cfg.CreateMap(entityType, responseModelType);
                         
+                        // Set the name of the embedded response model that matches the entity's name 
                         var embeddedResponseModelName = FrameworkConstructionExtensions.EmbeddedPrefix + entityNamePrefix + FrameworkConstructionExtensions.ResponseModelSuffix;
-
+                        // Searches for the embedded model if exists 
                         var embeddedResponseModelType = responseModelTypes.FirstOrDefault(x => x.Name == embeddedResponseModelName);
 
+                        // If the model does not exists...
                         if (embeddedResponseModelType == null)
+                            // Continue
                             continue;
-
+                        // Creates a map for entity -> embedded response model
                         cfg.CreateMap(entityType, embeddedResponseModelType);
                     }
                 }
@@ -149,11 +152,12 @@ namespace Fooli
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dBContext)
         {
+            EntryPoint.SetUp(dBContext);
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                dBContext.Database.EnsureCreated();
+
             }
 
             app.UseHttpsRedirection();
@@ -167,7 +171,7 @@ namespace Fooli
                 endpoints.MapControllers();
             });
 
-            await EntryPoint.SetUpAsync(dBContext);
         }
+
     }
 }

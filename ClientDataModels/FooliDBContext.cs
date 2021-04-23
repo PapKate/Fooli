@@ -129,23 +129,27 @@ namespace Fooli
                 .HasForeignKey(x => x.CompanyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // For the images of a company...
-            modelBuilder.Entity<CompanyEntity>()
-                // A company has many images
-                .HasMany(x => x.Images)
-                // An image has one company
-                .WithOne(x => x.Company)
-                // The principal key of the join is the Company.Id
-                .HasPrincipalKey(x => x.Id)
-                // The foreign key of the join is the Image.CompanyId
-                .HasForeignKey(x => x.CompanyId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             modelBuilder.Entity<CompanyEntity>()
                 .HasMany(x => x.Branches)
                 .WithOne(x => x.Company)
                 .HasPrincipalKey(x => x.Id)
                 .HasForeignKey(x => x.CompanyId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            #endregion
+
+            #region Branches
+
+            // For the images of a branch...
+            modelBuilder.Entity<BranchEntity>()
+                // A company has many images
+                .HasMany(x => x.Images)
+                // An image has one branch
+                .WithOne(x => x.Branch)
+                // The principal key of the join is the Branch.Id
+                .HasPrincipalKey(x => x.Id)
+                // The foreign key of the join is the Image.BranchId
+                .HasForeignKey(x => x.BranchId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
@@ -172,7 +176,7 @@ namespace Fooli
 
             modelBuilder.Entity<CompanyProductEntity>()
                .HasOne(x => x.Product)
-               .WithMany(x => x.CompanyProducts)
+               .WithMany(x => x.CompaniesProducts)
                .HasPrincipalKey(x => x.Id)
                .HasForeignKey(x => x.ProductrId)
                .OnDelete(DeleteBehavior.Cascade);
@@ -233,23 +237,6 @@ namespace Fooli
 
             #endregion
 
-            #region ProductMeasurementPairs
-
-            modelBuilder.Entity<ProductMeasurementUnitEntity>()
-                .HasOne(x => x.MeasurementUnit)
-                .WithMany(x => x.ProductMeasurementUnits)
-                .HasPrincipalKey(x => x.Id)
-                .HasForeignKey(x => x.MeasurementUnitId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<ProductMeasurementUnitEntity>()
-               .HasOne(x => x.Product)
-               .WithMany(x => x.ProductMeasurementUnits)
-               .HasPrincipalKey(x => x.Id)
-               .HasForeignKey(x => x.ProductId)
-               .OnDelete(DeleteBehavior.Cascade);
-
-            #endregion
         }
 
         #endregion

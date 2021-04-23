@@ -96,7 +96,7 @@ namespace Fooli
             Expression<Func<NoteEntity, bool>> filter = x => x.Id == noteId && x.UserId == userId;
 
             // Gets the response model
-            return ControllersHelper.GetAsync<NoteRequestModel, NoteEntity, NoteResponseModel>(
+            return ControllersHelper.GetAsync<NoteEntity, NoteResponseModel>(
                 NotesQuery,
                 DI.GetMapper, 
                 filter);
@@ -206,7 +206,7 @@ namespace Fooli
         public Task<ActionResult<CheckListItemResponseModel>> GetCheckListItemAsync([FromRoute] int userId, [FromRoute] int noteId, [FromRoute] int checkListItemId)
         {
             // Gets the response model
-            return ControllersHelper.GetAsync<CheckListItemRequestModel, CheckListItemEntity, CheckListItemResponseModel>(
+            return ControllersHelper.GetAsync<CheckListItemEntity, CheckListItemResponseModel>(
                 CheckListItemsQuery,
                 DI.GetMapper, 
                 x => x.NoteId == noteId && x.Id == checkListItemId && x.Note.UserId == userId);

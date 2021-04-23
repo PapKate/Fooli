@@ -77,7 +77,7 @@ namespace Fooli
             Expression<Func<UserEntity, bool>> filter = x => x.Id == userId;
 
             // Gets the response model 
-            return ControllersHelper.GetAsync<UserRequestModel, UserEntity, UserResponseModel>(
+            return ControllersHelper.GetAsync<UserEntity, UserResponseModel>(
                 mContext.Users, 
                 DI.GetMapper, 
                 filter);

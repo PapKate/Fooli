@@ -49,6 +49,11 @@ namespace Fooli
         /// </summary>
         public CompanyEntity Company { get; set; }
 
+        /// <summary>
+        /// The images
+        /// </summary>
+        public IEnumerable<ImageEntity> Images { get; set; }
+
         #endregion
 
         #endregion
@@ -74,7 +79,7 @@ namespace Fooli
         /// <param name="model">The model</param>
         /// <returns></returns>
         public static BranchEntity FromRequestModel(int companyId, BranchRequestModel model)
-            => ControllersHelper.FromRequestModel(model, (BranchEntity entity) => { entity.CompanyId = companyId});
+            => ControllersHelper.FromRequestModel(model, (BranchEntity entity) => { entity.CompanyId = companyId; });
 
         /// <summary>
         /// Creates and returns a <see cref="BranchResponseModel"/> from the current <see cref="BranchEntity"/>

@@ -117,6 +117,22 @@
         /// </summary>
         public const string CompanyImageRoute = CompanyImagesRoute + "/{imageId}";
 
+        #region Branches
+
+        /// <summary>
+        /// The route for a company's branches route
+        /// fooli/companies/2/branches
+        /// </summary>
+        public const string CompanyBranchesRoute = CompanyRoute + "/branches";
+
+        /// <summary>
+        /// The route for a company's branch
+        /// fooli/companies/2/branches/4
+        /// </summary>
+        public const string CompanyBranchRoute = CompanyBranchesRoute + "/{branchId}";
+
+        #endregion
+
         #region Company leaflets routes 
 
         /// <summary>

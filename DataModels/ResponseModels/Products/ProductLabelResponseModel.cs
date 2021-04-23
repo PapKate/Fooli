@@ -8,7 +8,7 @@
         #region Public Properties
 
         /// <summary>
-        /// The <see cref="ProductResponseModel.Id"/> of the related <see cref="ProductResponseModel"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="ProductResponseModel"/>
         /// </summary>
         public int ProductId { get; set; }
 
@@ -18,7 +18,7 @@
         public ProductResponseModel Product { get; set; }
 
         /// <summary>
-        /// The <see cref="LabelResponseModel.Id"/> of the related <see cref="LabelResponseModel"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="LabelResponseModel"/>
         /// </summary>
         public int LabelId { get; set; }
 
