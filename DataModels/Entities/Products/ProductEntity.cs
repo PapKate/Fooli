@@ -69,19 +69,26 @@ namespace Fooli
         /// <returns></returns>
         public ProductResponseModel ToResponseModel()
         {
+            // Maps the entity to a response model
             var response = ControllersHelper.ToResponseModel<ProductEntity, ProductResponseModel>(this);
 
+            // Sets the response's categories as the categories in the pair
             response.Categories = ProductCategories?.Select(x => ControllersHelper.ToResponseModel<CategoryEntity, EmbeddedCategoryResponseModel>(x.Category)).ToList();
 
+            // Sets the company products to the parsed from entities to embedded response models
             response.CompaniesProducts = CompaniesProducts?.Select(x => ControllersHelper.ToResponseModel<CompanyProductEntity, EmbeddedCompanyProductResponseModel>(x)).ToList();
 
+            // Sets the response's labels as the labels in the pair parsed to embedded response models
             response.Labels = ProductLabels?.Select(x => ControllersHelper.ToResponseModel<LabelEntity, EmbeddedLabelResponseModel>(x.Label)).ToList();
 
+            // For each label in the response...
             foreach(var label in response.Labels)
             {
+                // Sets the label's value as the value of the label with the same id
                 label.Value = ProductLabels?.FirstOrDefault(x => x.LabelId == label.Id).Value;
             }
 
+            // Returns the response
             return response;
         }
 
