@@ -182,23 +182,6 @@ namespace Fooli
         [Route(Routes.UserRoute)]
         public Task<ActionResult<UserResponseModel>> DeleteUserAsync(int userId)
         {
-            //// Gets the user from the database with id the specified id
-            //var user = await mContext.Users.FirstOrDefaultAsync(x => x.Id == id);
-
-            //// If there is no user...
-            //if (user == null)
-            //    // Return not found
-            //    return NotFound();
-
-            //// Remove from the db context the user
-            //mContext.Users.Remove(user);
-
-            //// Save the changes to the database
-            //await mContext.SaveChangesAsync();
-
-            //// Returns the deleted user
-            //return mMapper.Map<UserResponseModel>(user);
-
             return ControllersHelper.DeleteAsync<UserEntity, UserResponseModel>(
                 mContext, 
                 mContext.Users,

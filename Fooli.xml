@@ -232,14 +232,14 @@
             </summary>
             <param name="branchId">The branch's id</param>
             <param name="model">The model</param>
-            Post fooli/companies/5/images
+            Post fooli/companies/5/branches/4/images
         </member>
         <member name="M:Fooli.CompanyController.GetImagesAsync(System.Int32)">
             <summary>
             Gets all the images that belong to the company with the specified <paramref name="branchId"/>
             </summary>
             <param name="branchId">The branch's id</param>
-            Get fooli/companies/1/images
+            Get fooli/companies/1/branches/4/images
         </member>
         <member name="M:Fooli.CompanyController.GetImageAsync(System.Int32,System.Int32)">
             <summary>
@@ -247,7 +247,7 @@
             </summary>
             <param name="branchId">The branch's id</param>
             <param name="imageId">The image's id</param>
-            Get fooli/companies/1/images/5
+            Get fooli/companies/1/branches/4/images/5
         </member>
         <member name="M:Fooli.CompanyController.DeleteImageAsync(System.Int32,System.Int32)">
             <summary>
@@ -255,7 +255,7 @@
             </summary>
             <param name="branchId">The branch's id</param>
             <param name="imageId">The image's id</param>
-            Delete fooli/companies/1/images/6
+            Delete fooli/companies/1/branches/4/images/6
         </member>
         <member name="T:Fooli.NoteConstroller">
             <summary>
@@ -426,10 +426,11 @@
             <param name="productId">The product's id</param>
             fooli/products/7
         </member>
-        <member name="M:Fooli.ProductController.CreateCompanyProductAsync(System.Int32,Fooli.CompanyProductRequestModel)">
+        <member name="M:Fooli.ProductController.CreateCompanyProductAsync(System.Int32,System.Int32,Fooli.CompanyProductRequestModel)">
             <summary>
             Creates a new company product 
             </summary>
+            <param name="productId">The product's id</param>
             <param name="companyId">The company's id</param>
             <param name="model">The model</param>
             Post fooli/companies/2/companyProducts
@@ -671,6 +672,11 @@
         <member name="P:Fooli.CompanyEntity.Color">
             <summary>
             The color
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyEntity.Description">
+            <summary>
+            The description
             </summary>
         </member>
         <member name="P:Fooli.CompanyEntity.LogoImageName">
@@ -1562,34 +1568,54 @@
             Default constructor
             </summary>
         </member>
+        <member name="T:Fooli.CompanyRequestModel">
+            <summary>
+            The company's request model
+            </summary>
+        </member>
         <member name="P:Fooli.CompanyRequestModel.Name">
             <summary>
             The name
             </summary>
         </member>
-        <member name="P:Fooli.CompanyRequestModel.Country">
+        <member name="P:Fooli.CompanyRequestModel.Color">
             <summary>
-            The country
+            The color
             </summary>
         </member>
-        <member name="P:Fooli.CompanyRequestModel.City">
+        <member name="P:Fooli.CompanyRequestModel.Description">
             <summary>
-            The city
+            The description
             </summary>
         </member>
-        <member name="P:Fooli.CompanyRequestModel.Address">
+        <member name="P:Fooli.CompanyRequestModel.LogoImageName">
             <summary>
-            The address
+            The name of the logo image
             </summary>
         </member>
-        <member name="P:Fooli.CompanyRequestModel.PhoneNumber">
+        <member name="P:Fooli.CompanyRequestModel.LogoImageSource">
             <summary>
-            The phone number
+            The logo image's url
             </summary>
         </member>
-        <member name="P:Fooli.CompanyRequestModel.PostalCode">
+        <member name="P:Fooli.CompanyRequestModel.LogoImageAlt">
             <summary>
-            The postal code
+            The logo image's alternative text
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.TextImageName">
+            <summary>
+            The name of the text image
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.TextImageSource">
+            <summary>
+            The text image's url
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyRequestModel.TextImageAlt">
+            <summary>
+            The text image's alternative text
             </summary>
         </member>
         <member name="M:Fooli.CompanyRequestModel.#ctor">
@@ -2037,7 +2063,7 @@
         </member>
         <member name="P:Fooli.CompanyProductResponseModel.CompanyId">
             <summary>
-            The <see cref="!:CompanyResponseModel.Id"/> of the related <see cref="T:Fooli.CompanyResponseModel"/>
+            The <see cref="P:Fooli.BaseResponseModel.Id"/> of the related <see cref="T:Fooli.CompanyResponseModel"/>
             </summary>
         </member>
         <member name="P:Fooli.CompanyProductResponseModel.Company">
@@ -2047,7 +2073,7 @@
         </member>
         <member name="P:Fooli.CompanyProductResponseModel.ProductrId">
             <summary>
-            The <see cref="T:Fooli.ProductResponseModel"/> of the related <see cref="T:Fooli.ProductResponseModel"/>
+            The <see cref="P:Fooli.BaseResponseModel.Id"/> of the related <see cref="T:Fooli.ProductResponseModel"/>
             </summary>
         </member>
         <member name="P:Fooli.CompanyProductResponseModel.Product">
@@ -2070,34 +2096,44 @@
             The name
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.Country">
+        <member name="P:Fooli.CompanyResponseModel.Color">
             <summary>
-            The country
+            The color
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.City">
+        <member name="P:Fooli.CompanyResponseModel.Description">
             <summary>
-            The city
+            The description
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.Address">
+        <member name="P:Fooli.CompanyResponseModel.LogoImageName">
             <summary>
-            The address
+            The name of the logo image
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.PhoneNumber">
+        <member name="P:Fooli.CompanyResponseModel.LogoImageSource">
             <summary>
-            The phone number
+            The logo image's url
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.PostalCode">
+        <member name="P:Fooli.CompanyResponseModel.LogoImageAlt">
             <summary>
-            The postal code
+            The logo image's alternative text
             </summary>
         </member>
-        <member name="P:Fooli.CompanyResponseModel.Images">
+        <member name="P:Fooli.CompanyResponseModel.TextImageName">
             <summary>
-            The company's images
+            The name of the text image
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.TextImageSource">
+            <summary>
+            The text image's url
+            </summary>
+        </member>
+        <member name="P:Fooli.CompanyResponseModel.TextImageAlt">
+            <summary>
+            The text image's alternative text
             </summary>
         </member>
         <member name="M:Fooli.CompanyResponseModel.#ctor">
@@ -2243,18 +2279,18 @@
         </member>
         <member name="P:Fooli.ImageResponseModel.ProductId">
             <summary>
-            The <see cref="!:ProductEntity.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
+            The <see cref="P:Fooli.BaseResponseModel.Id"/> of the related <see cref="T:Fooli.ProductEntity"/>
             </summary>
         </member>
-        <member name="P:Fooli.ImageResponseModel.CompanyId">
+        <member name="P:Fooli.ImageResponseModel.BranchId">
             <summary>
-            The <see cref="!:CompanyEntity.Id"/> of the related <see cref="T:Fooli.CompanyEntity"/>
+            The <see cref="P:Fooli.BaseResponseModel.Id"/> of the related <see cref="T:Fooli.BranchEntity"/>
             </summary>
         </member>
         <member name="P:Fooli.ImageResponseModel.CompanyProductId">
             <summary>
             The company's product's image
-            The <see cref="!:CompanyProductEntity.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
+            The <see cref="P:Fooli.BaseResponseModel.Id"/> of the related <see cref="T:Fooli.CompanyProductEntity"/>
             </summary>
         </member>
         <member name="M:Fooli.ImageResponseModel.#ctor">
@@ -2411,6 +2447,11 @@
         <member name="P:Fooli.EmbeddedLabelResponseModel.Color">
             <summary>
             The color
+            </summary>
+        </member>
+        <member name="P:Fooli.EmbeddedLabelResponseModel.Value">
+            <summary>
+            The value
             </summary>
         </member>
         <member name="M:Fooli.EmbeddedLabelResponseModel.#ctor">
@@ -2959,18 +3000,6 @@
             fooli/companies/2
             </summary>
         </member>
-        <member name="F:Fooli.Routes.CompanyImagesRoute">
-            <summary>
-            The route for the all images of a company
-            fooli/companies/2/images
-            </summary>
-        </member>
-        <member name="F:Fooli.Routes.CompanyImageRoute">
-            <summary>
-            The route for a company's image with specified image id and company id
-            fooli/companies/2/images/5
-            </summary>
-        </member>
         <member name="F:Fooli.Routes.CompanyBranchesRoute">
             <summary>
             The route for a company's branches route
@@ -2981,6 +3010,18 @@
             <summary>
             The route for a company's branch
             fooli/companies/2/branches/4
+            </summary>
+        </member>
+        <member name="F:Fooli.Routes.BranchImagesRoute">
+            <summary>
+            The route for the all images of a company
+            fooli/companies/2/branches/4/images
+            </summary>
+        </member>
+        <member name="F:Fooli.Routes.BranchImageRoute">
+            <summary>
+            The route for a company's image with specified image id and company id
+            fooli/companies/2/branches/4/images/5
             </summary>
         </member>
         <member name="F:Fooli.Routes.CompanyLeafletsRoute">

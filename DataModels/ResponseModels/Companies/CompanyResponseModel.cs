@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Fooli
+﻿namespace Fooli
 {
     /// <summary>
     /// The company's response model
@@ -16,34 +13,44 @@ namespace Fooli
         public string Name { get; set; }
 
         /// <summary>
-        /// The country
+        /// The color
         /// </summary>
-        public string Country { get; set; }
+        public string Color { get; set; }
 
         /// <summary>
-        /// The city
+        /// The description
         /// </summary>
-        public string City { get; set; }
+        public string Description { get; set; }
 
         /// <summary>
-        /// The address
+        /// The name of the logo image
         /// </summary>
-        public string Address { get; set; }
+        public string LogoImageName { get; set; }
 
         /// <summary>
-        /// The phone number
+        /// The logo image's url
         /// </summary>
-        public string PhoneNumber { get; set; }
+        public string LogoImageSource { get; set; }
 
         /// <summary>
-        /// The postal code
+        /// The logo image's alternative text
         /// </summary>
-        public int PostalCode { get; set; }
+        public string LogoImageAlt { get; set; }
 
         /// <summary>
-        /// The company's images
+        /// The name of the text image
         /// </summary>
-        public IEnumerable<ImageEntity> Images { get; set; }
+        public string TextImageName { get; set; }
+
+        /// <summary>
+        /// The text image's url
+        /// </summary>
+        public string TextImageSource { get; set; }
+
+        /// <summary>
+        /// The text image's alternative text
+        /// </summary>
+        public string TextImageAlt { get; set; }
 
         #endregion
 

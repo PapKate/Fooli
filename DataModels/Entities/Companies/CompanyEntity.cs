@@ -20,6 +20,11 @@ namespace Fooli
         public string Color { get; set; }
 
         /// <summary>
+        /// The description
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// The name of the logo image
         /// </summary>
         public string LogoImageName { get; set; }

@@ -70,7 +70,7 @@ namespace Fooli
         [HttpPost]
         [Route(Routes.CompaniesRoute)]
         public Task<ActionResult<CompanyResponseModel>> CreateCompanyAsync([FromBody] CompanyRequestModel model)
-            => ControllersHelper.PostAsync<CompanyEntity, CompanyResponseModel>(
+            => ControllersHelper.PostAsync(
                 mContext,
                 mContext.Companies,
                 CompanyEntity.FromRequestModel(model),
@@ -103,7 +103,9 @@ namespace Fooli
         /// </summary>
         /// <param name="companyId">The company's id</param>
         /// <param name="model">The model</param>
-        /// <returns></returns>
+        /// Put fooli/companies/3
+        [HttpPut]
+        [Route(Routes.CompanyRoute)]
         public async Task<ActionResult<CompanyResponseModel>> UpdateCompanyAsync([FromRoute] int companyId, CompanyRequestModel model)
         {
             // Gets the company from the database with the specified id
@@ -240,7 +242,7 @@ namespace Fooli
         [HttpPost]
         [Route(Routes.CompanyBranchesRoute)]
         public Task<ActionResult<BranchResponseModel>> CreateBranchAsync([FromRoute] int companyId, [FromBody] BranchRequestModel model)
-            => ControllersHelper.PostAsync<BranchEntity, BranchResponseModel>(
+            => ControllersHelper.PostAsync(
                 mContext,
                 mContext.Branches,
                 BranchEntity.FromRequestModel(companyId, model),
@@ -289,18 +291,18 @@ namespace Fooli
 
         #endregion
 
-        #region Company Images
+        #region Branch Images
 
         /// <summary>
         /// Creates a new company image
         /// </summary>
         /// <param name="branchId">The branch's id</param>
         /// <param name="model">The model</param>
-        /// Post fooli/companies/5/images
+        /// Post fooli/companies/5/branches/4/images
         [HttpPost]
-        [Route(Routes.CompanyImagesRoute)]
+        [Route(Routes.BranchImagesRoute)]
         public Task<ActionResult<ImageResponseModel>> CreateImageAsync([FromRoute] int branchId, [FromBody] ImageRequestModel model) 
-            => ControllersHelper.PostAsync<ImageEntity, ImageResponseModel>(
+            => ControllersHelper.PostAsync(
                 mContext,
                 mContext.Images,
                 ImageEntity.FromRequestModel(branchId, model),
@@ -310,9 +312,9 @@ namespace Fooli
         /// Gets all the images that belong to the company with the specified <paramref name="branchId"/>
         /// </summary>
         /// <param name="branchId">The branch's id</param>
-        /// Get fooli/companies/1/images
+        /// Get fooli/companies/1/branches/4/images
         [HttpGet]
-        [Route(Routes.CompanyImagesRoute)]
+        [Route(Routes.BranchImagesRoute)]
         public Task<ActionResult<IEnumerable<ImageResponseModel>>> GetImagesAsync([FromRoute] int branchId)
             => ControllersHelper.GetAllAsync<ImageEntity, ImageResponseModel>(
                 ImagesQuery,
@@ -323,9 +325,9 @@ namespace Fooli
         /// </summary>
         /// <param name="branchId">The branch's id</param>
         /// <param name="imageId">The image's id</param>
-        /// Get fooli/companies/1/images/5
+        /// Get fooli/companies/1/branches/4/images/5
         [HttpGet]
-        [Route(Routes.CompanyImageRoute)]
+        [Route(Routes.BranchImageRoute)]
         public Task<ActionResult<ImageResponseModel>> GetImageAsync([FromRoute] int branchId, [FromRoute] int imageId)
             => ControllersHelper.GetAsync<ImageEntity, ImageResponseModel>(
                 ImagesQuery,
@@ -337,9 +339,9 @@ namespace Fooli
         /// </summary>
         /// <param name="branchId">The branch's id</param>
         /// <param name="imageId">The image's id</param>
-        /// Delete fooli/companies/1/images/6
+        /// Delete fooli/companies/1/branches/4/images/6
         [HttpDelete]
-        [Route(Routes.CompanyImageRoute)]
+        [Route(Routes.BranchImageRoute)]
         public Task<ActionResult<ImageResponseModel>> DeleteImageAsync([FromRoute] int branchId, [FromRoute] int imageId)
             => ControllersHelper.DeleteAsync<ImageEntity, ImageResponseModel>(
                 mContext,

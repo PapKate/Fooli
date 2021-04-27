@@ -25,18 +25,18 @@ namespace Fooli
         public string Alt { get; set; }
 
         /// <summary>
-        /// The <see cref="ProductEntity.Id"/> of the related <see cref="ProductEntity"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="ProductEntity"/>
         /// </summary>
         public int? ProductId { get; set; }
 
         /// <summary>
-        /// The <see cref="CompanyEntity.Id"/> of the related <see cref="CompanyEntity"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="BranchEntity"/>
         /// </summary>
-        public int? CompanyId { get; set; }
+        public int? BranchId { get; set; }
 
         /// <summary>
         /// The company's product's image
-        /// The <see cref="CompanyProductEntity.Id"/> of the related <see cref="CompanyProductEntity"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="CompanyProductEntity"/>
         /// </summary>
         public int? CompanyProductId { get; set; }
 

@@ -55,7 +55,7 @@ namespace Fooli
         public bool IsVerified { get; set; }
 
         /// <summary>
-        /// The <see cref="CompanyResponseModel.Id"/> of the related <see cref="CompanyResponseModel"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="CompanyResponseModel"/>
         /// </summary>
         public int CompanyId { get; set; }
 
@@ -65,7 +65,7 @@ namespace Fooli
         public CompanyResponseModel Company { get; set; }
 
         /// <summary>
-        /// The <see cref="ProductResponseModel"/> of the related <see cref="ProductResponseModel"/>
+        /// The <see cref="BaseResponseModel.Id"/> of the related <see cref="ProductResponseModel"/>
         /// </summary>
         public int ProductrId { get; set; }
 

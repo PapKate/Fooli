@@ -105,18 +105,6 @@
         /// </summary>
         public const string CompanyRoute = CompaniesRoute + "/{companyId}";
 
-        /// <summary>
-        /// The route for the all images of a company
-        /// fooli/companies/2/images
-        /// </summary>
-        public const string CompanyImagesRoute = CompanyRoute + "/images";
-
-        /// <summary>
-        /// The route for a company's image with specified image id and company id
-        /// fooli/companies/2/images/5
-        /// </summary>
-        public const string CompanyImageRoute = CompanyImagesRoute + "/{imageId}";
-
         #region Branches
 
         /// <summary>
@@ -130,6 +118,18 @@
         /// fooli/companies/2/branches/4
         /// </summary>
         public const string CompanyBranchRoute = CompanyBranchesRoute + "/{branchId}";
+
+        /// <summary>
+        /// The route for the all images of a company
+        /// fooli/companies/2/branches/4/images
+        /// </summary>
+        public const string BranchImagesRoute = CompanyBranchRoute + "/images";
+
+        /// <summary>
+        /// The route for a company's image with specified image id and company id
+        /// fooli/companies/2/branches/4/images/5
+        /// </summary>
+        public const string BranchImageRoute = BranchImagesRoute + "/{imageId}";
 
         #endregion
 

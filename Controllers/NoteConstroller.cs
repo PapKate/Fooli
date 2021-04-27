@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Fooli
@@ -33,7 +31,7 @@ namespace Fooli
         /// <summary>
         /// The query used for retrieving the check list items
         /// </summary>
-        protected IQueryable<CheckListItemEntity> CheckListItemsQuery => mContext.CheckListItems.Include(x => x.Note);
+        protected IQueryable<CheckListItemEntity> CheckListItemsQuery => mContext.CheckListItems;
 
         #endregion
 
@@ -92,14 +90,11 @@ namespace Fooli
         [Route(Routes.UserNoteRoute)]
         public Task<ActionResult<NoteResponseModel>> GetNoteAsync([FromRoute]int userId, [FromRoute]int noteId)
         {
-            // The needed expression for the filter
-            Expression<Func<NoteEntity, bool>> filter = x => x.Id == noteId && x.UserId == userId;
-
             // Gets the response model
             return ControllersHelper.GetAsync<NoteEntity, NoteResponseModel>(
                 NotesQuery,
-                DI.GetMapper, 
-                filter);
+                DI.GetMapper,
+                 x => x.Id == noteId && x.UserId == userId);
         }
 
         /// <summary>
@@ -168,17 +163,17 @@ namespace Fooli
         [Route(Routes.UserNoteCheckListItems)]
         public async Task<ActionResult<NoteResponseModel>> CreateCheckListItemAsync([FromRoute] int userId, [FromRoute] int noteId, [FromBody] CheckListItemRequestModel model)
         {
-            var checkListItem = ControllersHelper.PostAsync<CheckListItemEntity, CheckListItemResponseModel>(
+            var checkListItem = await ControllersHelper.PostAsync(
                 mContext,
                 mContext.CheckListItems,
-                CheckListItemEntity.FromRequestModel(userId, model),
+                CheckListItemEntity.FromRequestModel(noteId, model),
                 x => x.ToResponseModel());
             
-            // Finds the note entity with that item
-            var noteEntity = await NotesQuery.Where(x => x.Id == noteId).FirstAsync();
-
             // Maps the entity to a response model
-            var noteResponseModel = DI.GetMapper.Map<NoteResponseModel>(noteEntity);
+            var noteResponseModel = await ControllersHelper.GetAsync<NoteEntity, NoteResponseModel>(
+                NotesQuery,
+                DI.GetMapper,
+                x => x.Id == noteId);
 
             // Returns the note's response model that has the check list item
             return noteResponseModel;
@@ -267,13 +262,16 @@ namespace Fooli
         public async Task<ActionResult<NoteResponseModel>> DeleteCheckListItemAsync([FromRoute] int userId, [FromRoute] int noteId, [FromRoute] int checkListItemId)
         {
             // Deletes the check list item
-            var checkListItem = ControllersHelper.DeleteAsync<CheckListItemEntity, CheckListItemResponseModel>(mContext, CheckListItemsQuery, DI.GetMapper, x => x.NoteId == noteId && x.Id == checkListItemId && x.Note.UserId == userId);
-            
-            // Finds the note entity with that item
-            var noteEntity = await NotesQuery.Where(x => x.Id == noteId).FirstAsync();
+            var deletedCheckListItem = await ControllersHelper.DeleteAsync<CheckListItemEntity, CheckListItemResponseModel>(
+                mContext, 
+                CheckListItemsQuery, 
+                DI.GetMapper, 
+                x => x.NoteId == noteId && x.Id == checkListItemId && x.Note.UserId == userId);
 
-            // Maps the entity to a response model
-            var noteResponseModel = DI.GetMapper.Map<NoteResponseModel>(noteEntity);
+            var noteResponseModel = await ControllersHelper.GetAsync<NoteEntity, NoteResponseModel>(
+                NotesQuery, 
+                DI.GetMapper,
+                x => x.Id == noteId);
 
             // Returns the note's response model that has the check list item
             return noteResponseModel;

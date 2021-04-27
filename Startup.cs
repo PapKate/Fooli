@@ -39,8 +39,8 @@ namespace Fooli
         /// This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<FooliDBContext>(options => options.UseSqlServer
-                (Configuration.GetConnectionString("FooliSQLServerConnection")));
+            services.AddDbContext<FooliDBContext>( options => options.UseSqlServer
+                (Configuration.GetConnectionString("FooliSQLServerConnection")), ServiceLifetime.Transient);
 
             #region AutoMapper
 
@@ -150,7 +150,7 @@ namespace Fooli
         }
 
         /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dBContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, FooliDBContext dBContext)
         {
             EntryPoint.SetUp(dBContext);
 

@@ -78,7 +78,7 @@ namespace Fooli
         [HttpPost]
         [Route(Routes.ProductsRoute)]
         public Task<ActionResult<ProductResponseModel>> CreateProductAsync([FromBody] ProductRequestModel model)
-            => ControllersHelper.PostAsync<ProductEntity, ProductResponseModel>(
+            => ControllersHelper.PostAsync(
                 mContext,
                 mContext.Products,
                 ProductEntity.FromRequestModel(model),
@@ -129,15 +129,14 @@ namespace Fooli
         /// <summary>
         /// Creates a new company product 
         /// </summary>
+        /// <param name="productId">The product's id</param>
         /// <param name="companyId">The company's id</param>
         /// <param name="model">The model</param>
         /// Post fooli/companies/2/companyProducts
         [HttpPost]
         [Route(Routes.CompanyProductsRoute)]
-        public Task<ActionResult<CompanyProductResponseModel>> CreateCompanyProductAsync([FromRoute] int companyId, [FromBody] CompanyProductRequestModel model)
+        public Task<ActionResult<CompanyProductResponseModel>> CreateCompanyProductAsync(int productId, [FromRoute] int companyId, [FromBody] CompanyProductRequestModel model)
         {
-            var productId = 0;
-
             return ControllersHelper.PostAsync(
                            mContext,
                            mContext.CompanyProducts,
