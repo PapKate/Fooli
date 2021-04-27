@@ -31,10 +31,7 @@ namespace Fooli
                                                                               .Include(x => x.ProductLabels).ThenInclude(x => x.Label)
                                                                               .Include(x => x.ProductCategories).ThenInclude(x => x.Category);
 
-        /// <summary>
-        /// The query used for retrieving the company products
-        /// </summary>
-        protected IQueryable<CompanyProductEntity> CompanyProductsQuery => mContext.CompanyProducts;
+        
 
         /// <summary>
         /// The query used for retrieving the images
@@ -87,7 +84,7 @@ namespace Fooli
         /// <summary>
         /// Gets all the products
         /// </summary>
-        /// fooli/products
+        /// Get fooli/products
         [HttpGet]
         [Route(Routes.ProductsRoute)]
         public Task<ActionResult<IEnumerable<ProductResponseModel>>> GetAllProductsAsync()
@@ -99,7 +96,7 @@ namespace Fooli
         /// Gets the product with the specified <paramref name="productId"/>
         /// </summary>
         /// <param name="productId">The product's id</param>
-        /// fooli/products/8
+        /// Get fooli/products/8
         [HttpGet]
         [Route(Routes.ProductRoute)]
         public Task<ActionResult<ProductResponseModel>> GetProductAsync([FromRoute] int productId)
@@ -109,10 +106,25 @@ namespace Fooli
                 x => x.Id == productId);
 
         /// <summary>
+        /// Updates the product with the specified <paramref name="productId"/>
+        /// </summary>
+        /// <param name="productId">The product's id</param>
+        /// <param name="model"></param>
+        /// Put fooli/products/7
+        [HttpPut]
+        [Route(Routes.ProductRoute)]
+        public Task<ActionResult<ProductResponseModel>> UpdateProductAsync([FromRoute] int productId, [FromBody] ProductRequestModel model)
+            => ControllersHelper.PutAsync<ProductRequestModel, ProductEntity, ProductResponseModel>(
+                mContext,
+                ProductsQuery,
+                model,
+                x => x.Id == productId);
+
+        /// <summary>
         /// Deletes the product with the specified <paramref name="productId"/>
         /// </summary>
         /// <param name="productId">The product's id</param>
-        /// fooli/products/7
+        /// Delete fooli/products/7
         [HttpDelete]
         [Route(Routes.ProductRoute)]
         public Task<ActionResult<ProductResponseModel>> DeleteProductAsync([FromRoute] int productId)
@@ -121,28 +133,6 @@ namespace Fooli
                 ProductsQuery,
                 DI.GetMapper,
                 x => x.Id == productId);
-
-        #endregion
-
-        #region Company Product
-
-        /// <summary>
-        /// Creates a new company product 
-        /// </summary>
-        /// <param name="productId">The product's id</param>
-        /// <param name="companyId">The company's id</param>
-        /// <param name="model">The model</param>
-        /// Post fooli/companies/2/companyProducts
-        [HttpPost]
-        [Route(Routes.CompanyProductsRoute)]
-        public Task<ActionResult<CompanyProductResponseModel>> CreateCompanyProductAsync(int productId, [FromRoute] int companyId, [FromBody] CompanyProductRequestModel model)
-        {
-            return ControllersHelper.PostAsync(
-                           mContext,
-                           mContext.CompanyProducts,
-                           CompanyProductEntity.FromRequestModel(companyId, productId, model),
-                           x => x.ToResponseModel());
-        }
 
         #endregion
 
@@ -188,6 +178,22 @@ namespace Fooli
                 ImagesQuery,
                 DI.GetMapper,
                 x => x.Id == imageId && x.ProductId == productId);
+
+        /// <summary>
+        /// Updates an image with the specified <paramref name="imageId"/> that belongs to the product with the specified <paramref name="productId"/>
+        /// </summary>
+        /// <param name="productId">The product's id</param>
+        /// <param name="imageId">The image's id</param>
+        /// <param name="model"></param>
+        /// Put fooli/products/1/images/6
+        [HttpPut]
+        [Route(Routes.ProductImageRoute)]
+        public Task<ActionResult<ImageResponseModel>> UpdateImageAsync([FromRoute] int productId, [FromRoute] int imageId, [FromBody] ImageRequestModel model)
+            => ControllersHelper.PutAsync<ImageRequestModel, ImageEntity, ImageResponseModel>(
+                mContext,
+                ImagesQuery,
+                model,
+                x => x.ProductId == productId && x.Id == imageId);
 
         /// <summary>
         /// Deletes an image with the specified <paramref name="imageId"/> that belongs to the product with the specified <paramref name="productId"/>
@@ -237,7 +243,7 @@ namespace Fooli
         /// Gets the <see cref="CategoryResponseModel"/> with the specified <paramref name="categoryId"/>
         /// </summary>
         /// <param name="categoryId">The category's id</param>
-        /// fooli/categories/7
+        /// Get fooli/categories/7
         [HttpGet]
         [Route(Routes.CategoryRoute)]
         public Task<ActionResult<CategoryResponseModel>> GetCategoryAsync([FromRoute] int categoryId)
@@ -247,10 +253,25 @@ namespace Fooli
                 x=> x.Id == categoryId);
 
         /// <summary>
+        /// Updates the <see cref="CategoryEntity"/> with the specified <paramref name="categoryId"/>
+        /// </summary>
+        /// <param name="categoryId">The category's id</param>
+        /// <param name="model">The model</param>
+        /// Put fooli/categories/8
+        [HttpDelete]
+        [Route(Routes.CategoryRoute)]
+        public Task<ActionResult<CategoryResponseModel>> UpdateCategoryAsync([FromRoute] int categoryId, [FromBody] CategoryRequestModel model)
+        => ControllersHelper.PutAsync<CategoryRequestModel, CategoryEntity, CategoryResponseModel>(
+            mContext,
+            CategoriesQuery,
+            model,
+            x => x.Id == categoryId);
+
+        /// <summary>
         /// Deletes the <see cref="CategoryEntity"/> with the specified <paramref name="categoryId"/>
         /// </summary>
         /// <param name="categoryId"></param>
-        /// fooli/categories/8
+        /// Delete fooli/categories/8
         [HttpDelete]
         [Route(Routes.CategoryRoute)]
         public Task<ActionResult<CategoryResponseModel>> DeleteCategoryAsync([FromRoute] int categoryId)
@@ -303,10 +324,25 @@ namespace Fooli
                 x => x.Id == labelId);
 
         /// <summary>
+        /// Updates the label with the specified <paramref name="labelId"/>
+        /// </summary>
+        /// <param name="labelId">The id</param>
+        /// <param name="model">The model</param>
+        /// Put fooli/labels/3
+        [HttpPut]
+        [Route(Routes.LabelRoute)]
+        public Task<ActionResult<LabelResponseModel>> UpdateLabel([FromRoute] int labelId, [FromBody] LabelRequestModel model)
+            => ControllersHelper.PutAsync<LabelRequestModel, LabelEntity, LabelResponseModel>(
+                mContext,
+                LabelsQuery,
+                model,
+                x => x.Id == labelId);
+
+        /// <summary>
         /// Deletes the label with the specified <paramref name="labelId"/>
         /// </summary>
         /// <param name="labelId">The id</param>
-        /// <returns></returns>
+        /// Delete fooli/labels/4
         [HttpDelete]
         [Route(Routes.LabelRoute)]
         public Task<ActionResult<LabelResponseModel>> DeleteLabel([FromRoute] int labelId)

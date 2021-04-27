@@ -2,13 +2,12 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Threading;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Fooli
@@ -90,9 +89,53 @@ namespace Fooli
             return mapper.Map<TResponseModel>(entity);
         }
 
-        public static Task<ActionResult<TResponseModel>> UpdateAsync<TRequestModel, TEntity, TResponseModel>()
+        /// <summary>
+        /// Updates an entity's values that are not null in the <paramref name="model"/>
+        /// </summary>
+        /// <typeparam name="TRequestModel">The request model type</typeparam>
+        /// <typeparam name="TEntity">The entity type</typeparam>
+        /// <typeparam name="TResponseModel">The response model type</typeparam>
+        /// <param name="dBContext">The context</param>
+        /// <param name="dbSet">The db set</param>
+        /// <param name="model">The request model</param>
+        /// <param name="expression">The expression for the entity's search</param>
+        /// <returns></returns>
+        public static async Task<ActionResult<TResponseModel>> PutAsync<TRequestModel, TEntity, TResponseModel>(FooliDBContext dBContext, IQueryable<TEntity> dbSet, TRequestModel model, Expression<Func<TEntity, bool>> expression)
+        where TEntity : BaseEntity
         {
-            return null;
+            // Gets the entity if exists
+            var entity = await dbSet.FirstOrDefaultAsync(expression);
+
+            // If no entity is found...
+            if (entity == null)
+                // Return not found
+                return new NotFoundResult();
+
+            // For each property of the request model type...
+            foreach (var propertyInfo in typeof(TRequestModel).GetProperties())
+            {
+                // If the property's value is not null...
+                if (propertyInfo.GetValue(model) != null)
+                {
+                    // Gets the property with the same name as that of the model's
+                    typeof(TEntity)
+                    .GetProperty(propertyInfo.Name,
+                        BindingFlags.IgnoreCase |
+                        BindingFlags.Instance |
+                        BindingFlags.Public)
+                    // Ands sets its value as the model's value
+                    .SetValue(entity, propertyInfo.GetValue(model));
+                }
+            }
+
+            // Sets the date the entity was last modified as now
+            entity.DateModified = DateTimeOffset.Now;
+
+            // Saves the changes in the database
+            await dBContext.SaveChangesAsync();
+
+            // Maps the entity to a response model and returns it
+            return DI.GetMapper.Map<TEntity, TResponseModel>(entity);
         }
 
         /// <summary>

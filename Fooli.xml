@@ -155,7 +155,7 @@
             </summary>
             <param name="companyId">The company's id</param>
             <param name="model">The model</param>
-            <returns></returns>
+            Put fooli/companies/3
         </member>
         <member name="M:Fooli.CompanyController.DeleteCompanyAsync(System.Int32)">
             <summary>
@@ -308,10 +308,10 @@
             <summary>
             Updates the list with the specified id
             </summary>
-            <param name="userId"></param>
-            <param name="noteId">The id</param>
+            <param name="userId">The user's id</param>
+            <param name="noteId">The note's id</param>
             <param name="model">The list request model</param>
-            <returns></returns>
+            Put fooli/users/5/notes/4
         </member>
         <member name="M:Fooli.NoteConstroller.DeleteNoteAsync(System.Int32,System.Int32)">
             <summary>
@@ -2815,6 +2815,19 @@
             <param name="dbSet">The db set</param>
             <param name="mapper">The mapper</param>
             <param name="filter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Fooli.ControllersHelper.PutAsync``3(Fooli.FooliDBContext,System.Linq.IQueryable{``1},``0,System.Linq.Expressions.Expression{System.Func{``1,System.Boolean}})">
+            <summary>
+            Updates an entity's values that are not null in the <paramref name="model"/>
+            </summary>
+            <typeparam name="TRequestModel">The request model type</typeparam>
+            <typeparam name="TEntity">The entity type</typeparam>
+            <typeparam name="TResponseModel">The response model type</typeparam>
+            <param name="dBContext">The context</param>
+            <param name="dbSet">The db set</param>
+            <param name="model">The request model</param>
+            <param name="expression">The expression for the entity's search</param>
             <returns></returns>
         </member>
         <member name="M:Fooli.ControllersHelper.DeleteAsync``2(Microsoft.EntityFrameworkCore.DbContext,System.Linq.IQueryable{``0},AutoMapper.IMapper,System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">

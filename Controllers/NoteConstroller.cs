@@ -100,38 +100,18 @@ namespace Fooli
         /// <summary>
         /// Updates the list with the specified id
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="noteId">The id</param>
+        /// <param name="userId">The user's id</param>
+        /// <param name="noteId">The note's id</param>
         /// <param name="model">The list request model</param>
-        /// <returns></returns>
+        /// Put fooli/users/5/notes/4
         [HttpPut]
         [Route(Routes.UserNoteRoute)]
-        public async Task<ActionResult<NoteResponseModel>> UpdateNoteAsync([FromRoute] int userId, [FromRoute] int noteId, [FromBody] NoteRequestModel model)
-        {
-            // Gets the list with the specified id from the database if exists
-            var note = await mContext.Notes.Include(x => x.CheckListItems).FirstOrDefaultAsync(x => x.Id == noteId && x.UserId == userId);
-
-            // If no list is found...
-            if (note == null)
-                // Return is not found
-                return NotFound();
-
-            // If the model has a color...
-            if (model.Color != null)
-                // Set the list's color equal to the model's
-                note.Color = model.Color;
-
-            // If the model has a Title...
-            if (model.Title != null)
-                // Set the list's Title equal to the model's
-                note.Title = model.Title;
-
-            // Saves the changes to the database
-            await mContext.SaveChangesAsync();
-
-            // Returns a map note response model from the note entity
-            return DI.GetMapper.Map<NoteResponseModel>(note);
-        }
+        public Task<ActionResult<NoteResponseModel>> UpdateNoteAsync([FromRoute] int userId, [FromRoute] int noteId, [FromBody] NoteRequestModel model) 
+            => ControllersHelper.PutAsync<NoteRequestModel, NoteEntity, NoteResponseModel>(
+                mContext,
+                NotesQuery,
+                model,
+                x => x.Id == noteId && x.UserId == userId);
 
         /// <summary>
         /// Deletes the note with the specified noteId and userId
@@ -219,34 +199,20 @@ namespace Fooli
         [Route(Routes.UserNoteCheckListItem)]
         public async Task<ActionResult<NoteResponseModel>> UpdateCheckListItemAsync([FromRoute] int userId, [FromRoute] int noteId, [FromRoute] int checkListItemId, [FromBody] CheckListItemRequestModel model)
         {
-            // Gets the model and maps it to the check list item entity from the database that has the specified ids
-            var checkListItem = await mContext.CheckListItems.Include(x => x.Note).FirstOrDefaultAsync(x => x.NoteId == noteId && x.Id == checkListItemId && x.Note.UserId == userId);
+            // Updates the check list item
+            var checkListItem = await ControllersHelper.PutAsync<CheckListItemRequestModel, CheckListItemEntity, CheckListItemResponseModel>(
+                mContext,
+                CheckListItemsQuery,
+                model,
+                x => x.Id == checkListItemId && x.NoteId == noteId);
 
-            // If no check list item is found...
-            if (checkListItem == null)
-                // Return not found
-                return NotFound();
+            // Finds and maps the entity to a response model
+            var noteResponseModel = await ControllersHelper.GetAsync<NoteEntity, NoteResponseModel>(
+                NotesQuery,
+                DI.GetMapper,
+                x => x.UserId == userId && x.Id == noteId);
 
-            // If the model has text...
-            if (model.Text != null)
-                // Sets it as the items's text
-                checkListItem.Text = model.Text;
-
-            // If the model has a value on isChecked...
-            if (model.IsChecked != null)
-                // Sets it as the item's isChecked value
-                checkListItem.IsChecked = (bool)model.IsChecked;
-
-            // Saves the changes to the database
-            await mContext.SaveChangesAsync();
-
-            // Finds the note entity with that item
-            var noteEntity = await mContext.Notes.Include(x => x.CheckListItems).Where(x => x.CheckListItems.Any(y => y.Id == checkListItemId)).FirstAsync();
-
-            // Maps the entity to a response model
-            var noteResponseModel = DI.GetMapper.Map<NoteResponseModel>(noteEntity);
-
-            // Returns the note's response model that has the check list item
+            // Returns the note's response model
             return noteResponseModel;
         }
 

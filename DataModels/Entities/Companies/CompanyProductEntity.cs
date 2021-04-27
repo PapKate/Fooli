@@ -110,14 +110,12 @@ namespace Fooli
         /// Creates and returns a <see cref="CompanyProductEntity"/> from the specified <paramref name="model"/>
         /// </summary>
         /// <param name="companyId">The company's id</param>
-        /// <param name="productId">The product's id</param>
         /// <param name="model">The model</param>
         /// <returns></returns>
-        public static CompanyProductEntity FromRequestModel(int companyId, int productId, CompanyProductRequestModel model) 
+        public static CompanyProductEntity FromRequestModel(int companyId, CompanyProductRequestModel model) 
             => ControllersHelper.FromRequestModel(model, delegate (CompanyProductEntity entity)
                                                         {
                                                             entity.CompanyId = companyId;
-                                                            entity.ProductrId = productId;
                                                         });
 
         /// <summary>

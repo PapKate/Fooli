@@ -44,6 +44,11 @@ namespace Fooli
         /// </summary>
         protected IQueryable<BranchEntity> BranchesQuery => mContext.Branches.Include(x => x.Images);
 
+        /// <summary>
+        /// The query used for retrieving the company products
+        /// </summary>
+        protected IQueryable<CompanyProductEntity> CompanyProductsQuery => mContext.CompanyProducts;
+
         #endregion
 
         #region Constructors
@@ -106,55 +111,13 @@ namespace Fooli
         /// Put fooli/companies/3
         [HttpPut]
         [Route(Routes.CompanyRoute)]
-        public async Task<ActionResult<CompanyResponseModel>> UpdateCompanyAsync([FromRoute] int companyId, CompanyRequestModel model)
+        public Task<ActionResult<CompanyResponseModel>> UpdateCompanyAsync([FromRoute] int companyId, CompanyRequestModel model)
         {
-            // Gets the company from the database with the specified id
-            var company = await mContext.Companies.Include(x => x.CompayProducts)
-                                            .Include(x => x.Leaflets)
-                                            .FirstOrDefaultAsync(x => x.Id == companyId);
-
-            // If a company is NOT found...
-            if (company == null)
-                // If no company is found Creates an Microsoft.AspNetCore.Mvc.NotFoundResult that
-                // produces a Microsoft.AspNetCore.Http.StatusCodes.Status404NotFound
-                // response.
-                return NotFound();
-
-            // If the model has a name...
-            if (model.Name != null)
-                // Sets the company's name equal to the model's
-                company.Name = model.Name;
-
-            //// If the model has a country...
-            //if (model.Country != null)
-            //    // Sets the company's country equal to the model's
-            //    company.Country = model.Country;
-
-            //// If the model has a City...
-            //if (model.City != null)
-            //    // Sets the company's City equal to the model's
-            //    company.City = model.City;
-
-            //// If the model has an address...
-            //if (model.Address != null)
-            //    // Sets the company's Address equal to the model's
-            //    company.Address = model.Address;
-
-            //// If the model has a PhoneNumber...
-            //if (model.PhoneNumber != null)
-            //    // Sets the company's PhoneNumber equal to the model's
-            //    company.PhoneNumber = model.PhoneNumber;
-
-            //// If the model has a PostalCode...
-            //if (model.PostalCode != null)
-            //    // Sets the company's PostalCode equal to the model's
-            //    company.PostalCode = (int)model.PostalCode;
-
-            // Saves the changes to the database
-            await mContext.SaveChangesAsync();
-
-            // Returns a map note response model from the entity
-            return DI.GetMapper.Map<CompanyResponseModel>(company);
+            return ControllersHelper.PutAsync<CompanyRequestModel, CompanyEntity, CompanyResponseModel>(
+                mContext,
+                CompaniesQuery,
+                model,
+                x => x.Id == companyId);
         }
 
         /// <summary>
@@ -215,6 +178,22 @@ namespace Fooli
                 x => x.Id == leafletId && x.CompanyId == companyId);
 
         /// <summary>
+        /// Updates a leaflet with the specified <paramref name="leafletId"/> that belongs to the  company with the specified <paramref name="companyId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="leafletId">The leaflet's id</param>
+        /// <param name="model">The model</param>
+        /// Put fooli/companies/1/leaflets/4
+        [HttpPut]
+        [Route(Routes.CompanyLeafletRoute)]
+        public Task<ActionResult<LeafletResponseModel>> UpdateLeafletAsync([FromRoute] int companyId, [FromRoute] int leafletId, [FromBody] LeafletRequestModel model)
+            => ControllersHelper.PutAsync<LeafletRequestModel, LeafletEntity, LeafletResponseModel>(
+                mContext,
+                LeafletsQuery,
+                model,
+                x => x.CompanyId == companyId && x.Id == leafletId);
+
+        /// <summary>
         /// Deletes a leaflet with the specified <paramref name="leafletId"/> that belongs to the  company with the specified <paramref name="companyId"/>
         /// </summary>
         /// <param name="companyId"></param>
@@ -252,7 +231,7 @@ namespace Fooli
         /// Gets all the branches of the company with the specified <paramref name="companyId"/>
         /// </summary>
         /// <param name="companyId">The company's id</param>
-        /// <returns></returns>
+        /// Get fooli/companies/2/branches/
         [HttpGet]
         [Route(Routes.CompanyBranchesRoute)]
         public Task<ActionResult<IEnumerable<BranchResponseModel>>> GetAllBranchesAsync([FromRoute] int companyId)
@@ -265,7 +244,7 @@ namespace Fooli
         /// </summary>
         /// <param name="companyId">The company's id</param>
         /// <param name="branchId">The branch's Id</param>
-        /// <returns></returns>
+        /// Get fooli/companies/2/branches/4
         [HttpGet]
         [Route(Routes.CompanyBranchRoute)]
         public Task<ActionResult<BranchResponseModel>> GetBranchAsync([FromRoute] int companyId, [FromRoute] int branchId)
@@ -275,11 +254,27 @@ namespace Fooli
                 x => x.Id == branchId && x.CompanyId == companyId);
 
         /// <summary>
+        /// Updates the branch with the specified <paramref name="branchId"/> and <paramref name="companyId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="branchId">The branch's id</param>
+        /// <param name="model">The model</param>
+        /// Put fooli/companies/2/branches/3
+        [HttpPut]
+        [Route(Routes.CompanyBranchRoute)]
+        public Task<ActionResult<BranchResponseModel>> UpdateBranchAsync([FromRoute] int companyId, [FromRoute] int branchId, [FromBody] BranchRequestModel model)
+            => ControllersHelper.PutAsync<BranchRequestModel, BranchEntity, BranchResponseModel>(
+                mContext,
+                BranchesQuery,
+                model,
+                x => x.Id == branchId && x.CompanyId == companyId);
+
+        /// <summary>
         /// Deletes the branch with the specified <paramref name="branchId"/> and <paramref name="companyId"/>
         /// </summary>
         /// <param name="companyId">The company's id</param>
         /// <param name="branchId">The branch's id</param>
-        /// <returns></returns>
+        /// Delete fooli/companies/2/branches/3
         [HttpDelete]
         [Route(Routes.CompanyBranchRoute)]
         public Task<ActionResult<BranchResponseModel>> DeleteBranchAsync([FromRoute] int companyId, [FromRoute] int branchId)
@@ -335,6 +330,22 @@ namespace Fooli
                 x => x.Id == imageId && x.BranchId == branchId);
 
         /// <summary>
+        /// Updates an image with the specified <paramref name="imageId"/> that belongs to the  company with the specified <paramref name="branchId"/>
+        /// </summary>
+        /// <param name="branchId">The branch's id</param>
+        /// <param name="imageId">The image's id</param>
+        /// <param name="model"></param>
+        /// Put fooli/companies/1/branches/4/images/6
+        [HttpPut]
+        [Route(Routes.BranchImageRoute)]
+        public Task<ActionResult<ImageResponseModel>> UpdateImageAsync([FromRoute] int branchId, [FromRoute] int imageId, [FromBody] ImageRequestModel model)
+            => ControllersHelper.PutAsync<ImageRequestModel,ImageEntity, ImageResponseModel>(
+                mContext,
+                ImagesQuery,
+                model,
+                x => x.BranchId == branchId && x.Id == imageId);
+
+        /// <summary>
         /// Deletes an image with the specified <paramref name="imageId"/> that belongs to the  company with the specified <paramref name="branchId"/>
         /// </summary>
         /// <param name="branchId">The branch's id</param>
@@ -352,5 +363,85 @@ namespace Fooli
         #endregion
 
         #endregion
+
+        #region Company Product
+
+        /// <summary>
+        /// Creates a new company product 
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="model">The model</param>
+        /// Post fooli/companies/2/companyProducts
+        [HttpPost]
+        [Route(Routes.CompanyProductsRoute)]
+        public Task<ActionResult<CompanyProductResponseModel>> CreateCompanyProductAsync([FromRoute] int companyId, [FromBody] CompanyProductRequestModel model)
+        {
+            return ControllersHelper.PostAsync(
+                           mContext,
+                           mContext.CompanyProducts,
+                           CompanyProductEntity.FromRequestModel(companyId, model),
+                           x => x.ToResponseModel());
+        }
+
+        /// <summary>
+        /// Gets all the products of the company with the specified <paramref name="companyId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// Get fooli/companies/3/companyPropducts
+        [HttpGet]
+        [Route(Routes.CompanyProductsRoute)]
+        public Task<ActionResult<IEnumerable<CompanyProductResponseModel>>> GetCompanyProductsAsync([FromRoute] int companyId)
+            => ControllersHelper.GetAllAsync<CompanyProductEntity, CompanyProductResponseModel>(
+                CompanyProductsQuery,
+                x => x.CompanyId == companyId);
+
+        /// <summary>
+        /// Gets the product of the company with the specified <paramref name="companyId"/> and <paramref name="companyProductId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="companyProductId"></param>
+        /// Get fooli/companies/3/companyPropducts/3
+        [HttpGet]
+        [Route(Routes.CompanyProductRoute)]
+        public Task<ActionResult<CompanyProductResponseModel>> GetCompanyProductAsync([FromRoute] int companyId, [FromRoute] int companyProductId)
+            => ControllersHelper.GetAsync<CompanyProductEntity, CompanyProductResponseModel>(
+                CompanyProductsQuery,
+                DI.GetMapper,
+                x => x.CompanyId == companyId && x.Id == companyProductId);
+
+        /// <summary>
+        /// Updates the product of the company with the specified <paramref name="companyId"/> and <paramref name="companyProductId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="companyProductId"></param>
+        /// <param name="model">The model</param>
+        /// Put fooli/companies/3/companyPropducts/3
+        [HttpPut]
+        [Route(Routes.CompanyProductRoute)]
+        public Task<ActionResult<CompanyProductResponseModel>> UpadteCompanyProductAsync([FromRoute] int companyId, [FromRoute] int companyProductId, [FromBody] CompanyProductRequestModel model)
+            => ControllersHelper.PutAsync<CompanyProductRequestModel, CompanyProductEntity, CompanyProductResponseModel>(
+                mContext,
+                CompanyProductsQuery,
+                model,
+                x => x.CompanyId == companyId && x.Id == companyProductId);
+
+        /// <summary>
+        /// Deletes the product of the company with the specified <paramref name="companyId"/> and <paramref name="companyProductId"/>
+        /// </summary>
+        /// <param name="companyId">The company's id</param>
+        /// <param name="companyProductId"></param>
+        /// <param name="model">The model</param>
+        /// Delete fooli/companies/3/companyPropducts/3
+        [HttpDelete]
+        [Route(Routes.CompanyProductRoute)]
+        public Task<ActionResult<CompanyProductResponseModel>> DeleteCompanyProductAsync([FromRoute] int companyId, [FromRoute] int companyProductId)
+            => ControllersHelper.DeleteAsync<CompanyProductEntity, CompanyProductResponseModel>(
+                mContext,
+                CompanyProductsQuery,
+                DI.GetMapper,
+                x => x.CompanyId == companyId && x.Id == companyProductId);
+
+        #endregion
+
     }
 }
